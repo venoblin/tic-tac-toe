@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+  --primary-color: #DB5461;
+  --bg-color: #100B00;
+  --color: #FAFAFF;
+  --muted-white: #7a7a7a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--bg-color);
+  color: var(--color);
+  font-family: 'Press Start 2P', cursive;
+
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 4rem;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+h3 {
+  text-align: center;
+}
+
+input,
+button {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  color: inherit;
+  text-transform: uppercase;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+input {
+  border: none;
+  background-color: transparent;
+  color: inherit;
+  border-bottom: solid 3px var(--muted-white);
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn {
+  color: inherit;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  background-color: transparent;
+  border: 3px solid var(--muted-white);
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--bg-color);
+}
+
+#game-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.game-mode-container {
+  display: flex;
+  justify-content: center;
+}
+
+.game-mode-container button {
+  height: 100px;
+  width: 200px;
+  font-size: 1.25em;
+  background-color: transparent;
+  border: 3px solid var(--muted-white);
+  transition: all 0.3s ease;
+}
+
+.game-mode-container button:hover {
+  background-color: var(--muted-white);
+}
+
+.game-mode-container button.selected:hover {
+  background-color: var(--primary-color);
+}
+
+.game-mode-container button:nth-of-type(1) {
+  border-radius: 1rem 0 0 1rem;
+  border-right: none;
+}
+
+.game-mode-container button:nth-of-type(2) {
+  border-radius: 0 1rem 1rem 0;
+  border-left: none;
+}
+
+.game-mode-container button.selected {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  cursor: default;
+}
+
+.input-container {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.input-container input {
+  margin: 0 0.5rem;
+  padding: 0.75rem 0.5rem;
+  text-align: center;
+}
+
+.main-menu .btn {
+  display: block;
+  margin: 5rem auto 0 auto;
+}
+
+.alert {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(16, 11, 0, 0.9);
+}
+
+.alert .btn:nth-of-type(1) {
+  margin-bottom: 2rem;
+}
+
+.first-wins span,
+.second-wins span {
+  color: var(--primary-color);
+}
+
+.currently-playing {
+  margin: 3rem;
+  text-align: center;
+}
+
+.board {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.btns-container {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.btns-container .btn {
+  margin: 0 0.5rem;
+}
+
+.click-blocker {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.cell {
+  border: 1px solid var(--muted-white);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.cell svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  fill: var(--color);
+}
+
+.cell:hover {
+  background-color: var(--muted-white);
+}
+
+.cell.winning-cell {
+  background-color: var(--primary-color);
+}
+
+/* Remove borders so we don't have any on the outside */
+.cell:nth-of-type(1),
+.cell:nth-of-type(2),
+.cell:nth-of-type(3) {
+  border-top: none;
+}
+
+.cell:nth-of-type(3),
+.cell:nth-of-type(6),
+.cell:nth-of-type(9) {
+  border-right: none;
+}
+
+.cell:nth-of-type(7),
+.cell:nth-of-type(8),
+.cell:nth-of-type(9) {
+  border-bottom: none;
+}
+
+.cell:nth-of-type(1),
+.cell:nth-of-type(4),
+.cell:nth-of-type(7) {
+  border-left: none;
+}
+
+@media (max-width: 500px) {
+  .game-mode-container button {
+    height: 50px;
+    width: 150px;
+    font-size: 1em;
+  }
+
+  .input-container {
+    flex-direction: column;
+  }
+
+  .input-container input {
+    margin-left: 0rem;
+    margin-left: 0rem;
+  }
+
+  .input-container input:nth-of-type(1) {
+    margin-bottom: 2rem;
+  }
+}
