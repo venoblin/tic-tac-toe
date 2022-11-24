@@ -1,6 +1,4 @@
-# Project Title
-
-## Date: 6/20/2022
+# Tic-Tac-Toe
 
 ### By: Jonathan Villagomez
 
@@ -10,46 +8,23 @@
 
 ---
 
+### [**_Play This Game!_**](http://tic-tac-toe-jvh.surge.sh/)
+
 ### **_Description_**
 
-#### A brief description of the project
+#### Tic-Tac-Toe game made entirely with JavaScript! You can play against someone or play a computer. This project was assigned while attending the General Assembly bootcamp ([GA_README](/GA_README.md)), using only JavaScript wasn't required but I decided to implement it to challenge myself.
 
 ---
 
 ### **_Technologies Used_**
 
-- Tech 1
-- Tech 2
-- Tech 3
-  - Tech 3 sub item
-- Tech 4
-
----
-
-### **_Getting Started_**
-
-#### Getting started with the project
+- JavaScript
+- CSS
 
 ---
 
 ### **_Screenshots_**
 
-#### Image 1 header
-
-![Image](https://media.istockphoto.com/photos/programming-code-abstract-technology-background-of-software-deve-picture-id537331500?k=20&m=537331500&s=612x612&w=0&h=vnE5e_eExMtetDyYBTBoORFkxiK02o9H6KfgFwvKt4c=)
-
----
-
-### **_Task List_**
-
-- [ ] Task 1
-- [ ] Task 2
-- [x] ~~Task 3~~
-
----
-
-### **_Credits_**
-
-#### Image: [iStock](https://www.istockphoto.com/photo/programming-code-abstract-technology-background-of-software-deve-gm537331500-95204155)
-
-#### Markdown HW: [GitHub](https://github.com/VillagomezHJonathan/u1_hw_markdown)
+![Image](/screenshots/screenshot01.png)
+![Image](/screenshots/screenshot02.png)
+![Image](/screenshots/screenshot03.png)
