@@ -10,6 +10,8 @@
 
 ### [**_Play This Game!_**](http://tic-tac-toe-jvh.surge.sh/)
 
+---
+
 ### **_Description_**
 
 #### Tic-Tac-Toe game made entirely with JavaScript! You can play against someone or play a computer. This project was assigned while attending the General Assembly bootcamp ([GA_README](/GA_README.md)), using only JavaScript wasn't required but I decided to implement it to challenge myself.
