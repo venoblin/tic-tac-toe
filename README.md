@@ -25,8 +25,6 @@
 
 ---
 
-### **_Screenshots_**
-
 ![Image](/screenshots/screenshot01.png)
 ![Image](/screenshots/screenshot02.png)
 ![Image](/screenshots/screenshot03.png)
