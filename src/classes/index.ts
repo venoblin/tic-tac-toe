@@ -35,6 +35,14 @@ export class Game {
     anchorElem?.append(this.#layout)
   }
 
+  get playerOne(): Player {
+    return this.#playerOne
+  }
+
+  get playerTwo(): Player {
+    return this.#playerTwo
+  }
+
   #showAlert(msg: string) {
     const alertContainer = document.createElement('div')
     alertContainer.classList.add('alert')
@@ -65,7 +73,8 @@ export class Game {
         this.#showAlert(`Names can't be the same.`)
       }
     } else {
-      console.log(`starting game... p1: ${playerOneName} and p2: ${playerTwoName}`)
+      this.#playerOne.updateName(playerOneName)
+      this.#playerTwo.updateName(playerTwoName)
     }
   }
 

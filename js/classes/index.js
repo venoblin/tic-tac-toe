@@ -40,6 +40,12 @@ export class Game {
         __classPrivateFieldGet(this, _Game_layout, "f").classList.add('layout');
         anchorElem === null || anchorElem === void 0 ? void 0 : anchorElem.append(__classPrivateFieldGet(this, _Game_layout, "f"));
     }
+    get playerOne() {
+        return __classPrivateFieldGet(this, _Game_playerOne, "f");
+    }
+    get playerTwo() {
+        return __classPrivateFieldGet(this, _Game_playerTwo, "f");
+    }
     displayStart() {
         let isComputerPlaying = false;
         const startMenu = document.createElement('div');
@@ -124,6 +130,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         }
     }
     else {
-        console.log(`starting game... p1: ${playerOneName} and p2: ${playerTwoName}`);
+        __classPrivateFieldGet(this, _Game_playerOne, "f").updateName(playerOneName);
+        __classPrivateFieldGet(this, _Game_playerTwo, "f").updateName(playerTwoName);
     }
 };
