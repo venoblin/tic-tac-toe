@@ -31,6 +31,7 @@ export class Screen {
         anchorElem === null || anchorElem === void 0 ? void 0 : anchorElem.append(__classPrivateFieldGet(this, _Screen_layout, "f"));
     }
     displayStart() {
+        let isComputerPlaying = false;
         const startMenu = document.createElement('div');
         startMenu.classList.add('start-menu');
         // gamemode switcher
@@ -40,6 +41,7 @@ export class Screen {
         pvpModeBtn.classList.add('selected');
         pvpModeBtn.innerText = '🤨 vs. 🤨';
         pvpModeBtn.addEventListener('click', () => {
+            isComputerPlaying = false;
             secondPlayerInput.style.display = 'initial';
             pvpModeBtn.classList.add('selected');
             pvcModeBtn.classList.remove('selected');
@@ -47,6 +49,7 @@ export class Screen {
         const pvcModeBtn = document.createElement('button');
         pvcModeBtn.innerText = '🤨 vs. 🤖';
         pvcModeBtn.addEventListener('click', () => {
+            isComputerPlaying = true;
             secondPlayerInput.style.display = 'none';
             pvcModeBtn.classList.add('selected');
             pvpModeBtn.classList.remove('selected');
@@ -71,7 +74,12 @@ export class Screen {
         startBtn.classList.add('btn');
         startBtn.innerText = 'Play';
         startBtn.addEventListener('click', () => {
-            __classPrivateFieldGet(this, _Screen_instances, "m", _Screen_startHandler).call(this, firstPlayerInput.value, secondPlayerInput.value);
+            if (isComputerPlaying) {
+                __classPrivateFieldGet(this, _Screen_instances, "m", _Screen_startHandler).call(this, firstPlayerInput.value, 'Computer');
+            }
+            else {
+                __classPrivateFieldGet(this, _Screen_instances, "m", _Screen_startHandler).call(this, firstPlayerInput.value, secondPlayerInput.value);
+            }
         });
         startMenu.append(gameModeContainer);
         startMenu.append(inputContainer);
@@ -97,7 +105,7 @@ _Screen_layout = new WeakMap(), _Screen_instances = new WeakSet(), _Screen_showA
     if (playerOneName === '' || playerTwoName === '') {
         __classPrivateFieldGet(this, _Screen_instances, "m", _Screen_showAlert).call(this, 'Both names are required.');
     }
-    else if (playerOneName === playerTwoName) {
+    else if (playerOneName.toLowerCase() === playerTwoName.toLowerCase()) {
         if (playerTwoName === 'Computer') {
             __classPrivateFieldGet(this, _Screen_instances, "m", _Screen_showAlert).call(this, `You can't share names with the Computer.`);
         }
@@ -106,6 +114,6 @@ _Screen_layout = new WeakMap(), _Screen_instances = new WeakSet(), _Screen_showA
         }
     }
     else {
-        console.log('starting game...');
+        console.log(`starting game... p1: ${playerOneName} and p2: ${playerTwoName}`);
     }
 };

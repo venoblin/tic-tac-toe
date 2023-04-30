@@ -45,18 +45,20 @@ export class Screen {
   #startHandler (playerOneName: string, playerTwoName: string) {
     if (playerOneName === '' || playerTwoName === '') {
       this.#showAlert('Both names are required.')
-    } else if (playerOneName === playerTwoName) {
+    } else if (playerOneName.toLowerCase() === playerTwoName.toLowerCase()) {
       if (playerTwoName === 'Computer') {
         this.#showAlert(`You can't share names with the Computer.`)
       } else {
         this.#showAlert(`Names can't be the same.`)
       }
     } else {
-      console.log('starting game...')
+      console.log(`starting game... p1: ${playerOneName} and p2: ${playerTwoName}`)
     }
   }
 
   displayStart() {
+    let isComputerPlaying: boolean = false
+
     const startMenu = document.createElement('div')
     startMenu.classList.add('start-menu')
 
@@ -67,13 +69,15 @@ export class Screen {
     pvpModeBtn.classList.add('selected')
     pvpModeBtn.innerText = '🤨 vs. 🤨'
     pvpModeBtn.addEventListener('click', () => {
+      isComputerPlaying = false
       secondPlayerInput.style.display = 'initial'
       pvpModeBtn.classList.add('selected')
       pvcModeBtn.classList.remove('selected')
     })
     const pvcModeBtn = document.createElement('button')
     pvcModeBtn.innerText = '🤨 vs. 🤖'
-    pvcModeBtn.addEventListener('click', () => {  
+    pvcModeBtn.addEventListener('click', () => {
+      isComputerPlaying = true  
       secondPlayerInput.style.display = 'none'
       pvcModeBtn.classList.add('selected')
       pvpModeBtn.classList.remove('selected')
@@ -100,7 +104,11 @@ export class Screen {
     startBtn.classList.add('btn')
     startBtn.innerText = 'Play'
     startBtn.addEventListener('click', () => {
-      this.#startHandler(firstPlayerInput.value, secondPlayerInput.value)
+      if (isComputerPlaying) {
+        this.#startHandler(firstPlayerInput.value, 'Computer')
+      } else {
+        this.#startHandler(firstPlayerInput.value, secondPlayerInput.value)
+      }
     })
 
     startMenu.append(gameModeContainer)
