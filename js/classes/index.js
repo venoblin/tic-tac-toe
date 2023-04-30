@@ -9,7 +9,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Player_name, _Player_isComputer, _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_showAlert, _Game_startHandler;
+var _Player_name, _Player_isComputer, _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_showAlert, _Game_resetLayout, _Game_startHandler;
 class Player {
     constructor(name, isComputer = false) {
         _Player_name.set(this, void 0);
@@ -55,6 +55,7 @@ export class Game {
         return __classPrivateFieldGet(this, _Game_playerTwo, "f");
     }
     displayGame() {
+        __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);
         const gameBoard = document.createElement('div');
         gameBoard.classList.add('game-board');
         const winsContainer = document.createElement('div');
@@ -79,6 +80,7 @@ export class Game {
         mainMenuBtn.addEventListener('click', this.displayStart);
     }
     displayStart() {
+        __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);
         let isComputerPlaying = false;
         const startMenu = document.createElement('div');
         startMenu.classList.add('start-menu');
@@ -150,6 +152,9 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     alertContainer.append(h2);
     alertContainer.append(dismissBtn);
     __classPrivateFieldGet(this, _Game_layout, "f").append(alertContainer);
+}, _Game_resetLayout = function _Game_resetLayout() {
+    // clears entire layout so new displays can be shown
+    __classPrivateFieldGet(this, _Game_layout, "f").innerHTML = '';
 }, _Game_startHandler = function _Game_startHandler(playerOneName, playerTwoName) {
     // makes sure names are unique
     if (playerOneName === '' || playerTwoName === '') {

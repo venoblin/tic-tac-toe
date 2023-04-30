@@ -72,6 +72,11 @@ export class Game {
 
     this.#layout.append(alertContainer)
   }
+  
+  #resetLayout() {
+    // clears entire layout so new displays can be shown
+    this.#layout.innerHTML = ''
+  }
 
   #startHandler(playerOneName: string, playerTwoName: string) {
     // makes sure names are unique
@@ -91,6 +96,8 @@ export class Game {
   }
 
   displayGame() {
+    this.#resetLayout()
+
     const gameBoard = document.createElement('div')
     gameBoard.classList.add('game-board')
 
@@ -124,6 +131,7 @@ export class Game {
   }
 
   displayStart() {
+    this.#resetLayout()
     let isComputerPlaying: boolean = false
 
     const startMenu = document.createElement('div')
