@@ -54,6 +54,30 @@ export class Game {
     get playerTwo() {
         return __classPrivateFieldGet(this, _Game_playerTwo, "f");
     }
+    displayGame() {
+        const gameBoard = document.createElement('div');
+        gameBoard.classList.add('game-board');
+        const winsContainer = document.createElement('div');
+        winsContainer.classList.add('wins-container');
+        const firstPlayerWins = document.createElement('h3');
+        firstPlayerWins.classList.add('first-wins');
+        const secondPlayerWins = document.createElement('h3');
+        secondPlayerWins.classList.add('second-wins');
+        const playingHeader = document.createElement('h2');
+        playingHeader.classList.add('currently-playing');
+        playingHeader.innerText = `${__classPrivateFieldGet(this, _Game_playerOne, "f").name}'s Turn`;
+        const board = document.createElement('div');
+        board.classList.add('board');
+        const btnsContainer = document.createElement('div');
+        btnsContainer.classList.add('btns-container');
+        const resetBtn = document.createElement('button');
+        resetBtn.innerText = 'Reset';
+        resetBtn.classList.add('btn');
+        const mainMenuBtn = document.createElement('button');
+        mainMenuBtn.innerText = 'Main Menu';
+        mainMenuBtn.classList.add('btn');
+        mainMenuBtn.addEventListener('click', this.displayStart);
+    }
     displayStart() {
         let isComputerPlaying = false;
         const startMenu = document.createElement('div');
@@ -104,6 +128,7 @@ export class Game {
             else {
                 __classPrivateFieldGet(this, _Game_instances, "m", _Game_startHandler).call(this, firstPlayerInput.value, secondPlayerInput.value);
             }
+            this.displayGame();
         });
         startMenu.append(gameModeContainer);
         startMenu.append(inputContainer);
@@ -126,17 +151,14 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     alertContainer.append(dismissBtn);
     __classPrivateFieldGet(this, _Game_layout, "f").append(alertContainer);
 }, _Game_startHandler = function _Game_startHandler(playerOneName, playerTwoName) {
-    // makes sure names are't the same
+    // makes sure names are unique
     if (playerOneName === '' || playerTwoName === '') {
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_showAlert).call(this, 'Both names are required.');
     }
     else if (playerOneName.toLowerCase() === playerTwoName.toLowerCase()) {
-        if (playerTwoName === 'Computer') {
-            __classPrivateFieldGet(this, _Game_instances, "m", _Game_showAlert).call(this, `You can't share names with the Computer.`);
-        }
-        else {
+        playerTwoName === 'Computer' ?
+            __classPrivateFieldGet(this, _Game_instances, "m", _Game_showAlert).call(this, `You can't share names with the Computer.`) :
             __classPrivateFieldGet(this, _Game_instances, "m", _Game_showAlert).call(this, `Names can't be the same.`);
-        }
     }
     else {
         // updates player names if both names are unique

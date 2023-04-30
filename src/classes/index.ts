@@ -74,15 +74,13 @@ export class Game {
   }
 
   #startHandler(playerOneName: string, playerTwoName: string) {
-    // makes sure names are't the same
+    // makes sure names are unique
     if (playerOneName === '' || playerTwoName === '') {
       this.#showAlert('Both names are required.')
     } else if (playerOneName.toLowerCase() === playerTwoName.toLowerCase()) {
-      if (playerTwoName === 'Computer') {
-        this.#showAlert(`You can't share names with the Computer.`)
-      } else {
+      playerTwoName === 'Computer' ?
+        this.#showAlert(`You can't share names with the Computer.`) :
         this.#showAlert(`Names can't be the same.`)
-      }
     } else {
       // updates player names if both names are unique
       this.#playerOne.name = playerOneName
@@ -90,6 +88,39 @@ export class Game {
 
       if(playerTwoName.toLowerCase() === 'computer') this.#playerTwo.isComputer = true
     }
+  }
+
+  displayGame() {
+    const gameBoard = document.createElement('div')
+    gameBoard.classList.add('game-board')
+
+    const winsContainer = document.createElement('div')
+    winsContainer.classList.add('wins-container')
+
+    const firstPlayerWins = document.createElement('h3')
+    firstPlayerWins.classList.add('first-wins')
+
+    const secondPlayerWins = document.createElement('h3')
+    secondPlayerWins.classList.add('second-wins')
+    
+    const playingHeader = document.createElement('h2')
+    playingHeader.classList.add('currently-playing')
+    playingHeader.innerText = `${this.#playerOne.name}'s Turn`
+
+    const board = document.createElement('div')
+    board.classList.add('board')
+
+    const btnsContainer = document.createElement('div')
+    btnsContainer.classList.add('btns-container')
+
+    const resetBtn = document.createElement('button')
+    resetBtn.innerText = 'Reset'
+    resetBtn.classList.add('btn')
+
+    const mainMenuBtn = document.createElement('button')
+    mainMenuBtn.innerText = 'Main Menu'
+    mainMenuBtn.classList.add('btn')
+    mainMenuBtn.addEventListener('click', this.displayStart)
   }
 
   displayStart() {
@@ -145,6 +176,8 @@ export class Game {
       } else {
         this.#startHandler(firstPlayerInput.value, secondPlayerInput.value)
       }
+
+      this.displayGame()
     })
 
     startMenu.append(gameModeContainer)
