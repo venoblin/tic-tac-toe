@@ -1,5 +1,5 @@
-import { Player, Screen } from "./classes/index.js";
+import { Player, Game } from "./classes/index.js";
 
-const screen: Screen = new Screen({anchorId: 'game-container'})
+const game: Game = new Game({anchorId: 'game-container'})
 
-screen.displayStart()
+game.displayStart()

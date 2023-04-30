@@ -9,7 +9,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Player_name, _Screen_instances, _Screen_layout, _Screen_showAlert, _Screen_startHandler;
+var _Player_name, _Game_instances, _Game_layout, _Game_showAlert, _Game_startHandler;
 export class Player {
     constructor(name) {
         _Player_name.set(this, void 0);
@@ -17,18 +17,18 @@ export class Player {
     }
 }
 _Player_name = new WeakMap();
-export class Screen {
+export class Game {
     constructor(options) {
-        _Screen_instances.add(this);
-        _Screen_layout.set(this, void 0);
+        _Game_instances.add(this);
+        _Game_layout.set(this, void 0);
         // creating and anchoring layout element to anchor element  
         const anchorElem = document.getElementById(options.anchorId);
         if (anchorElem === null) {
             console.error('Anchor element not found!');
         }
-        __classPrivateFieldSet(this, _Screen_layout, document.createElement('div'), "f");
-        __classPrivateFieldGet(this, _Screen_layout, "f").classList.add('layout');
-        anchorElem === null || anchorElem === void 0 ? void 0 : anchorElem.append(__classPrivateFieldGet(this, _Screen_layout, "f"));
+        __classPrivateFieldSet(this, _Game_layout, document.createElement('div'), "f");
+        __classPrivateFieldGet(this, _Game_layout, "f").classList.add('layout');
+        anchorElem === null || anchorElem === void 0 ? void 0 : anchorElem.append(__classPrivateFieldGet(this, _Game_layout, "f"));
     }
     displayStart() {
         let isComputerPlaying = false;
@@ -75,19 +75,19 @@ export class Screen {
         startBtn.innerText = 'Play';
         startBtn.addEventListener('click', () => {
             if (isComputerPlaying) {
-                __classPrivateFieldGet(this, _Screen_instances, "m", _Screen_startHandler).call(this, firstPlayerInput.value, 'Computer');
+                __classPrivateFieldGet(this, _Game_instances, "m", _Game_startHandler).call(this, firstPlayerInput.value, 'Computer');
             }
             else {
-                __classPrivateFieldGet(this, _Screen_instances, "m", _Screen_startHandler).call(this, firstPlayerInput.value, secondPlayerInput.value);
+                __classPrivateFieldGet(this, _Game_instances, "m", _Game_startHandler).call(this, firstPlayerInput.value, secondPlayerInput.value);
             }
         });
         startMenu.append(gameModeContainer);
         startMenu.append(inputContainer);
         startMenu.append(startBtn);
-        __classPrivateFieldGet(this, _Screen_layout, "f").append(startMenu);
+        __classPrivateFieldGet(this, _Game_layout, "f").append(startMenu);
     }
 }
-_Screen_layout = new WeakMap(), _Screen_instances = new WeakSet(), _Screen_showAlert = function _Screen_showAlert(msg) {
+_Game_layout = new WeakMap(), _Game_instances = new WeakSet(), _Game_showAlert = function _Game_showAlert(msg) {
     const alertContainer = document.createElement('div');
     alertContainer.classList.add('alert');
     const h2 = document.createElement('h2');
@@ -100,17 +100,17 @@ _Screen_layout = new WeakMap(), _Screen_instances = new WeakSet(), _Screen_showA
     });
     alertContainer.append(h2);
     alertContainer.append(dismissBtn);
-    __classPrivateFieldGet(this, _Screen_layout, "f").append(alertContainer);
-}, _Screen_startHandler = function _Screen_startHandler(playerOneName, playerTwoName) {
+    __classPrivateFieldGet(this, _Game_layout, "f").append(alertContainer);
+}, _Game_startHandler = function _Game_startHandler(playerOneName, playerTwoName) {
     if (playerOneName === '' || playerTwoName === '') {
-        __classPrivateFieldGet(this, _Screen_instances, "m", _Screen_showAlert).call(this, 'Both names are required.');
+        __classPrivateFieldGet(this, _Game_instances, "m", _Game_showAlert).call(this, 'Both names are required.');
     }
     else if (playerOneName.toLowerCase() === playerTwoName.toLowerCase()) {
         if (playerTwoName === 'Computer') {
-            __classPrivateFieldGet(this, _Screen_instances, "m", _Screen_showAlert).call(this, `You can't share names with the Computer.`);
+            __classPrivateFieldGet(this, _Game_instances, "m", _Game_showAlert).call(this, `You can't share names with the Computer.`);
         }
         else {
-            __classPrivateFieldGet(this, _Screen_instances, "m", _Screen_showAlert).call(this, `Names can't be the same.`);
+            __classPrivateFieldGet(this, _Game_instances, "m", _Game_showAlert).call(this, `Names can't be the same.`);
         }
     }
     else {

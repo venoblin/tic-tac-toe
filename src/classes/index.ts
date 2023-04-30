@@ -6,7 +6,7 @@ export class Player {
   }
 }
 
-export class Screen {
+export class Game {
   #layout: HTMLElement
 
   constructor(options: {anchorId: string}) {

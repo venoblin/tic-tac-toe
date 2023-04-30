@@ -1,3 +1,3 @@
-import { Screen } from "./classes/index.js";
-const screen = new Screen({ anchorId: 'game-container' });
-screen.displayStart();
+import { Game } from "./classes/index.js";
+const game = new Game({ anchorId: 'game-container' });
+game.displayStart();
