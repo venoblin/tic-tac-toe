@@ -1,15 +1,28 @@
-export class Player {
+class Player {
   #name: string
 
   constructor(name: string) {
+    this.#name = name
+  }
+
+  get name(): string {
+    return this.#name
+  }
+
+  updateName(name: string) {
     this.#name = name
   }
 }
 
 export class Game {
   #layout: HTMLElement
+  #playerOne: Player
+  #playerTwo: Player
 
   constructor(options: {anchorId: string}) {
+    this.#playerOne = new Player('Player 1')
+    this.#playerTwo = new Player('Player 2')
+
     // creating and anchoring layout element to anchor element  
     const anchorElem = document.getElementById(options.anchorId)
     if (anchorElem === null) {
@@ -91,11 +104,11 @@ export class Game {
     const firstPlayerInput = document.createElement('input')
     firstPlayerInput.setAttribute('id', 'firstPlayerInput')
     firstPlayerInput.setAttribute('placeholder', 'Player 1 Name')
-    firstPlayerInput.value = 'Player 1'
+    firstPlayerInput.value = this.#playerOne.name
     const secondPlayerInput = document.createElement('input')
     secondPlayerInput.setAttribute('id', 'secondPlayerInput')
     secondPlayerInput.setAttribute('placeholder', 'Player 2 Name')
-    secondPlayerInput.value = 'Player 2'
+    secondPlayerInput.value = this.#playerTwo.name
     inputContainer.append(firstPlayerInput)
     inputContainer.append(secondPlayerInput)
 
