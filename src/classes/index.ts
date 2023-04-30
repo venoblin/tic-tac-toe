@@ -9,9 +9,9 @@ export class Player {
 export class Screen {
   layout: HTMLElement
 
-  constructor(anchor: string) {
+  constructor(options: {anchor: string}) {
     // creating and anchoring layout element to anchor element  
-    const anchorElem = document.getElementById(anchor)
+    const anchorElem = document.getElementById(options.anchor)
     if (anchorElem === null) {
       console.error('Anchor element not found!')
     }
@@ -34,7 +34,6 @@ export class Screen {
     pvpModeBtn.innerText = '🤨 vs. 🤨'
     pvpModeBtn.addEventListener('click', () => {
       secondPlayerInput.style.display = 'initial'
-  
       pvpModeBtn.classList.add('selected')
       pvcModeBtn.classList.remove('selected')
     })
@@ -42,7 +41,6 @@ export class Screen {
     pvcModeBtn.innerText = '🤨 vs. 🤖'
     pvcModeBtn.addEventListener('click', () => {  
       secondPlayerInput.style.display = 'none'
-  
       pvcModeBtn.classList.add('selected')
       pvpModeBtn.classList.remove('selected')
     })
