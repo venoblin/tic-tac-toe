@@ -42,6 +42,20 @@ export class Screen {
     this.#layout.append(alertContainer)
   }
 
+  #startHandler (playerOneName: string, playerTwoName: string) {
+    if (playerOneName === '' || playerTwoName === '') {
+      this.#showAlert('Both names are required.')
+    } else if (playerOneName === playerTwoName) {
+      if (playerTwoName === 'Computer') {
+        this.#showAlert(`You can't share names with the Computer.`)
+      } else {
+        this.#showAlert(`Names can't be the same.`)
+      }
+    } else {
+      console.log('starting game...')
+    }
+  }
+
   displayStart() {
     const startMenu = document.createElement('div')
     startMenu.classList.add('start-menu')

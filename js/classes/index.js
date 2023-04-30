@@ -9,7 +9,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Screen_instances, _Screen_layout, _Screen_showAlert;
+var _Screen_instances, _Screen_layout, _Screen_showAlert, _Screen_startHandler;
 export class Player {
     constructor(name) {
         this.name = name;
@@ -88,4 +88,19 @@ _Screen_layout = new WeakMap(), _Screen_instances = new WeakSet(), _Screen_showA
     alertContainer.append(h2);
     alertContainer.append(dismissBtn);
     __classPrivateFieldGet(this, _Screen_layout, "f").append(alertContainer);
+}, _Screen_startHandler = function _Screen_startHandler(playerOneName, playerTwoName) {
+    if (playerOneName === '' || playerTwoName === '') {
+        __classPrivateFieldGet(this, _Screen_instances, "m", _Screen_showAlert).call(this, 'Both names are required.');
+    }
+    else if (playerOneName === playerTwoName) {
+        if (playerTwoName === 'Computer') {
+            __classPrivateFieldGet(this, _Screen_instances, "m", _Screen_showAlert).call(this, `You can't share names with the Computer.`);
+        }
+        else {
+            __classPrivateFieldGet(this, _Screen_instances, "m", _Screen_showAlert).call(this, `Names can't be the same.`);
+        }
+    }
+    else {
+        console.log('starting game...');
+    }
 };
