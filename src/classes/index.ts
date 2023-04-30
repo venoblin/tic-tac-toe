@@ -32,8 +32,20 @@ export class Screen {
     const pvpModeBtn = document.createElement('button')
     pvpModeBtn.classList.add('selected')
     pvpModeBtn.innerText = '🤨 vs. 🤨'
+    pvpModeBtn.addEventListener('click', () => {
+      secondPlayerInput.style.display = 'initial'
+  
+      pvpModeBtn.classList.add('selected')
+      pvcModeBtn.classList.remove('selected')
+    })
     const pvcModeBtn = document.createElement('button')
     pvcModeBtn.innerText = '🤨 vs. 🤖'
+    pvcModeBtn.addEventListener('click', () => {  
+      secondPlayerInput.style.display = 'none'
+  
+      pvcModeBtn.classList.add('selected')
+      pvpModeBtn.classList.remove('selected')
+    })
     gameModeContainer.append(pvpModeBtn)
     gameModeContainer.append(pvcModeBtn)
 
