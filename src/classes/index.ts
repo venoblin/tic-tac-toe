@@ -1,8 +1,8 @@
 export class Player {
-  name: string
+  #name: string
 
   constructor(name: string) {
-    this.name = name
+    this.#name = name
   }
 }
 
