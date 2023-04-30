@@ -9,20 +9,28 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Player_name, _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_showAlert, _Game_startHandler;
+var _Player_name, _Player_isComputer, _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_showAlert, _Game_startHandler;
 class Player {
-    constructor(name) {
+    constructor(name, isComputer = false) {
         _Player_name.set(this, void 0);
+        _Player_isComputer.set(this, void 0);
         __classPrivateFieldSet(this, _Player_name, name, "f");
+        __classPrivateFieldSet(this, _Player_isComputer, isComputer, "f");
     }
     get name() {
         return __classPrivateFieldGet(this, _Player_name, "f");
     }
-    updateName(name) {
+    get isComputer() {
+        return __classPrivateFieldGet(this, _Player_isComputer, "f");
+    }
+    set name(name) {
         __classPrivateFieldSet(this, _Player_name, name, "f");
     }
+    set isComputer(b) {
+        __classPrivateFieldSet(this, _Player_isComputer, b, "f");
+    }
 }
-_Player_name = new WeakMap();
+_Player_name = new WeakMap(), _Player_isComputer = new WeakMap();
 export class Game {
     constructor(options) {
         _Game_instances.add(this);
@@ -118,6 +126,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     alertContainer.append(dismissBtn);
     __classPrivateFieldGet(this, _Game_layout, "f").append(alertContainer);
 }, _Game_startHandler = function _Game_startHandler(playerOneName, playerTwoName) {
+    // makes sure names are't the same
     if (playerOneName === '' || playerTwoName === '') {
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_showAlert).call(this, 'Both names are required.');
     }
@@ -130,7 +139,10 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         }
     }
     else {
-        __classPrivateFieldGet(this, _Game_playerOne, "f").updateName(playerOneName);
-        __classPrivateFieldGet(this, _Game_playerTwo, "f").updateName(playerTwoName);
+        // updates player names if both names are unique
+        __classPrivateFieldGet(this, _Game_playerOne, "f").name = playerOneName;
+        __classPrivateFieldGet(this, _Game_playerTwo, "f").name = playerTwoName;
+        if (playerTwoName.toLowerCase() === 'computer')
+            __classPrivateFieldGet(this, _Game_playerTwo, "f").isComputer = true;
     }
 };

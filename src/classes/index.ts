@@ -1,16 +1,26 @@
 class Player {
   #name: string
+  #isComputer: boolean
 
-  constructor(name: string) {
+  constructor(name: string, isComputer: boolean = false) {
     this.#name = name
+    this.#isComputer = isComputer
   }
 
   get name(): string {
     return this.#name
   }
 
-  updateName(name: string) {
+  get isComputer(): boolean {
+    return this.#isComputer
+  }
+
+  set name(name: string) {
     this.#name = name
+  }
+
+  set isComputer(b: boolean) {
+    this.#isComputer = b
   }
 }
 
@@ -63,7 +73,8 @@ export class Game {
     this.#layout.append(alertContainer)
   }
 
-  #startHandler (playerOneName: string, playerTwoName: string) {
+  #startHandler(playerOneName: string, playerTwoName: string) {
+    // makes sure names are't the same
     if (playerOneName === '' || playerTwoName === '') {
       this.#showAlert('Both names are required.')
     } else if (playerOneName.toLowerCase() === playerTwoName.toLowerCase()) {
@@ -73,8 +84,11 @@ export class Game {
         this.#showAlert(`Names can't be the same.`)
       }
     } else {
-      this.#playerOne.updateName(playerOneName)
-      this.#playerTwo.updateName(playerTwoName)
+      // updates player names if both names are unique
+      this.#playerOne.name = playerOneName
+      this.#playerTwo.name = playerTwoName
+
+      if(playerTwoName.toLowerCase() === 'computer') this.#playerTwo.isComputer = true
     }
   }
 
