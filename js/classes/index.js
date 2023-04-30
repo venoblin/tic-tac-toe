@@ -9,11 +9,12 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Player_name, _Player_isComputer, _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_showAlert, _Game_resetLayout, _Game_startHandler;
+var _Player_name, _Player_isComputer, _Player_wins, _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_showAlert, _Game_resetLayout, _Game_startHandler;
 class Player {
     constructor(name, isComputer = false) {
         _Player_name.set(this, void 0);
         _Player_isComputer.set(this, void 0);
+        _Player_wins.set(this, 0);
         __classPrivateFieldSet(this, _Player_name, name, "f");
         __classPrivateFieldSet(this, _Player_isComputer, isComputer, "f");
     }
@@ -23,6 +24,9 @@ class Player {
     get isComputer() {
         return __classPrivateFieldGet(this, _Player_isComputer, "f");
     }
+    get wins() {
+        return __classPrivateFieldGet(this, _Player_wins, "f");
+    }
     set name(name) {
         __classPrivateFieldSet(this, _Player_name, name, "f");
     }
@@ -30,7 +34,7 @@ class Player {
         __classPrivateFieldSet(this, _Player_isComputer, b, "f");
     }
 }
-_Player_name = new WeakMap(), _Player_isComputer = new WeakMap();
+_Player_name = new WeakMap(), _Player_isComputer = new WeakMap(), _Player_wins = new WeakMap();
 export class Game {
     constructor(options) {
         _Game_instances.add(this);
@@ -62,8 +66,12 @@ export class Game {
         winsContainer.classList.add('wins-container');
         const firstPlayerWins = document.createElement('h3');
         firstPlayerWins.classList.add('first-wins');
+        firstPlayerWins.innerHTML =
+            `${__classPrivateFieldGet(this, _Game_playerOne, "f").name} Wins: <span>${__classPrivateFieldGet(this, _Game_playerOne, "f").wins}</span>`;
         const secondPlayerWins = document.createElement('h3');
         secondPlayerWins.classList.add('second-wins');
+        secondPlayerWins.innerHTML =
+            `${__classPrivateFieldGet(this, _Game_playerTwo, "f").name} Wins: <span>${__classPrivateFieldGet(this, _Game_playerTwo, "f").wins}</span>`;
         const playingHeader = document.createElement('h2');
         playingHeader.classList.add('currently-playing');
         playingHeader.innerText = `${__classPrivateFieldGet(this, _Game_playerOne, "f").name}'s Turn`;
@@ -78,6 +86,15 @@ export class Game {
         mainMenuBtn.innerText = 'Main Menu';
         mainMenuBtn.classList.add('btn');
         mainMenuBtn.addEventListener('click', this.displayStart);
+        winsContainer.append(firstPlayerWins);
+        winsContainer.append(secondPlayerWins);
+        btnsContainer.append(resetBtn);
+        btnsContainer.append(mainMenuBtn);
+        gameBoard.append(winsContainer);
+        gameBoard.append(playingHeader);
+        gameBoard.append(board);
+        gameBoard.append(btnsContainer);
+        __classPrivateFieldGet(this, _Game_layout, "f").append(gameBoard);
     }
     displayStart() {
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);

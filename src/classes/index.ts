@@ -1,6 +1,7 @@
 class Player {
   #name: string
   #isComputer: boolean
+  #wins: number = 0
 
   constructor(name: string, isComputer: boolean = false) {
     this.#name = name
@@ -13,6 +14,10 @@ class Player {
 
   get isComputer(): boolean {
     return this.#isComputer
+  }
+
+  get wins(): number {
+    return this.#wins
   }
 
   set name(name: string) {
@@ -106,9 +111,13 @@ export class Game {
 
     const firstPlayerWins = document.createElement('h3')
     firstPlayerWins.classList.add('first-wins')
+    firstPlayerWins.innerHTML = 
+      `${this.#playerOne.name} Wins: <span>${this.#playerOne.wins}</span>`
 
     const secondPlayerWins = document.createElement('h3')
     secondPlayerWins.classList.add('second-wins')
+    secondPlayerWins.innerHTML = 
+      `${this.#playerTwo.name} Wins: <span>${this.#playerTwo.wins}</span>`
     
     const playingHeader = document.createElement('h2')
     playingHeader.classList.add('currently-playing')
@@ -128,6 +137,18 @@ export class Game {
     mainMenuBtn.innerText = 'Main Menu'
     mainMenuBtn.classList.add('btn')
     mainMenuBtn.addEventListener('click', this.displayStart)
+
+    winsContainer.append(firstPlayerWins)
+    winsContainer.append(secondPlayerWins)
+    btnsContainer.append(resetBtn)
+    btnsContainer.append(mainMenuBtn)
+
+    gameBoard.append(winsContainer)
+    gameBoard.append(playingHeader)
+    gameBoard.append(board)
+    gameBoard.append(btnsContainer)
+
+    this.#layout.append(gameBoard)
   }
 
   displayStart() {
