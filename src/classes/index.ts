@@ -7,7 +7,7 @@ export class Player {
 }
 
 export class Screen {
-  layout: HTMLElement
+  #layout: HTMLElement
 
   constructor(options: {anchorId: string}) {
     // creating and anchoring layout element to anchor element  
@@ -16,10 +16,30 @@ export class Screen {
       console.error('Anchor element not found!')
     }
 
-    this.layout = document.createElement('div')
-    this.layout.classList.add('layout')
+    this.#layout = document.createElement('div')
+    this.#layout.classList.add('layout')
 
-    anchorElem?.append(this.layout)
+    anchorElem?.append(this.#layout)
+  }
+
+  #showAlert(msg: string) {
+    const alertContainer = document.createElement('div')
+    alertContainer.classList.add('alert')
+
+    const h2 = document.createElement('h2')
+    h2.innerText = msg
+
+    const dismissBtn = document.createElement('button')
+    dismissBtn.innerText = 'Ok'
+    dismissBtn.classList.add('btn')
+    dismissBtn.addEventListener('click', () => {
+      alertContainer.remove()
+    })
+
+    alertContainer.append(h2)
+    alertContainer.append(dismissBtn)
+
+    this.#layout.append(alertContainer)
   }
 
   displayStart() {
@@ -69,6 +89,6 @@ export class Screen {
     startMenu.append(gameModeContainer)
     startMenu.append(inputContainer)
     startMenu.append(startBtn)
-    this.layout.append(startMenu)
+    this.#layout.append(startMenu)
   }
 }
