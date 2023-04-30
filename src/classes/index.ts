@@ -3,7 +3,11 @@ export class Screen {
 
   constructor(anchor: string) {
     const anchorElem = document.getElementById(anchor)
-    
+
+    if (anchorElem === null) {
+      console.error('Anchor element not found!')
+    }
+
     this.layout = document.createElement('div')
     this.layout.classList.add('layout')
 
