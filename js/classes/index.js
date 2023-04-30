@@ -6,7 +6,7 @@ export class Player {
 export class Screen {
     constructor(options) {
         // creating and anchoring layout element to anchor element  
-        const anchorElem = document.getElementById(options.anchor);
+        const anchorElem = document.getElementById(options.anchorId);
         if (anchorElem === null) {
             console.error('Anchor element not found!');
         }
