@@ -68,6 +68,9 @@ export class Screen {
         const startBtn = document.createElement('button');
         startBtn.classList.add('btn');
         startBtn.innerText = 'Play';
+        startBtn.addEventListener('click', () => {
+            __classPrivateFieldGet(this, _Screen_instances, "m", _Screen_startHandler).call(this, firstPlayerInput.value, secondPlayerInput.value);
+        });
         startMenu.append(gameModeContainer);
         startMenu.append(inputContainer);
         startMenu.append(startBtn);

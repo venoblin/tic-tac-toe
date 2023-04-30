@@ -99,6 +99,9 @@ export class Screen {
     const startBtn = document.createElement('button')
     startBtn.classList.add('btn')
     startBtn.innerText = 'Play'
+    startBtn.addEventListener('click', () => {
+      this.#startHandler(firstPlayerInput.value, secondPlayerInput.value)
+    })
 
     startMenu.append(gameModeContainer)
     startMenu.append(inputContainer)
