@@ -9,12 +9,12 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Player_name, _Player_isComputer, _Player_wins, _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_showAlert, _Game_resetLayout, _Game_startHandler;
+var _Player_name, _Player_isComputer, _Player_wins, _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart;
 class Player {
     constructor(name, isComputer = false) {
         _Player_name.set(this, void 0);
         _Player_isComputer.set(this, void 0);
-        _Player_wins.set(this, 0);
+        _Player_wins.set(this, 5);
         __classPrivateFieldSet(this, _Player_name, name, "f");
         __classPrivateFieldSet(this, _Player_isComputer, isComputer, "f");
     }
@@ -33,6 +33,9 @@ class Player {
     set isComputer(b) {
         __classPrivateFieldSet(this, _Player_isComputer, b, "f");
     }
+    set wins(amount) {
+        __classPrivateFieldSet(this, _Player_wins, amount, "f");
+    }
 }
 _Player_name = new WeakMap(), _Player_isComputer = new WeakMap(), _Player_wins = new WeakMap();
 export class Game {
@@ -41,6 +44,11 @@ export class Game {
         _Game_layout.set(this, void 0);
         _Game_playerOne.set(this, void 0);
         _Game_playerTwo.set(this, void 0);
+        _Game_board.set(this, [
+            ['', '', ''],
+            ['', '', ''],
+            ['', '', '']
+        ]);
         __classPrivateFieldSet(this, _Game_playerOne, new Player('Player 1'), "f");
         __classPrivateFieldSet(this, _Game_playerTwo, new Player('Player 2'), "f");
         // creating and anchoring layout element to anchor element  
@@ -58,108 +66,11 @@ export class Game {
     get playerTwo() {
         return __classPrivateFieldGet(this, _Game_playerTwo, "f");
     }
-    displayGame() {
-        __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);
-        // entire game board
-        const gameBoard = document.createElement('div');
-        gameBoard.classList.add('game-board');
-        const winsContainer = document.createElement('div');
-        winsContainer.classList.add('wins-container');
-        gameBoard.append(winsContainer);
-        // displays first player wins
-        const firstPlayerWins = document.createElement('h3');
-        firstPlayerWins.classList.add('first-wins');
-        firstPlayerWins.innerHTML =
-            `${__classPrivateFieldGet(this, _Game_playerOne, "f").name} Wins: <span>${__classPrivateFieldGet(this, _Game_playerOne, "f").wins}</span>`;
-        winsContainer.append(firstPlayerWins);
-        // displays second player wins
-        const secondPlayerWins = document.createElement('h3');
-        secondPlayerWins.classList.add('second-wins');
-        secondPlayerWins.innerHTML =
-            `${__classPrivateFieldGet(this, _Game_playerTwo, "f").name} Wins: <span>${__classPrivateFieldGet(this, _Game_playerTwo, "f").wins}</span>`;
-        winsContainer.append(secondPlayerWins);
-        // displays who's currently playing
-        const playingHeader = document.createElement('h2');
-        playingHeader.classList.add('currently-playing');
-        playingHeader.innerText = `${__classPrivateFieldGet(this, _Game_playerOne, "f").name}'s Turn`;
-        gameBoard.append(playingHeader);
-        const board = document.createElement('div');
-        board.classList.add('board');
-        gameBoard.append(board);
-        const btnsContainer = document.createElement('div');
-        btnsContainer.classList.add('btns-container');
-        gameBoard.append(btnsContainer);
-        const resetBtn = document.createElement('button');
-        resetBtn.innerText = 'Reset';
-        resetBtn.classList.add('btn');
-        btnsContainer.append(resetBtn);
-        const mainMenuBtn = document.createElement('button');
-        mainMenuBtn.innerText = 'Main Menu';
-        mainMenuBtn.classList.add('btn');
-        mainMenuBtn.addEventListener('click', this.displayStart);
-        btnsContainer.append(mainMenuBtn);
-        __classPrivateFieldGet(this, _Game_layout, "f").append(gameBoard);
-    }
-    displayStart() {
-        __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);
-        let isComputerPlaying = false;
-        const startMenu = document.createElement('div');
-        startMenu.classList.add('start-menu');
-        // gamemode switcher
-        const gameModeContainer = document.createElement('div');
-        gameModeContainer.classList.add('game-mode-container');
-        const pvpModeBtn = document.createElement('button');
-        pvpModeBtn.classList.add('selected');
-        pvpModeBtn.innerText = '🤨 vs. 🤨';
-        pvpModeBtn.addEventListener('click', () => {
-            isComputerPlaying = false;
-            secondPlayerInput.style.display = 'initial';
-            pvpModeBtn.classList.add('selected');
-            pvcModeBtn.classList.remove('selected');
-        });
-        const pvcModeBtn = document.createElement('button');
-        pvcModeBtn.innerText = '🤨 vs. 🤖';
-        pvcModeBtn.addEventListener('click', () => {
-            isComputerPlaying = true;
-            secondPlayerInput.style.display = 'none';
-            pvcModeBtn.classList.add('selected');
-            pvpModeBtn.classList.remove('selected');
-        });
-        gameModeContainer.append(pvpModeBtn);
-        gameModeContainer.append(pvcModeBtn);
-        // player name inputs
-        const inputContainer = document.createElement('div');
-        inputContainer.classList.add('input-container');
-        const firstPlayerInput = document.createElement('input');
-        firstPlayerInput.setAttribute('id', 'firstPlayerInput');
-        firstPlayerInput.setAttribute('placeholder', 'Player 1 Name');
-        firstPlayerInput.value = __classPrivateFieldGet(this, _Game_playerOne, "f").name;
-        const secondPlayerInput = document.createElement('input');
-        secondPlayerInput.setAttribute('id', 'secondPlayerInput');
-        secondPlayerInput.setAttribute('placeholder', 'Player 2 Name');
-        secondPlayerInput.value = __classPrivateFieldGet(this, _Game_playerTwo, "f").name;
-        inputContainer.append(firstPlayerInput);
-        inputContainer.append(secondPlayerInput);
-        // start button
-        const startBtn = document.createElement('button');
-        startBtn.classList.add('btn');
-        startBtn.innerText = 'Play';
-        startBtn.addEventListener('click', () => {
-            if (isComputerPlaying) {
-                __classPrivateFieldGet(this, _Game_instances, "m", _Game_startHandler).call(this, firstPlayerInput.value, 'Computer');
-            }
-            else {
-                __classPrivateFieldGet(this, _Game_instances, "m", _Game_startHandler).call(this, firstPlayerInput.value, secondPlayerInput.value);
-            }
-            this.displayGame();
-        });
-        startMenu.append(gameModeContainer);
-        startMenu.append(inputContainer);
-        startMenu.append(startBtn);
-        __classPrivateFieldGet(this, _Game_layout, "f").append(startMenu);
+    run() {
+        __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayStart).call(this);
     }
 }
-_Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo = new WeakMap(), _Game_instances = new WeakSet(), _Game_showAlert = function _Game_showAlert(msg) {
+_Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo = new WeakMap(), _Game_board = new WeakMap(), _Game_instances = new WeakSet(), _Game_showAlert = function _Game_showAlert(msg) {
     const alertContainer = document.createElement('div');
     alertContainer.classList.add('alert');
     const h2 = document.createElement('h2');
@@ -176,6 +87,9 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
 }, _Game_resetLayout = function _Game_resetLayout() {
     // clears entire layout so new displays can be shown
     __classPrivateFieldGet(this, _Game_layout, "f").innerHTML = '';
+}, _Game_resetBoard = function _Game_resetBoard() {
+    __classPrivateFieldGet(this, _Game_playerOne, "f").wins = 0;
+    __classPrivateFieldGet(this, _Game_playerTwo, "f").wins = 0;
 }, _Game_startHandler = function _Game_startHandler(playerOneName, playerTwoName) {
     // makes sure names are unique
     if (playerOneName === '' || playerTwoName === '') {
@@ -193,4 +107,115 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         if (playerTwoName.toLowerCase() === 'computer')
             __classPrivateFieldGet(this, _Game_playerTwo, "f").isComputer = true;
     }
+}, _Game_generateGameBoard = function _Game_generateGameBoard(boardAnchor) {
+    __classPrivateFieldGet(this, _Game_board, "f").forEach((row, x) => {
+        row.forEach((col, y) => {
+            const newCell = document.createElement('div');
+            newCell.classList.add('cell');
+            boardAnchor.append(newCell);
+        });
+    });
+}, _Game_displayGame = function _Game_displayGame() {
+    __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);
+    // entire game board
+    const gameBoard = document.createElement('div');
+    gameBoard.classList.add('game-board');
+    const winsContainer = document.createElement('div');
+    winsContainer.classList.add('wins-container');
+    gameBoard.append(winsContainer);
+    // displays first player wins
+    const firstPlayerWins = document.createElement('h3');
+    firstPlayerWins.classList.add('first-wins');
+    firstPlayerWins.innerHTML =
+        `${__classPrivateFieldGet(this, _Game_playerOne, "f").name} Wins: <span>${__classPrivateFieldGet(this, _Game_playerOne, "f").wins}</span>`;
+    winsContainer.append(firstPlayerWins);
+    // displays second player wins
+    const secondPlayerWins = document.createElement('h3');
+    secondPlayerWins.classList.add('second-wins');
+    secondPlayerWins.innerHTML =
+        `${__classPrivateFieldGet(this, _Game_playerTwo, "f").name} Wins: <span>${__classPrivateFieldGet(this, _Game_playerTwo, "f").wins}</span>`;
+    winsContainer.append(secondPlayerWins);
+    // displays who's currently playing
+    const playingHeader = document.createElement('h2');
+    playingHeader.classList.add('currently-playing');
+    playingHeader.innerText = `${__classPrivateFieldGet(this, _Game_playerOne, "f").name}'s Turn`;
+    gameBoard.append(playingHeader);
+    const board = document.createElement('div');
+    board.classList.add('board');
+    __classPrivateFieldGet(this, _Game_instances, "m", _Game_generateGameBoard).call(this, board);
+    gameBoard.append(board);
+    const btnsContainer = document.createElement('div');
+    btnsContainer.classList.add('btns-container');
+    gameBoard.append(btnsContainer);
+    const resetBtn = document.createElement('button');
+    resetBtn.innerText = 'Reset';
+    resetBtn.classList.add('btn');
+    resetBtn.addEventListener('click', () => {
+        __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetBoard).call(this);
+        __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
+    });
+    btnsContainer.append(resetBtn);
+    const mainMenuBtn = document.createElement('button');
+    mainMenuBtn.innerText = 'Main Menu';
+    mainMenuBtn.classList.add('btn');
+    mainMenuBtn.addEventListener('click', () => __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayStart).call(this));
+    btnsContainer.append(mainMenuBtn);
+    __classPrivateFieldGet(this, _Game_layout, "f").append(gameBoard);
+}, _Game_displayStart = function _Game_displayStart() {
+    __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);
+    let isComputerPlaying = false;
+    const startMenu = document.createElement('div');
+    startMenu.classList.add('start-menu');
+    // gamemode switcher
+    const gameModeContainer = document.createElement('div');
+    gameModeContainer.classList.add('game-mode-container');
+    const pvpModeBtn = document.createElement('button');
+    pvpModeBtn.classList.add('selected');
+    pvpModeBtn.innerText = '🤨 vs. 🤨';
+    pvpModeBtn.addEventListener('click', () => {
+        isComputerPlaying = false;
+        secondPlayerInput.style.display = 'initial';
+        pvpModeBtn.classList.add('selected');
+        pvcModeBtn.classList.remove('selected');
+    });
+    const pvcModeBtn = document.createElement('button');
+    pvcModeBtn.innerText = '🤨 vs. 🤖';
+    pvcModeBtn.addEventListener('click', () => {
+        isComputerPlaying = true;
+        secondPlayerInput.style.display = 'none';
+        pvcModeBtn.classList.add('selected');
+        pvpModeBtn.classList.remove('selected');
+    });
+    gameModeContainer.append(pvpModeBtn);
+    gameModeContainer.append(pvcModeBtn);
+    // player name inputs
+    const inputContainer = document.createElement('div');
+    inputContainer.classList.add('input-container');
+    const firstPlayerInput = document.createElement('input');
+    firstPlayerInput.setAttribute('id', 'firstPlayerInput');
+    firstPlayerInput.setAttribute('placeholder', 'Player 1 Name');
+    firstPlayerInput.value = __classPrivateFieldGet(this, _Game_playerOne, "f").name;
+    const secondPlayerInput = document.createElement('input');
+    secondPlayerInput.setAttribute('id', 'secondPlayerInput');
+    secondPlayerInput.setAttribute('placeholder', 'Player 2 Name');
+    secondPlayerInput.value = __classPrivateFieldGet(this, _Game_playerTwo, "f").name;
+    inputContainer.append(firstPlayerInput);
+    inputContainer.append(secondPlayerInput);
+    // start button
+    const startBtn = document.createElement('button');
+    startBtn.classList.add('btn');
+    startBtn.innerText = 'Play';
+    startBtn.addEventListener('click', () => {
+        if (isComputerPlaying) {
+            __classPrivateFieldGet(this, _Game_instances, "m", _Game_startHandler).call(this, firstPlayerInput.value, 'Computer');
+        }
+        else {
+            __classPrivateFieldGet(this, _Game_instances, "m", _Game_startHandler).call(this, firstPlayerInput.value, secondPlayerInput.value);
+        }
+        __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
+    });
+    startMenu.append(gameModeContainer);
+    startMenu.append(inputContainer);
+    startMenu.append(startBtn);
+    __classPrivateFieldGet(this, _Game_layout, "f").append(startMenu);
 };

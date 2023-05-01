@@ -1,7 +1,9 @@
+import { Board } from "../types"
+
 class Player {
   #name: string
   #isComputer: boolean
-  #wins: number = 0
+  #wins: number = 5
 
   constructor(name: string, isComputer: boolean = false) {
     this.#name = name
@@ -27,12 +29,21 @@ class Player {
   set isComputer(b: boolean) {
     this.#isComputer = b
   }
+
+  set wins(amount: number) {
+    this.#wins = amount
+  }
 }
 
 export class Game {
   #layout: HTMLElement
   #playerOne: Player
   #playerTwo: Player
+  #board: Board = [
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', '']
+  ]
 
   constructor(options: {anchorId: string}) {
     this.#playerOne = new Player('Player 1')
@@ -83,6 +94,11 @@ export class Game {
     this.#layout.innerHTML = ''
   }
 
+  #resetBoard() {
+    this.#playerOne.wins = 0
+    this.#playerTwo.wins = 0
+  }
+
   #startHandler(playerOneName: string, playerTwoName: string) {
     // makes sure names are unique
     if (playerOneName === '' || playerTwoName === '') {
@@ -99,8 +115,19 @@ export class Game {
       if(playerTwoName.toLowerCase() === 'computer') this.#playerTwo.isComputer = true
     }
   }
+
+  #generateGameBoard(boardAnchor: HTMLElement) {
+    this.#board.forEach((row, x) => {
+      row.forEach((col, y) => {
+        const newCell = document.createElement('div')
+        newCell.classList.add('cell')
+
+        boardAnchor.append(newCell)
+      })
+    })
+  }
     
-  displayGame() {
+  #displayGame() {
     this.#resetLayout()
       
     // entire game board
@@ -133,6 +160,7 @@ export class Game {
 
     const board = document.createElement('div')
     board.classList.add('board')
+    this.#generateGameBoard(board)
     gameBoard.append(board)
 
     const btnsContainer = document.createElement('div')
@@ -142,18 +170,22 @@ export class Game {
     const resetBtn = document.createElement('button')
     resetBtn.innerText = 'Reset'
     resetBtn.classList.add('btn')
+    resetBtn.addEventListener('click', () => {
+      this.#resetBoard()
+      this.#displayGame()
+    })
     btnsContainer.append(resetBtn)
 
     const mainMenuBtn = document.createElement('button')
     mainMenuBtn.innerText = 'Main Menu'
     mainMenuBtn.classList.add('btn')
-    mainMenuBtn.addEventListener('click', this.displayStart)
+    mainMenuBtn.addEventListener('click', () => this.#displayStart())
     btnsContainer.append(mainMenuBtn)
 
     this.#layout.append(gameBoard)
   }
 
-  displayStart() {
+  #displayStart() {
     this.#resetLayout()
     let isComputerPlaying: boolean = false
 
@@ -208,12 +240,16 @@ export class Game {
         this.#startHandler(firstPlayerInput.value, secondPlayerInput.value)
       }
 
-      this.displayGame()
+      this.#displayGame()
     })
 
     startMenu.append(gameModeContainer)
     startMenu.append(inputContainer)
     startMenu.append(startBtn)
     this.#layout.append(startMenu)
+  }
+
+  run() {
+    this.#displayStart()
   }
 }
