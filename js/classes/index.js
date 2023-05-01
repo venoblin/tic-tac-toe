@@ -93,6 +93,7 @@ export class Game {
         gameBoard.append(playingHeader);
         const board = document.createElement('div');
         board.classList.add('board');
+        __classPrivateFieldGet(this, _Game_instances, "m", _Game_generateGameBoard).call(this, board);
         gameBoard.append(board);
         const btnsContainer = document.createElement('div');
         btnsContainer.classList.add('btns-container');
@@ -202,6 +203,11 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
             __classPrivateFieldGet(this, _Game_playerTwo, "f").isComputer = true;
     }
 }, _Game_generateGameBoard = function _Game_generateGameBoard(boardAnchor) {
-    __classPrivateFieldGet(this, _Game_board, "f").forEach((row, i) => {
+    __classPrivateFieldGet(this, _Game_board, "f").forEach((row, x) => {
+        row.forEach((col, y) => {
+            const newCell = document.createElement('div');
+            newCell.classList.add('cell');
+            boardAnchor.append(newCell);
+        });
     });
 };

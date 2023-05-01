@@ -108,8 +108,13 @@ export class Game {
   }
 
   #generateGameBoard(boardAnchor: HTMLElement) {
-    this.#board.forEach((row, i) => {
-      
+    this.#board.forEach((row, x) => {
+      row.forEach((col, y) => {
+        const newCell = document.createElement('div')
+        newCell.classList.add('cell')
+
+        boardAnchor.append(newCell)
+      })
     })
   }
 
@@ -150,6 +155,7 @@ export class Game {
 
     const board = document.createElement('div')
     board.classList.add('board')
+    this.#generateGameBoard(board)
     gameBoard.append(board)
 
     const btnsContainer = document.createElement('div')
