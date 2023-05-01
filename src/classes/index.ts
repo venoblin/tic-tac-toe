@@ -107,6 +107,12 @@ export class Game {
     }
   }
 
+  #generateGameBoard(boardAnchor: HTMLElement) {
+    this.#board.forEach((row, i) => {
+      
+    })
+  }
+
   run() {
     this.displayStart()
   }

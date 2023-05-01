@@ -9,7 +9,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Player_name, _Player_isComputer, _Player_wins, _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_startHandler;
+var _Player_name, _Player_isComputer, _Player_wins, _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_startHandler, _Game_generateGameBoard;
 class Player {
     constructor(name, isComputer = false) {
         _Player_name.set(this, void 0);
@@ -201,4 +201,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         if (playerTwoName.toLowerCase() === 'computer')
             __classPrivateFieldGet(this, _Game_playerTwo, "f").isComputer = true;
     }
+}, _Game_generateGameBoard = function _Game_generateGameBoard(boardAnchor) {
+    __classPrivateFieldGet(this, _Game_board, "f").forEach((row, i) => {
+    });
 };
