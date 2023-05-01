@@ -95,58 +95,60 @@ export class Game {
       // updates player names if both names are unique
       this.#playerOne.name = playerOneName
       this.#playerTwo.name = playerTwoName
-
+        
       if(playerTwoName.toLowerCase() === 'computer') this.#playerTwo.isComputer = true
     }
   }
-
+    
   displayGame() {
     this.#resetLayout()
-
+      
+    // entire game board
     const gameBoard = document.createElement('div')
     gameBoard.classList.add('game-board')
-
+      
     const winsContainer = document.createElement('div')
     winsContainer.classList.add('wins-container')
-
+    gameBoard.append(winsContainer)
+    
+    // displays first player wins
     const firstPlayerWins = document.createElement('h3')
     firstPlayerWins.classList.add('first-wins')
     firstPlayerWins.innerHTML = 
-      `${this.#playerOne.name} Wins: <span>${this.#playerOne.wins}</span>`
-
+    `${this.#playerOne.name} Wins: <span>${this.#playerOne.wins}</span>`
+    winsContainer.append(firstPlayerWins)
+    
+    // displays second player wins
     const secondPlayerWins = document.createElement('h3')
     secondPlayerWins.classList.add('second-wins')
     secondPlayerWins.innerHTML = 
-      `${this.#playerTwo.name} Wins: <span>${this.#playerTwo.wins}</span>`
+    `${this.#playerTwo.name} Wins: <span>${this.#playerTwo.wins}</span>`
+    winsContainer.append(secondPlayerWins)
     
+    // displays who's currently playing
     const playingHeader = document.createElement('h2')
     playingHeader.classList.add('currently-playing')
     playingHeader.innerText = `${this.#playerOne.name}'s Turn`
+    gameBoard.append(playingHeader)
 
     const board = document.createElement('div')
     board.classList.add('board')
+    gameBoard.append(board)
 
     const btnsContainer = document.createElement('div')
     btnsContainer.classList.add('btns-container')
+    gameBoard.append(btnsContainer)
 
     const resetBtn = document.createElement('button')
     resetBtn.innerText = 'Reset'
     resetBtn.classList.add('btn')
+    btnsContainer.append(resetBtn)
 
     const mainMenuBtn = document.createElement('button')
     mainMenuBtn.innerText = 'Main Menu'
     mainMenuBtn.classList.add('btn')
     mainMenuBtn.addEventListener('click', this.displayStart)
-
-    winsContainer.append(firstPlayerWins)
-    winsContainer.append(secondPlayerWins)
-    btnsContainer.append(resetBtn)
     btnsContainer.append(mainMenuBtn)
-
-    gameBoard.append(winsContainer)
-    gameBoard.append(playingHeader)
-    gameBoard.append(board)
-    gameBoard.append(btnsContainer)
 
     this.#layout.append(gameBoard)
   }

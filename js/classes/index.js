@@ -60,40 +60,44 @@ export class Game {
     }
     displayGame() {
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);
+        // entire game board
         const gameBoard = document.createElement('div');
         gameBoard.classList.add('game-board');
         const winsContainer = document.createElement('div');
         winsContainer.classList.add('wins-container');
+        gameBoard.append(winsContainer);
+        // displays first player wins
         const firstPlayerWins = document.createElement('h3');
         firstPlayerWins.classList.add('first-wins');
         firstPlayerWins.innerHTML =
             `${__classPrivateFieldGet(this, _Game_playerOne, "f").name} Wins: <span>${__classPrivateFieldGet(this, _Game_playerOne, "f").wins}</span>`;
+        winsContainer.append(firstPlayerWins);
+        // displays second player wins
         const secondPlayerWins = document.createElement('h3');
         secondPlayerWins.classList.add('second-wins');
         secondPlayerWins.innerHTML =
             `${__classPrivateFieldGet(this, _Game_playerTwo, "f").name} Wins: <span>${__classPrivateFieldGet(this, _Game_playerTwo, "f").wins}</span>`;
+        winsContainer.append(secondPlayerWins);
+        // displays who's currently playing
         const playingHeader = document.createElement('h2');
         playingHeader.classList.add('currently-playing');
         playingHeader.innerText = `${__classPrivateFieldGet(this, _Game_playerOne, "f").name}'s Turn`;
+        gameBoard.append(playingHeader);
         const board = document.createElement('div');
         board.classList.add('board');
+        gameBoard.append(board);
         const btnsContainer = document.createElement('div');
         btnsContainer.classList.add('btns-container');
+        gameBoard.append(btnsContainer);
         const resetBtn = document.createElement('button');
         resetBtn.innerText = 'Reset';
         resetBtn.classList.add('btn');
+        btnsContainer.append(resetBtn);
         const mainMenuBtn = document.createElement('button');
         mainMenuBtn.innerText = 'Main Menu';
         mainMenuBtn.classList.add('btn');
         mainMenuBtn.addEventListener('click', this.displayStart);
-        winsContainer.append(firstPlayerWins);
-        winsContainer.append(secondPlayerWins);
-        btnsContainer.append(resetBtn);
         btnsContainer.append(mainMenuBtn);
-        gameBoard.append(winsContainer);
-        gameBoard.append(playingHeader);
-        gameBoard.append(board);
-        gameBoard.append(btnsContainer);
         __classPrivateFieldGet(this, _Game_layout, "f").append(gameBoard);
     }
     displayStart() {
