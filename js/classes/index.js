@@ -58,6 +58,9 @@ export class Game {
     get playerTwo() {
         return __classPrivateFieldGet(this, _Game_playerTwo, "f");
     }
+    run() {
+        this.displayStart();
+    }
     displayGame() {
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);
         // entire game board
@@ -96,7 +99,7 @@ export class Game {
         const mainMenuBtn = document.createElement('button');
         mainMenuBtn.innerText = 'Main Menu';
         mainMenuBtn.classList.add('btn');
-        mainMenuBtn.addEventListener('click', this.displayStart);
+        mainMenuBtn.addEventListener('click', () => this.displayStart());
         btnsContainer.append(mainMenuBtn);
         __classPrivateFieldGet(this, _Game_layout, "f").append(gameBoard);
     }

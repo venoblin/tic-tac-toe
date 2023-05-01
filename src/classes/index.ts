@@ -99,6 +99,10 @@ export class Game {
       if(playerTwoName.toLowerCase() === 'computer') this.#playerTwo.isComputer = true
     }
   }
+
+  run() {
+    this.displayStart()
+  }
     
   displayGame() {
     this.#resetLayout()
@@ -147,7 +151,7 @@ export class Game {
     const mainMenuBtn = document.createElement('button')
     mainMenuBtn.innerText = 'Main Menu'
     mainMenuBtn.classList.add('btn')
-    mainMenuBtn.addEventListener('click', this.displayStart)
+    mainMenuBtn.addEventListener('click', () => this.displayStart())
     btnsContainer.append(mainMenuBtn)
 
     this.#layout.append(gameBoard)
