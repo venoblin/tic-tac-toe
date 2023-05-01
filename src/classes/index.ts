@@ -1,3 +1,5 @@
+import { Board } from "../types"
+
 class Player {
   #name: string
   #isComputer: boolean
@@ -33,6 +35,11 @@ export class Game {
   #layout: HTMLElement
   #playerOne: Player
   #playerTwo: Player
+  #board: Board = [
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', '']
+  ]
 
   constructor(options: {anchorId: string}) {
     this.#playerOne = new Player('Player 1')
