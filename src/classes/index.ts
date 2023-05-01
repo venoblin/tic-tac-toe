@@ -1,16 +1,31 @@
 class Player {
   #name: string
+  #isComputer: boolean
+  #wins: number = 0
 
-  constructor(name: string) {
+  constructor(name: string, isComputer: boolean = false) {
     this.#name = name
+    this.#isComputer = isComputer
   }
 
   get name(): string {
     return this.#name
   }
 
-  updateName(name: string) {
+  get isComputer(): boolean {
+    return this.#isComputer
+  }
+
+  get wins(): number {
+    return this.#wins
+  }
+
+  set name(name: string) {
     this.#name = name
+  }
+
+  set isComputer(b: boolean) {
+    this.#isComputer = b
   }
 }
 
@@ -62,23 +77,84 @@ export class Game {
 
     this.#layout.append(alertContainer)
   }
+  
+  #resetLayout() {
+    // clears entire layout so new displays can be shown
+    this.#layout.innerHTML = ''
+  }
 
-  #startHandler (playerOneName: string, playerTwoName: string) {
+  #startHandler(playerOneName: string, playerTwoName: string) {
+    // makes sure names are unique
     if (playerOneName === '' || playerTwoName === '') {
       this.#showAlert('Both names are required.')
     } else if (playerOneName.toLowerCase() === playerTwoName.toLowerCase()) {
-      if (playerTwoName === 'Computer') {
-        this.#showAlert(`You can't share names with the Computer.`)
-      } else {
+      playerTwoName === 'Computer' ?
+        this.#showAlert(`You can't share names with the Computer.`) :
         this.#showAlert(`Names can't be the same.`)
-      }
     } else {
-      this.#playerOne.updateName(playerOneName)
-      this.#playerTwo.updateName(playerTwoName)
+      // updates player names if both names are unique
+      this.#playerOne.name = playerOneName
+      this.#playerTwo.name = playerTwoName
+        
+      if(playerTwoName.toLowerCase() === 'computer') this.#playerTwo.isComputer = true
     }
+  }
+    
+  displayGame() {
+    this.#resetLayout()
+      
+    // entire game board
+    const gameBoard = document.createElement('div')
+    gameBoard.classList.add('game-board')
+      
+    const winsContainer = document.createElement('div')
+    winsContainer.classList.add('wins-container')
+    gameBoard.append(winsContainer)
+    
+    // displays first player wins
+    const firstPlayerWins = document.createElement('h3')
+    firstPlayerWins.classList.add('first-wins')
+    firstPlayerWins.innerHTML = 
+    `${this.#playerOne.name} Wins: <span>${this.#playerOne.wins}</span>`
+    winsContainer.append(firstPlayerWins)
+    
+    // displays second player wins
+    const secondPlayerWins = document.createElement('h3')
+    secondPlayerWins.classList.add('second-wins')
+    secondPlayerWins.innerHTML = 
+    `${this.#playerTwo.name} Wins: <span>${this.#playerTwo.wins}</span>`
+    winsContainer.append(secondPlayerWins)
+    
+    // displays who's currently playing
+    const playingHeader = document.createElement('h2')
+    playingHeader.classList.add('currently-playing')
+    playingHeader.innerText = `${this.#playerOne.name}'s Turn`
+    gameBoard.append(playingHeader)
+
+    const board = document.createElement('div')
+    board.classList.add('board')
+    gameBoard.append(board)
+
+    const btnsContainer = document.createElement('div')
+    btnsContainer.classList.add('btns-container')
+    gameBoard.append(btnsContainer)
+
+    const resetBtn = document.createElement('button')
+    resetBtn.innerText = 'Reset'
+    resetBtn.classList.add('btn')
+    btnsContainer.append(resetBtn)
+
+    const mainMenuBtn = document.createElement('button')
+    mainMenuBtn.innerText = 'Main Menu'
+    mainMenuBtn.classList.add('btn')
+    mainMenuBtn.addEventListener('click', this.displayStart)
+    btnsContainer.append(mainMenuBtn)
+
+    this.#layout.append(gameBoard)
   }
 
   displayStart() {
+    this.#resetLayout()
     let isComputerPlaying: boolean = false
 
     const startMenu = document.createElement('div')
@@ -131,6 +207,8 @@ export class Game {
       } else {
         this.#startHandler(firstPlayerInput.value, secondPlayerInput.value)
       }
+
+      this.displayGame()
     })
 
     startMenu.append(gameModeContainer)
