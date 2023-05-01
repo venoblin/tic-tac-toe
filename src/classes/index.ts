@@ -3,7 +3,7 @@ import { Board } from "../types"
 class Player {
   #name: string
   #isComputer: boolean
-  #wins: number = 0
+  #wins: number = 5
 
   constructor(name: string, isComputer: boolean = false) {
     this.#name = name
@@ -28,6 +28,10 @@ class Player {
 
   set isComputer(b: boolean) {
     this.#isComputer = b
+  }
+
+  set wins(amount: number) {
+    this.#wins = amount
   }
 }
 
@@ -90,6 +94,11 @@ export class Game {
     this.#layout.innerHTML = ''
   }
 
+  #resetBoard() {
+    this.#playerOne.wins = 0
+    this.#playerTwo.wins = 0
+  }
+
   #startHandler(playerOneName: string, playerTwoName: string) {
     // makes sure names are unique
     if (playerOneName === '' || playerTwoName === '') {
@@ -117,12 +126,8 @@ export class Game {
       })
     })
   }
-
-  run() {
-    this.displayStart()
-  }
     
-  displayGame() {
+  #displayGame() {
     this.#resetLayout()
       
     // entire game board
@@ -165,18 +170,22 @@ export class Game {
     const resetBtn = document.createElement('button')
     resetBtn.innerText = 'Reset'
     resetBtn.classList.add('btn')
+    resetBtn.addEventListener('click', () => {
+      this.#resetBoard()
+      this.#displayGame()
+    })
     btnsContainer.append(resetBtn)
 
     const mainMenuBtn = document.createElement('button')
     mainMenuBtn.innerText = 'Main Menu'
     mainMenuBtn.classList.add('btn')
-    mainMenuBtn.addEventListener('click', () => this.displayStart())
+    mainMenuBtn.addEventListener('click', () => this.#displayStart())
     btnsContainer.append(mainMenuBtn)
 
     this.#layout.append(gameBoard)
   }
 
-  displayStart() {
+  #displayStart() {
     this.#resetLayout()
     let isComputerPlaying: boolean = false
 
@@ -231,12 +240,16 @@ export class Game {
         this.#startHandler(firstPlayerInput.value, secondPlayerInput.value)
       }
 
-      this.displayGame()
+      this.#displayGame()
     })
 
     startMenu.append(gameModeContainer)
     startMenu.append(inputContainer)
     startMenu.append(startBtn)
     this.#layout.append(startMenu)
+  }
+
+  run() {
+    this.#displayStart()
   }
 }
