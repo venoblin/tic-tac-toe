@@ -2,7 +2,7 @@ import { Board } from "../types"
 
 class Player {
   #name: string
-  #initialName: string
+  #initialName: string // used to remember name given when first instantiated 
   #isComputer: boolean
   #wins: number = 0
 
@@ -36,7 +36,7 @@ class Player {
     this.#wins = amount
   }
 
-  resetName() {
+  resetName(): void {
     this.#name = this.#initialName
   }
 }
@@ -75,7 +75,7 @@ export class Game {
     return this.#playerTwo
   }
 
-  #showAlert(msg: string) {
+  #showAlert(msg: string): void {
     const alertContainer = document.createElement('div')
     alertContainer.classList.add('alert')
 
@@ -95,17 +95,17 @@ export class Game {
     this.#layout.append(alertContainer)
   }
   
-  #resetLayout() {
+  #resetLayout(): void {
     // clears entire layout so new displays can be shown
     this.#layout.innerHTML = ''
   }
 
-  #resetBoard() {
+  #resetBoard(): void {
     this.#playerOne.wins = 0
     this.#playerTwo.wins = 0
   }
 
-  #startHandler(playerOneName: string, playerTwoName: string) {
+  #startHandler(playerOneName: string, playerTwoName: string): void {
     // makes sure names are unique
     if (playerOneName === '' || playerTwoName === '') {
       this.#showAlert('Both names are required.')
@@ -122,7 +122,7 @@ export class Game {
     }
   }
 
-  #generateGameBoard(boardAnchor: HTMLElement) {
+  #generateGameBoard(boardAnchor: HTMLElement): void {
     this.#board.forEach((row, x) => {
       row.forEach((col, y) => {
         const newCell = document.createElement('div')
@@ -133,7 +133,7 @@ export class Game {
     })
   }
     
-  #displayGame() {
+  #displayGame(): void {
     this.#resetLayout()
       
     // entire game board
@@ -194,7 +194,7 @@ export class Game {
     this.#layout.append(gameBoard)
   }
 
-  #displayStart() {
+  #displayStart(): void {
     this.#resetLayout()
     let isComputerPlaying: boolean = false
 
@@ -258,7 +258,7 @@ export class Game {
     this.#layout.append(startMenu)
   }
 
-  run() {
+  run(): void {
     this.#displayStart()
   }
 }

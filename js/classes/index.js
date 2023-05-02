@@ -13,7 +13,7 @@ var _Player_name, _Player_initialName, _Player_isComputer, _Player_wins, _Game_i
 class Player {
     constructor(name, isComputer = false) {
         _Player_name.set(this, void 0);
-        _Player_initialName.set(this, void 0);
+        _Player_initialName.set(this, void 0); // used to remember name given when first instantiated 
         _Player_isComputer.set(this, void 0);
         _Player_wins.set(this, 0);
         __classPrivateFieldSet(this, _Player_name, name, "f");
