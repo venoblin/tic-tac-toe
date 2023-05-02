@@ -2,11 +2,13 @@ import { Board } from "../types"
 
 class Player {
   #name: string
+  #initialName: string
   #isComputer: boolean
-  #wins: number = 5
+  #wins: number = 0
 
   constructor(name: string, isComputer: boolean = false) {
     this.#name = name
+    this.#initialName = name
     this.#isComputer = isComputer
   }
 
@@ -32,6 +34,10 @@ class Player {
 
   set wins(amount: number) {
     this.#wins = amount
+  }
+
+  resetName() {
+    this.#name = this.#initialName
   }
 }
 
@@ -179,7 +185,10 @@ export class Game {
     const mainMenuBtn = document.createElement('button')
     mainMenuBtn.innerText = 'Main Menu'
     mainMenuBtn.classList.add('btn')
-    mainMenuBtn.addEventListener('click', () => this.#displayStart())
+    mainMenuBtn.addEventListener('click', () => {
+      if (this.#playerTwo.name.toLowerCase() === 'computer') this.#playerTwo.resetName()
+      this.#displayStart()
+    })
     btnsContainer.append(mainMenuBtn)
 
     this.#layout.append(gameBoard)

@@ -9,13 +9,15 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Player_name, _Player_isComputer, _Player_wins, _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart;
+var _Player_name, _Player_initialName, _Player_isComputer, _Player_wins, _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart;
 class Player {
     constructor(name, isComputer = false) {
         _Player_name.set(this, void 0);
+        _Player_initialName.set(this, void 0);
         _Player_isComputer.set(this, void 0);
-        _Player_wins.set(this, 5);
+        _Player_wins.set(this, 0);
         __classPrivateFieldSet(this, _Player_name, name, "f");
+        __classPrivateFieldSet(this, _Player_initialName, name, "f");
         __classPrivateFieldSet(this, _Player_isComputer, isComputer, "f");
     }
     get name() {
@@ -36,8 +38,11 @@ class Player {
     set wins(amount) {
         __classPrivateFieldSet(this, _Player_wins, amount, "f");
     }
+    resetName() {
+        __classPrivateFieldSet(this, _Player_name, __classPrivateFieldGet(this, _Player_initialName, "f"), "f");
+    }
 }
-_Player_name = new WeakMap(), _Player_isComputer = new WeakMap(), _Player_wins = new WeakMap();
+_Player_name = new WeakMap(), _Player_initialName = new WeakMap(), _Player_isComputer = new WeakMap(), _Player_wins = new WeakMap();
 export class Game {
     constructor(options) {
         _Game_instances.add(this);
@@ -158,7 +163,11 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     const mainMenuBtn = document.createElement('button');
     mainMenuBtn.innerText = 'Main Menu';
     mainMenuBtn.classList.add('btn');
-    mainMenuBtn.addEventListener('click', () => __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayStart).call(this));
+    mainMenuBtn.addEventListener('click', () => {
+        if (__classPrivateFieldGet(this, _Game_playerTwo, "f").name.toLowerCase() === 'computer')
+            __classPrivateFieldGet(this, _Game_playerTwo, "f").resetName();
+        __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayStart).call(this);
+    });
     btnsContainer.append(mainMenuBtn);
     __classPrivateFieldGet(this, _Game_layout, "f").append(gameBoard);
 }, _Game_displayStart = function _Game_displayStart() {
