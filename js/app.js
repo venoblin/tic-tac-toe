@@ -1,7 +1,6 @@
 ////////////////////////////////
 // Global Variables Here
 ////////////////////////////////
-
 const gameContainer = document.getElementById('game-container')
 
 const cellsArr = []
@@ -28,7 +27,6 @@ const wins = {
 ////////////////////////////////
 // Helper Functions
 ////////////////////////////////
-
 const removeAllChildren = (parentElem, exeptionsArr = []) => {
   // Exeptions array should be an array of classes from the elements
   // you wish not to remove, just add the string don't put a '.',
@@ -87,9 +85,8 @@ const updateWins = () => {
 ////////////////////////////////
 // Functions For Game Logic Here
 ////////////////////////////////
-
-// Returns true or false if a certain cell already has a piece on it
 const isCellFilled = (cellNum) => {
+  // Returns true or false if a certain cell already has a piece on it
   let filled = null
 
   typeof cellsArr[cellNum] !== 'undefined' ? (filled = true) : (filled = false)
@@ -250,7 +247,6 @@ const computerChoice = () => {
 ////////////////////////////////
 // Event Listeners Here
 ////////////////////////////////
-
 const cellClick = (cell, cellNum) => {
   if (!isCellFilled(cellNum)) {
     cellsArr[cellNum] = currentPlayer
