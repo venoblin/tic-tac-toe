@@ -57,9 +57,7 @@ export class Game {
 
     // creating and anchoring layout element to anchor element  
     const anchorElem = document.getElementById(options.anchorId)
-    if (anchorElem === null) {
-      console.error('Anchor element not found!')
-    }
+    if (anchorElem === null) console.error('Anchor element not found!')
 
     this.#layout = document.createElement('div')
     this.#layout.classList.add('layout')
