@@ -58,9 +58,8 @@ export class Game {
         __classPrivateFieldSet(this, _Game_playerTwo, new Player('Player 2'), "f");
         // creating and anchoring layout element to anchor element  
         const anchorElem = document.getElementById(options.anchorId);
-        if (anchorElem === null) {
+        if (anchorElem === null)
             console.error('Anchor element not found!');
-        }
         __classPrivateFieldSet(this, _Game_layout, document.createElement('div'), "f");
         __classPrivateFieldGet(this, _Game_layout, "f").classList.add('layout');
         anchorElem === null || anchorElem === void 0 ? void 0 : anchorElem.append(__classPrivateFieldGet(this, _Game_layout, "f"));
