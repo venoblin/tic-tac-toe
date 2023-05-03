@@ -23,6 +23,9 @@ export default class Player {
     get name() {
         return __classPrivateFieldGet(this, _Player_name, "f");
     }
+    get initialName() {
+        return __classPrivateFieldGet(this, _Player_initialName, "f");
+    }
     get isComputer() {
         return __classPrivateFieldGet(this, _Player_isComputer, "f");
     }

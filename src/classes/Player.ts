@@ -14,6 +14,10 @@ export default class Player {
     return this.#name
   }
 
+  get initialName(): string {
+    return this.#initialName
+  }
+
   get isComputer(): boolean {
     return this.#isComputer
   }

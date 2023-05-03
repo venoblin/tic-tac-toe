@@ -6,10 +6,12 @@ export default class Game {
   #playerOne: Player
   #playerTwo: Player
   #board: Board
+  #currentPlayer: string
 
   constructor(options: {anchorId: string}) {
     this.#playerOne = new Player('Player 1')
     this.#playerTwo = new Player('Player 2')
+    this.#currentPlayer = this.#playerOne.initialName
     this.#board = new Board()
 
     // creating and anchoring layout element to anchor element  
@@ -77,6 +79,10 @@ export default class Game {
     }
   }
 
+  #switchCurrentPlayer() {
+    // if ()
+  }
+
   // function to handle clicking on board cells
   #cellClickHandler(): void {
     console.log('click')
@@ -110,7 +116,7 @@ export default class Game {
     // displays who's currently playing
     const playingHeader = document.createElement('h2')
     playingHeader.classList.add('currently-playing')
-    playingHeader.innerText = `${this.#playerOne.name}'s Turn`
+    playingHeader.innerText = `${this.#currentPlayer}'s Turn`
     gameBoard.append(playingHeader)
 
     const boardContainer = document.createElement('div')
