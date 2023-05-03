@@ -12,7 +12,7 @@ export default class Board {
   }
 
   // gets a board cell using coordinates 
-  getCell(x: number, y: number) {
+  getCell(x: number, y: number): string {
     return this.#board[x][y]
   }
 
