@@ -17,6 +17,11 @@ export default class Board {
         const newCell = document.createElement('div')
         newCell.classList.add('cell')
 
+        newCell.addEventListener('click', () => {
+          console.log(`row: ${x}`)
+          console.log(`col: ${y}`)
+        })
+        
         boardAnchor.append(newCell)
       })
     })

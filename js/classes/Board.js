@@ -24,6 +24,10 @@ export default class Board {
             row.forEach((col, y) => {
                 const newCell = document.createElement('div');
                 newCell.classList.add('cell');
+                newCell.addEventListener('click', () => {
+                    console.log(`row: ${x}`);
+                    console.log(`col: ${y}`);
+                });
                 boardAnchor.append(newCell);
             });
         });
