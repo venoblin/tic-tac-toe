@@ -19,14 +19,18 @@ export default class Board {
             ['', '', '']
         ], "f");
     }
+    // gets a board cell using coordinates 
+    getCell(x, y) {
+        return __classPrivateFieldGet(this, _Board_board, "f")[x][y];
+    }
     generateGameBoard(boardAnchor) {
         __classPrivateFieldGet(this, _Board_board, "f").forEach((row, x) => {
             row.forEach((col, y) => {
                 const newCell = document.createElement('div');
                 newCell.classList.add('cell');
                 newCell.addEventListener('click', () => {
-                    console.log(`row: ${x}`);
-                    console.log(`col: ${y}`);
+                    console.clear();
+                    console.log(this.getCell(x, y));
                 });
                 boardAnchor.append(newCell);
             });

@@ -11,6 +11,11 @@ export default class Board {
     ]
   }
 
+  // gets a board cell using coordinates 
+  getCell(x: number, y: number) {
+    return this.#board[x][y]
+  }
+
   generateGameBoard(boardAnchor: HTMLElement): void {
     this.#board.forEach((row, x) => {
       row.forEach((col, y) => {
@@ -18,8 +23,8 @@ export default class Board {
         newCell.classList.add('cell')
 
         newCell.addEventListener('click', () => {
-          console.log(`row: ${x}`)
-          console.log(`col: ${y}`)
+          console.clear()
+          console.log(this.getCell(x, y))
         })
         
         boardAnchor.append(newCell)
