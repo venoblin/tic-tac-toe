@@ -1,5 +1,5 @@
 export type BoardArray = [
-    [string, string, string],
-    [string, string, string],
-    [string, string, string]
+    ['' | 'x' | 'o', '' | 'x' | 'o', '' | 'x' | 'o'],
+    ['' | 'x' | 'o', '' | 'x' | 'o', '' | 'x' | 'o'],
+    ['' | 'x' | 'o', '' | 'x' | 'o', '' | 'x' | 'o']
   ]
