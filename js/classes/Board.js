@@ -29,7 +29,10 @@ export default class Board {
                 const newCell = document.createElement('div');
                 newCell.classList.add('cell');
                 newCell.addEventListener('click', () => {
+                    console.clear();
                     clickHandler();
+                    console.log('x: ' + x);
+                    console.log('y: ' + y);
                 });
                 boardAnchor.append(newCell);
             });
