@@ -23,14 +23,13 @@ export default class Board {
     getCell(x, y) {
         return __classPrivateFieldGet(this, _Board_board, "f")[x][y];
     }
-    generateGameBoard(boardAnchor) {
+    generateGameBoard(boardAnchor, clickHandler) {
         __classPrivateFieldGet(this, _Board_board, "f").forEach((row, x) => {
             row.forEach((col, y) => {
                 const newCell = document.createElement('div');
                 newCell.classList.add('cell');
                 newCell.addEventListener('click', () => {
-                    console.clear();
-                    console.log(this.getCell(x, y));
+                    clickHandler();
                 });
                 boardAnchor.append(newCell);
             });

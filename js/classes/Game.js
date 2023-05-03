@@ -9,7 +9,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_displayGame, _Game_displayStart;
+var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_cellClickHandler, _Game_displayGame, _Game_displayStart;
 import Player from "./Player.js";
 import Board from "./Board.js";
 export default class Game {
@@ -77,6 +77,8 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         if (playerTwoName.toLowerCase() === 'computer')
             __classPrivateFieldGet(this, _Game_playerTwo, "f").isComputer = true;
     }
+}, _Game_cellClickHandler = function _Game_cellClickHandler() {
+    console.log('click');
 }, _Game_displayGame = function _Game_displayGame() {
     __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);
     // entire game board
@@ -105,7 +107,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     const boardContainer = document.createElement('div');
     boardContainer.classList.add('board');
     // generating board
-    __classPrivateFieldGet(this, _Game_board, "f").generateGameBoard(boardContainer);
+    __classPrivateFieldGet(this, _Game_board, "f").generateGameBoard(boardContainer, __classPrivateFieldGet(this, _Game_instances, "m", _Game_cellClickHandler));
     gameBoard.append(boardContainer);
     const btnsContainer = document.createElement('div');
     btnsContainer.classList.add('btns-container');

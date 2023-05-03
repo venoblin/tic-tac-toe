@@ -16,15 +16,14 @@ export default class Board {
     return this.#board[x][y]
   }
 
-  generateGameBoard(boardAnchor: HTMLElement): void {
+  generateGameBoard(boardAnchor: HTMLElement, clickHandler: Function): void {
     this.#board.forEach((row, x) => {
       row.forEach((col, y) => {
         const newCell = document.createElement('div')
         newCell.classList.add('cell')
 
         newCell.addEventListener('click', () => {
-          console.clear()
-          console.log(this.getCell(x, y))
+          clickHandler()
         })
         
         boardAnchor.append(newCell)

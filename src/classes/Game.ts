@@ -76,6 +76,11 @@ export default class Game {
       if(playerTwoName.toLowerCase() === 'computer') this.#playerTwo.isComputer = true
     }
   }
+
+  // function to handle clicking on board cells
+  #cellClickHandler(): void {
+    console.log('click')
+  }
     
   #displayGame(): void {
     this.#resetLayout()
@@ -111,7 +116,7 @@ export default class Game {
     const boardContainer = document.createElement('div')
     boardContainer.classList.add('board')
     // generating board
-    this.#board.generateGameBoard(boardContainer)
+    this.#board.generateGameBoard(boardContainer, this.#cellClickHandler)
     gameBoard.append(boardContainer)
 
     const btnsContainer = document.createElement('div')
