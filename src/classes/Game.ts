@@ -1,55 +1,9 @@
-import { Board } from "../types"
+import Player from "./Player.js"
 
-class Player {
-  #name: string
-  #initialName: string // used to remember name given when first instantiated 
-  #isComputer: boolean
-  #wins: number = 0
-
-  constructor(name: string, isComputer: boolean = false) {
-    this.#name = name
-    this.#initialName = name
-    this.#isComputer = isComputer
-  }
-
-  get name(): string {
-    return this.#name
-  }
-
-  get isComputer(): boolean {
-    return this.#isComputer
-  }
-
-  get wins(): number {
-    return this.#wins
-  }
-
-  set name(name: string) {
-    this.#name = name
-  }
-
-  set isComputer(b: boolean) {
-    this.#isComputer = b
-  }
-
-  set wins(amount: number) {
-    this.#wins = amount
-  }
-
-  resetName(): void {
-    this.#name = this.#initialName
-  }
-}
-
-export class Game {
+export default class Game {
   #layout: HTMLElement
   #playerOne: Player
   #playerTwo: Player
-  #board: Board = [
-    ['', '', ''],
-    ['', '', ''],
-    ['', '', '']
-  ]
 
   constructor(options: {anchorId: string}) {
     this.#playerOne = new Player('Player 1')
@@ -120,16 +74,16 @@ export class Game {
     }
   }
 
-  #generateGameBoard(boardAnchor: HTMLElement): void {
-    this.#board.forEach((row, x) => {
-      row.forEach((col, y) => {
-        const newCell = document.createElement('div')
-        newCell.classList.add('cell')
+  // #generateGameBoard(boardAnchor: HTMLElement): void {
+  //   this.#boardArray.forEach((row, x) => {
+  //     row.forEach((col, y) => {
+  //       const newCell = document.createElement('div')
+  //       newCell.classList.add('cell')
 
-        boardAnchor.append(newCell)
-      })
-    })
-  }
+  //       boardAnchor.append(newCell)
+  //     })
+  //   })
+  // }
     
   #displayGame(): void {
     this.#resetLayout()
@@ -164,7 +118,6 @@ export class Game {
 
     const board = document.createElement('div')
     board.classList.add('board')
-    this.#generateGameBoard(board)
     gameBoard.append(board)
 
     const btnsContainer = document.createElement('div')

@@ -10,7 +10,8 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_displayGame, _Game_displayStart;
-export class Game {
+import Player from "./Player.js";
+export default class Game {
     constructor(options) {
         _Game_instances.add(this);
         _Game_layout.set(this, void 0);
@@ -100,7 +101,6 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     gameBoard.append(playingHeader);
     const board = document.createElement('div');
     board.classList.add('board');
-    this.(board);
     gameBoard.append(board);
     const btnsContainer = document.createElement('div');
     btnsContainer.classList.add('btns-container');
