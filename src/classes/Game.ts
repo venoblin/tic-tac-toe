@@ -1,13 +1,16 @@
 import Player from "./Player.js"
+import Board from "./Board.js"
 
 export default class Game {
   #layout: HTMLElement
   #playerOne: Player
   #playerTwo: Player
+  #board: Board
 
   constructor(options: {anchorId: string}) {
     this.#playerOne = new Player('Player 1')
     this.#playerTwo = new Player('Player 2')
+    this.#board = new Board()
 
     // creating and anchoring layout element to anchor element  
     const anchorElem = document.getElementById(options.anchorId)
@@ -73,17 +76,6 @@ export default class Game {
       if(playerTwoName.toLowerCase() === 'computer') this.#playerTwo.isComputer = true
     }
   }
-
-  // #generateGameBoard(boardAnchor: HTMLElement): void {
-  //   this.#boardArray.forEach((row, x) => {
-  //     row.forEach((col, y) => {
-  //       const newCell = document.createElement('div')
-  //       newCell.classList.add('cell')
-
-  //       boardAnchor.append(newCell)
-  //     })
-  //   })
-  // }
     
   #displayGame(): void {
     this.#resetLayout()
@@ -116,9 +108,11 @@ export default class Game {
     playingHeader.innerText = `${this.#playerOne.name}'s Turn`
     gameBoard.append(playingHeader)
 
-    const board = document.createElement('div')
-    board.classList.add('board')
-    gameBoard.append(board)
+    const boardContainer = document.createElement('div')
+    boardContainer.classList.add('board')
+    // generating board
+    this.#board.generateGameBoard(boardContainer)
+    gameBoard.append(boardContainer)
 
     const btnsContainer = document.createElement('div')
     btnsContainer.classList.add('btns-container')

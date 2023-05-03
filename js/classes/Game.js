@@ -9,16 +9,19 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_displayGame, _Game_displayStart;
+var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_displayGame, _Game_displayStart;
 import Player from "./Player.js";
+import Board from "./Board.js";
 export default class Game {
     constructor(options) {
         _Game_instances.add(this);
         _Game_layout.set(this, void 0);
         _Game_playerOne.set(this, void 0);
         _Game_playerTwo.set(this, void 0);
+        _Game_board.set(this, void 0);
         __classPrivateFieldSet(this, _Game_playerOne, new Player('Player 1'), "f");
         __classPrivateFieldSet(this, _Game_playerTwo, new Player('Player 2'), "f");
+        __classPrivateFieldSet(this, _Game_board, new Board(), "f");
         // creating and anchoring layout element to anchor element  
         const anchorElem = document.getElementById(options.anchorId);
         if (anchorElem === null)
@@ -37,7 +40,7 @@ export default class Game {
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayStart).call(this);
     }
 }
-_Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo = new WeakMap(), _Game_instances = new WeakSet(), _Game_showAlert = function _Game_showAlert(msg) {
+_Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo = new WeakMap(), _Game_board = new WeakMap(), _Game_instances = new WeakSet(), _Game_showAlert = function _Game_showAlert(msg) {
     const alertContainer = document.createElement('div');
     alertContainer.classList.add('alert');
     const h2 = document.createElement('h2');
@@ -99,9 +102,11 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     playingHeader.classList.add('currently-playing');
     playingHeader.innerText = `${__classPrivateFieldGet(this, _Game_playerOne, "f").name}'s Turn`;
     gameBoard.append(playingHeader);
-    const board = document.createElement('div');
-    board.classList.add('board');
-    gameBoard.append(board);
+    const boardContainer = document.createElement('div');
+    boardContainer.classList.add('board');
+    // generating board
+    __classPrivateFieldGet(this, _Game_board, "f").generateGameBoard(boardContainer);
+    gameBoard.append(boardContainer);
     const btnsContainer = document.createElement('div');
     btnsContainer.classList.add('btns-container');
     gameBoard.append(btnsContainer);
