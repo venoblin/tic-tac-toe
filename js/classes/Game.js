@@ -9,9 +9,8 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_board, _Game_currentPlayer, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_switchCurrentPlayer, _Game_cellClickHandler, _Game_displayGame, _Game_displayStart;
+var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_board, _Game_currentPlayer, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_switchCurrentPlayer, _Game_getCurrentPlayer, _Game_getCell, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart;
 import Player from "./Player.js";
-import Board from "./Board.js";
 export default class Game {
     constructor(options) {
         _Game_instances.add(this);
@@ -23,7 +22,11 @@ export default class Game {
         __classPrivateFieldSet(this, _Game_playerOne, new Player('Player 1'), "f");
         __classPrivateFieldSet(this, _Game_playerTwo, new Player('Player 2'), "f");
         __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f").initialName, "f");
-        __classPrivateFieldSet(this, _Game_board, new Board(), "f");
+        __classPrivateFieldSet(this, _Game_board, [
+            ['', '', ''],
+            ['', '', ''],
+            ['', '', '']
+        ], "f");
         // creating and anchoring layout element to anchor element  
         const anchorElem = document.getElementById(options.anchorId);
         if (anchorElem === null)
@@ -80,9 +83,29 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
             __classPrivateFieldGet(this, _Game_playerTwo, "f").isComputer = true;
     }
 }, _Game_switchCurrentPlayer = function _Game_switchCurrentPlayer() {
-    // if ()
-}, _Game_cellClickHandler = function _Game_cellClickHandler() {
-    console.log('click');
+    __classPrivateFieldGet(this, _Game_currentPlayer, "f").toLowerCase() === 'player 1' ?
+        __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerTwo, "f").name, "f") :
+        __classPrivateFieldSet(this, _Game_currentPlayer, this.playerOne.name, "f");
+}, _Game_getCurrentPlayer = function _Game_getCurrentPlayer() {
+    return __classPrivateFieldGet(this, _Game_currentPlayer, "f").toLowerCase() === 'player 1' ?
+        __classPrivateFieldGet(this, _Game_playerOne, "f").name : __classPrivateFieldGet(this, _Game_playerTwo, "f").name;
+}, _Game_getCell = function _Game_getCell(x, y) {
+    return __classPrivateFieldGet(this, _Game_board, "f")[x][y];
+}, _Game_generateGameBoard = function _Game_generateGameBoard(boardAnchor) {
+    __classPrivateFieldGet(this, _Game_board, "f").forEach((row, x) => {
+        row.forEach((col, y) => {
+            const newCell = document.createElement('div');
+            newCell.classList.add('cell');
+            newCell.addEventListener('click', () => {
+                console.clear();
+                console.log('x: ' + x);
+                console.log('y: ' + y);
+                __classPrivateFieldGet(this, _Game_instances, "m", _Game_switchCurrentPlayer).call(this);
+                __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
+            });
+            boardAnchor.append(newCell);
+        });
+    });
 }, _Game_displayGame = function _Game_displayGame() {
     __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);
     // entire game board
@@ -106,12 +129,12 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     // displays who's currently playing
     const playingHeader = document.createElement('h2');
     playingHeader.classList.add('currently-playing');
-    playingHeader.innerText = `${__classPrivateFieldGet(this, _Game_currentPlayer, "f")}'s Turn`;
+    playingHeader.innerText = `${__classPrivateFieldGet(this, _Game_instances, "m", _Game_getCurrentPlayer).call(this)}'s Turn`;
     gameBoard.append(playingHeader);
     const boardContainer = document.createElement('div');
     boardContainer.classList.add('board');
     // generating board
-    __classPrivateFieldGet(this, _Game_board, "f").generateGameBoard(boardContainer, __classPrivateFieldGet(this, _Game_instances, "m", _Game_cellClickHandler));
+    __classPrivateFieldGet(this, _Game_instances, "m", _Game_generateGameBoard).call(this, boardContainer);
     gameBoard.append(boardContainer);
     const btnsContainer = document.createElement('div');
     btnsContainer.classList.add('btns-container');

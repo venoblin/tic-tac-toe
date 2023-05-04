@@ -5,14 +5,18 @@ export default class Game {
   #layout: HTMLElement
   #playerOne: Player
   #playerTwo: Player
-  #board: Board
+  #board: BoardArray
   #currentPlayer: string
 
   constructor(options: {anchorId: string}) {
     this.#playerOne = new Player('Player 1')
     this.#playerTwo = new Player('Player 2')
     this.#currentPlayer = this.#playerOne.initialName
-    this.#board = new Board()
+    this.#board = [
+      ['', '', ''],
+      ['', '', ''],
+      ['', '', '']
+    ]
 
     // creating and anchoring layout element to anchor element  
     const anchorElem = document.getElementById(options.anchorId)
@@ -79,14 +83,41 @@ export default class Game {
     }
   }
 
-  #switchCurrentPlayer() {
-    // if ()
+  #switchCurrentPlayer(): void {
+    this.#currentPlayer.toLowerCase() === 'player 1' ?
+      this.#currentPlayer = this.#playerTwo.name :
+      this.#currentPlayer = this.playerOne.name
   }
 
-  // function to handle clicking on board cells
-  #cellClickHandler(): void {
-    console.log('click')
+  #getCurrentPlayer(): string {
+    return this.#currentPlayer.toLowerCase() === 'player 1' ? 
+      this.#playerOne.name : this.#playerTwo.name
   }
+
+  // gets a board cell using coordinates 
+  #getCell(x: number, y: number): string {
+    return this.#board[x][y]
+  }
+
+  #generateGameBoard(boardAnchor: HTMLElement): void {
+    this.#board.forEach((row, x) => {
+      row.forEach((col, y) => {
+        const newCell = document.createElement('div')
+        newCell.classList.add('cell')
+
+        newCell.addEventListener('click', () => {
+          console.clear()
+          console.log('x: ' + x)
+          console.log('y: ' + y)
+          this.#switchCurrentPlayer()
+          this.#displayGame()
+        })
+        
+        boardAnchor.append(newCell)
+      })
+    })
+  }
+  
     
   #displayGame(): void {
     this.#resetLayout()
@@ -116,13 +147,13 @@ export default class Game {
     // displays who's currently playing
     const playingHeader = document.createElement('h2')
     playingHeader.classList.add('currently-playing')
-    playingHeader.innerText = `${this.#currentPlayer}'s Turn`
+    playingHeader.innerText = `${this.#getCurrentPlayer()}'s Turn`
     gameBoard.append(playingHeader)
 
     const boardContainer = document.createElement('div')
     boardContainer.classList.add('board')
     // generating board
-    this.#board.generateGameBoard(boardContainer, this.#cellClickHandler)
+    this.#generateGameBoard(boardContainer)
     gameBoard.append(boardContainer)
 
     const btnsContainer = document.createElement('div')
