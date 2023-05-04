@@ -47,8 +47,9 @@ export default class Player {
     set wins(amount) {
         __classPrivateFieldSet(this, _Player_wins, amount, "f");
     }
-    getIcon() {
-        return __classPrivateFieldGet(this, _Player_icons, "f")[__classPrivateFieldGet(this, _Player_selectedIcon, "f")];
+    putIcon(cell) {
+        // puts icon at cell
+        cell.innerHTML = __classPrivateFieldGet(this, _Player_icons, "f")[__classPrivateFieldGet(this, _Player_selectedIcon, "f")];
     }
     resetName() {
         __classPrivateFieldSet(this, _Player_name, __classPrivateFieldGet(this, _Player_initialName, "f"), "f");

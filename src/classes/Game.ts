@@ -90,9 +90,9 @@ export default class Game {
       this.#currentPlayer = this.playerOne.name
   }
 
-  #getCurrentPlayer(): string {
+  #getCurrentPlayer(): Player {
     return this.#currentPlayer.toLowerCase() === 'player 1' ? 
-      this.#playerOne.name : this.#playerTwo.name
+      this.#playerOne : this.#playerTwo
   }
 
   // gets a board cell using coordinates 
@@ -107,9 +107,10 @@ export default class Game {
         newCell.classList.add('cell')
 
         newCell.addEventListener('click', () => {
-          console.clear()
-          console.log('x: ' + x)
-          console.log('y: ' + y)
+          // this.#currentPlayer === this.#playerOne.initialName ? 
+          //   this.
+
+
           this.#switchCurrentPlayer()
           this.#displayGame()
         })
@@ -148,7 +149,7 @@ export default class Game {
     // displays who's currently playing
     const playingHeader = document.createElement('h2')
     playingHeader.classList.add('currently-playing')
-    playingHeader.innerText = `${this.#getCurrentPlayer()}'s Turn`
+    playingHeader.innerText = `${this.#getCurrentPlayer().name}'s Turn`
     gameBoard.append(playingHeader)
 
     const boardContainer = document.createElement('div')

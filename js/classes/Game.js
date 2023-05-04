@@ -89,7 +89,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         __classPrivateFieldSet(this, _Game_currentPlayer, this.playerOne.name, "f");
 }, _Game_getCurrentPlayer = function _Game_getCurrentPlayer() {
     return __classPrivateFieldGet(this, _Game_currentPlayer, "f").toLowerCase() === 'player 1' ?
-        __classPrivateFieldGet(this, _Game_playerOne, "f").name : __classPrivateFieldGet(this, _Game_playerTwo, "f").name;
+        __classPrivateFieldGet(this, _Game_playerOne, "f") : __classPrivateFieldGet(this, _Game_playerTwo, "f");
 }, _Game_getCell = function _Game_getCell(x, y) {
     return __classPrivateFieldGet(this, _Game_board, "f")[x][y];
 }, _Game_generateGameBoard = function _Game_generateGameBoard(boardAnchor) {
@@ -98,9 +98,8 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
             const newCell = document.createElement('div');
             newCell.classList.add('cell');
             newCell.addEventListener('click', () => {
-                console.clear();
-                console.log('x: ' + x);
-                console.log('y: ' + y);
+                // this.#currentPlayer === this.#playerOne.initialName ? 
+                //   this.
                 __classPrivateFieldGet(this, _Game_instances, "m", _Game_switchCurrentPlayer).call(this);
                 __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
             });
@@ -130,7 +129,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     // displays who's currently playing
     const playingHeader = document.createElement('h2');
     playingHeader.classList.add('currently-playing');
-    playingHeader.innerText = `${__classPrivateFieldGet(this, _Game_instances, "m", _Game_getCurrentPlayer).call(this)}'s Turn`;
+    playingHeader.innerText = `${__classPrivateFieldGet(this, _Game_instances, "m", _Game_getCurrentPlayer).call(this).name}'s Turn`;
     gameBoard.append(playingHeader);
     const boardContainer = document.createElement('div');
     boardContainer.classList.add('board');

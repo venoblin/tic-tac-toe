@@ -46,8 +46,9 @@ export default class Player {
     this.#wins = amount
   }
 
-  getIcon(): string {
-    return this.#icons[this.#selectedIcon]
+  putIcon(cell: HTMLElement): void {
+    // puts icon at cell
+    cell.innerHTML = this.#icons[this.#selectedIcon]
   }
 
   resetName(): void {
