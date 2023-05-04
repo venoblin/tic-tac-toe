@@ -100,8 +100,8 @@ export default class Game {
   }
 
   #generateGameBoard(boardAnchor: HTMLElement): void {
-    this.#board.forEach((row, x) => {
-      row.forEach((col, y) => {
+    this.#board.forEach((row: Array<string>, x: number) => {
+      row.forEach((str: string, y: number) => {
         const newCell = document.createElement('div')
         newCell.classList.add('cell')
 
