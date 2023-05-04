@@ -19,8 +19,8 @@ export default class Game {
         _Game_playerTwo.set(this, void 0);
         _Game_board.set(this, void 0);
         _Game_currentPlayer.set(this, void 0);
-        __classPrivateFieldSet(this, _Game_playerOne, new Player('Player 1'), "f");
-        __classPrivateFieldSet(this, _Game_playerTwo, new Player('Player 2'), "f");
+        __classPrivateFieldSet(this, _Game_playerOne, new Player({ name: 'Player 1', icon: 'x' }), "f");
+        __classPrivateFieldSet(this, _Game_playerTwo, new Player({ name: 'Player 2', icon: 'o' }), "f");
         __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f").initialName, "f");
         __classPrivateFieldSet(this, _Game_board, [
             ['', '', ''],

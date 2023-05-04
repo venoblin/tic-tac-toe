@@ -9,8 +9,8 @@ export default class Game {
   #currentPlayer: string
 
   constructor(options: {anchorId: string}) {
-    this.#playerOne = new Player('Player 1')
-    this.#playerTwo = new Player('Player 2')
+    this.#playerOne = new Player({name: 'Player 1', icon: 'x'})
+    this.#playerTwo = new Player({name: 'Player 2', icon: 'o'})
     this.#currentPlayer = this.#playerOne.initialName
     this.#board = [
       ['', '', ''],
