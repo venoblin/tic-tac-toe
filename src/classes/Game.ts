@@ -1,5 +1,5 @@
 import Player from "./Player.js"
-import Board from "./Board.js"
+import { BoardArray } from "../types"
 
 export default class Game {
   #layout: HTMLElement
