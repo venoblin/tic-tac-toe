@@ -64,6 +64,12 @@ export default class Game {
   #resetBoard(): void {
     this.#playerOne.wins = 0
     this.#playerTwo.wins = 0
+    this.#currentPlayer = this.#playerOne
+    this.#board = [
+      [null, null, null],
+      [null, null, null],
+      [null, null, null]
+    ]
   }
 
   #startHandler(playerOneName: string, playerTwoName: string): void {
@@ -170,6 +176,7 @@ export default class Game {
     mainMenuBtn.classList.add('btn')
     mainMenuBtn.addEventListener('click', () => {
       if (this.#playerTwo.name.toLowerCase() === 'computer') this.#playerTwo.resetName()
+      this.#resetBoard()
       this.#displayStart()
     })
     btnsContainer.append(mainMenuBtn)
