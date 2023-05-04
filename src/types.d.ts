@@ -1,7 +1,9 @@
+import Player from "./classes/Player"
+
 export type BoardArray = [
-    ['' | 'x' | 'o', '' | 'x' | 'o', '' | 'x' | 'o'],
-    ['' | 'x' | 'o', '' | 'x' | 'o', '' | 'x' | 'o'],
-    ['' | 'x' | 'o', '' | 'x' | 'o', '' | 'x' | 'o']
+    [Player | null, Player | null, Player | null],
+    [Player | null, Player | null, Player | null],
+    [Player | null, Player | null, Player | null]
   ]
 
   export type Icon = 'x' | 'o'

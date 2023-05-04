@@ -23,9 +23,9 @@ export default class Game {
         __classPrivateFieldSet(this, _Game_playerTwo, new Player({ name: 'Player 2', icon: 'o' }), "f");
         __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f"), "f");
         __classPrivateFieldSet(this, _Game_board, [
-            ['', '', ''],
-            ['', '', ''],
-            ['', '', '']
+            [null, null, null],
+            [null, null, null],
+            [null, null, null]
         ], "f");
         // creating and anchoring layout element to anchor element  
         const anchorElem = document.getElementById(options.anchorId);
@@ -91,12 +91,14 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     return __classPrivateFieldGet(this, _Game_board, "f")[x][y];
 }, _Game_generateGameBoard = function _Game_generateGameBoard(boardAnchor) {
     __classPrivateFieldGet(this, _Game_board, "f").forEach((row, x) => {
-        row.forEach((str, y) => {
+        row.forEach((player, y) => {
             const newCell = document.createElement('div');
             newCell.classList.add('cell');
+            if (player) {
+            }
             newCell.addEventListener('click', () => {
-                // this.#currentPlayer === this.#playerOne.initialName ? 
-                //   this.
+                __classPrivateFieldGet(this, _Game_board, "f")[x][y] = __classPrivateFieldGet(this, _Game_currentPlayer, "f");
+                console.log(__classPrivateFieldGet(this, _Game_board, "f"));
                 __classPrivateFieldGet(this, _Game_instances, "m", _Game_switchCurrentPlayer).call(this);
                 __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
             });

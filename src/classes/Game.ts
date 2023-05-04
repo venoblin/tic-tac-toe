@@ -13,9 +13,9 @@ export default class Game {
     this.#playerTwo = new Player({name: 'Player 2', icon: 'o'})
     this.#currentPlayer = this.#playerOne
     this.#board = [
-      ['', '', ''],
-      ['', '', ''],
-      ['', '', '']
+      [null, null, null],
+      [null, null, null],
+      [null, null, null]
     ]
 
     // creating and anchoring layout element to anchor element  
@@ -96,15 +96,19 @@ export default class Game {
   }
 
   #generateGameBoard(boardAnchor: HTMLElement): void {
-    this.#board.forEach((row: Array<string>, x: number) => {
-      row.forEach((str: string, y: number) => {
+    this.#board.forEach((row: Array<Player | null>, x: number) => {
+      row.forEach((player: Player | null, y: number) => {
         const newCell = document.createElement('div')
         newCell.classList.add('cell')
 
-        newCell.addEventListener('click', () => {
-          // this.#currentPlayer === this.#playerOne.initialName ? 
-          //   this.
+        if (player) {
 
+        }
+
+        newCell.addEventListener('click', () => {
+          this.#board[x][y] = this.#currentPlayer
+
+          console.log(this.#board)
 
           this.#switchCurrentPlayer()
           this.#displayGame()
