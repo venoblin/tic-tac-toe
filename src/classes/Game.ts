@@ -80,6 +80,7 @@ export default class Game {
       this.#playerTwo.name = playerTwoName
         
       if(playerTwoName.toLowerCase() === 'computer') this.#playerTwo.isComputer = true
+      this.#displayGame()
     }
   }
 
@@ -235,8 +236,6 @@ export default class Game {
       } else {
         this.#startHandler(firstPlayerInput.value, secondPlayerInput.value)
       }
-
-      this.#displayGame()
     })
 
     startMenu.append(gameModeContainer)

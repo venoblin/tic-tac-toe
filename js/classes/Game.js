@@ -81,6 +81,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         __classPrivateFieldGet(this, _Game_playerTwo, "f").name = playerTwoName;
         if (playerTwoName.toLowerCase() === 'computer')
             __classPrivateFieldGet(this, _Game_playerTwo, "f").isComputer = true;
+        __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
     }
 }, _Game_switchCurrentPlayer = function _Game_switchCurrentPlayer() {
     __classPrivateFieldGet(this, _Game_currentPlayer, "f").toLowerCase() === 'player 1' ?
@@ -208,7 +209,6 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         else {
             __classPrivateFieldGet(this, _Game_instances, "m", _Game_startHandler).call(this, firstPlayerInput.value, secondPlayerInput.value);
         }
-        __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
     });
     startMenu.append(gameModeContainer);
     startMenu.append(inputContainer);
