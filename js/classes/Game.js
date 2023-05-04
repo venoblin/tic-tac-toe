@@ -9,7 +9,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_currentPlayer, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_switchCurrentPlayer, _Game_getCell, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart;
+var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_currentPlayer, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_switchCurrentPlayer, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart;
 import Player from "./Player.js";
 export default class Game {
     constructor(options) {
@@ -87,14 +87,13 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     __classPrivateFieldGet(this, _Game_currentPlayer, "f") === __classPrivateFieldGet(this, _Game_playerOne, "f") ?
         __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerTwo, "f"), "f") :
         __classPrivateFieldSet(this, _Game_currentPlayer, this.playerOne, "f");
-}, _Game_getCell = function _Game_getCell(x, y) {
-    return __classPrivateFieldGet(this, _Game_board, "f")[x][y];
 }, _Game_generateGameBoard = function _Game_generateGameBoard(boardAnchor) {
     __classPrivateFieldGet(this, _Game_board, "f").forEach((row, x) => {
         row.forEach((player, y) => {
             const newCell = document.createElement('div');
             newCell.classList.add('cell');
             if (player) {
+                newCell.innerHTML = player.getIcon();
             }
             newCell.addEventListener('click', () => {
                 __classPrivateFieldGet(this, _Game_board, "f")[x][y] = __classPrivateFieldGet(this, _Game_currentPlayer, "f");

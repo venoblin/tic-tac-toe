@@ -90,11 +90,6 @@ export default class Game {
       this.#currentPlayer = this.playerOne
   }
 
-  // gets a board cell using coordinates 
-  #getCell(x: number, y: number): string {
-    return this.#board[x][y]
-  }
-
   #generateGameBoard(boardAnchor: HTMLElement): void {
     this.#board.forEach((row: Array<Player | null>, x: number) => {
       row.forEach((player: Player | null, y: number) => {
@@ -102,7 +97,7 @@ export default class Game {
         newCell.classList.add('cell')
 
         if (player) {
-
+          newCell.innerHTML = player.getIcon()
         }
 
         newCell.addEventListener('click', () => {
