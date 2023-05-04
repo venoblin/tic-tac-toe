@@ -107,12 +107,12 @@ export default class Game {
         }
 
         newCell.addEventListener('click', () => {
-          this.#board[x][y] = this.#currentPlayer
+          if(this.#board[x][y] === null) {
+            this.#board[x][y] = this.#currentPlayer
+            this.#switchCurrentPlayer()
+            this.#displayGame()
+          }
 
-          console.log(this.#board)
-
-          this.#switchCurrentPlayer()
-          this.#displayGame()
         })
         
         boardAnchor.append(newCell)

@@ -102,10 +102,11 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
                 newCell.innerHTML = player.getIcon();
             }
             newCell.addEventListener('click', () => {
-                __classPrivateFieldGet(this, _Game_board, "f")[x][y] = __classPrivateFieldGet(this, _Game_currentPlayer, "f");
-                console.log(__classPrivateFieldGet(this, _Game_board, "f"));
-                __classPrivateFieldGet(this, _Game_instances, "m", _Game_switchCurrentPlayer).call(this);
-                __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
+                if (__classPrivateFieldGet(this, _Game_board, "f")[x][y] === null) {
+                    __classPrivateFieldGet(this, _Game_board, "f")[x][y] = __classPrivateFieldGet(this, _Game_currentPlayer, "f");
+                    __classPrivateFieldGet(this, _Game_instances, "m", _Game_switchCurrentPlayer).call(this);
+                    __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
+                }
             });
             boardAnchor.append(newCell);
         });
