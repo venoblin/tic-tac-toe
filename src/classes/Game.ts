@@ -5,13 +5,13 @@ export default class Game {
   #layout: HTMLElement
   #playerOne: Player
   #playerTwo: Player
+  #currentPlayer: Player
   #board: BoardArray
-  #currentPlayer: string
 
   constructor(options: {anchorId: string}) {
     this.#playerOne = new Player({name: 'Player 1', icon: 'x'})
     this.#playerTwo = new Player({name: 'Player 2', icon: 'o'})
-    this.#currentPlayer = this.#playerOne.initialName
+    this.#currentPlayer = this.#playerOne
     this.#board = [
       ['', '', ''],
       ['', '', ''],
@@ -85,14 +85,9 @@ export default class Game {
   }
 
   #switchCurrentPlayer(): void {
-    this.#currentPlayer.toLowerCase() === 'player 1' ?
-      this.#currentPlayer = this.#playerTwo.name :
-      this.#currentPlayer = this.playerOne.name
-  }
-
-  #getCurrentPlayer(): Player {
-    return this.#currentPlayer.toLowerCase() === 'player 1' ? 
-      this.#playerOne : this.#playerTwo
+    this.#currentPlayer === this.#playerOne ?
+      this.#currentPlayer = this.#playerTwo :
+      this.#currentPlayer = this.playerOne
   }
 
   // gets a board cell using coordinates 
@@ -149,7 +144,7 @@ export default class Game {
     // displays who's currently playing
     const playingHeader = document.createElement('h2')
     playingHeader.classList.add('currently-playing')
-    playingHeader.innerText = `${this.#getCurrentPlayer().name}'s Turn`
+    playingHeader.innerText = `${this.#currentPlayer.name}'s Turn`
     gameBoard.append(playingHeader)
 
     const boardContainer = document.createElement('div')

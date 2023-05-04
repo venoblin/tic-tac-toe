@@ -9,7 +9,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_board, _Game_currentPlayer, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_switchCurrentPlayer, _Game_getCurrentPlayer, _Game_getCell, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart;
+var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_currentPlayer, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_switchCurrentPlayer, _Game_getCell, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart;
 import Player from "./Player.js";
 export default class Game {
     constructor(options) {
@@ -17,11 +17,11 @@ export default class Game {
         _Game_layout.set(this, void 0);
         _Game_playerOne.set(this, void 0);
         _Game_playerTwo.set(this, void 0);
-        _Game_board.set(this, void 0);
         _Game_currentPlayer.set(this, void 0);
+        _Game_board.set(this, void 0);
         __classPrivateFieldSet(this, _Game_playerOne, new Player({ name: 'Player 1', icon: 'x' }), "f");
         __classPrivateFieldSet(this, _Game_playerTwo, new Player({ name: 'Player 2', icon: 'o' }), "f");
-        __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f").initialName, "f");
+        __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f"), "f");
         __classPrivateFieldSet(this, _Game_board, [
             ['', '', ''],
             ['', '', ''],
@@ -45,7 +45,7 @@ export default class Game {
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayStart).call(this);
     }
 }
-_Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo = new WeakMap(), _Game_board = new WeakMap(), _Game_currentPlayer = new WeakMap(), _Game_instances = new WeakSet(), _Game_showAlert = function _Game_showAlert(msg) {
+_Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo = new WeakMap(), _Game_currentPlayer = new WeakMap(), _Game_board = new WeakMap(), _Game_instances = new WeakSet(), _Game_showAlert = function _Game_showAlert(msg) {
     const alertContainer = document.createElement('div');
     alertContainer.classList.add('alert');
     const h2 = document.createElement('h2');
@@ -84,12 +84,9 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
     }
 }, _Game_switchCurrentPlayer = function _Game_switchCurrentPlayer() {
-    __classPrivateFieldGet(this, _Game_currentPlayer, "f").toLowerCase() === 'player 1' ?
-        __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerTwo, "f").name, "f") :
-        __classPrivateFieldSet(this, _Game_currentPlayer, this.playerOne.name, "f");
-}, _Game_getCurrentPlayer = function _Game_getCurrentPlayer() {
-    return __classPrivateFieldGet(this, _Game_currentPlayer, "f").toLowerCase() === 'player 1' ?
-        __classPrivateFieldGet(this, _Game_playerOne, "f") : __classPrivateFieldGet(this, _Game_playerTwo, "f");
+    __classPrivateFieldGet(this, _Game_currentPlayer, "f") === __classPrivateFieldGet(this, _Game_playerOne, "f") ?
+        __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerTwo, "f"), "f") :
+        __classPrivateFieldSet(this, _Game_currentPlayer, this.playerOne, "f");
 }, _Game_getCell = function _Game_getCell(x, y) {
     return __classPrivateFieldGet(this, _Game_board, "f")[x][y];
 }, _Game_generateGameBoard = function _Game_generateGameBoard(boardAnchor) {
@@ -129,7 +126,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     // displays who's currently playing
     const playingHeader = document.createElement('h2');
     playingHeader.classList.add('currently-playing');
-    playingHeader.innerText = `${__classPrivateFieldGet(this, _Game_instances, "m", _Game_getCurrentPlayer).call(this).name}'s Turn`;
+    playingHeader.innerText = `${__classPrivateFieldGet(this, _Game_currentPlayer, "f").name}'s Turn`;
     gameBoard.append(playingHeader);
     const boardContainer = document.createElement('div');
     boardContainer.classList.add('board');
