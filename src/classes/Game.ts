@@ -93,7 +93,7 @@ export default class Game {
   #switchCurrentPlayer(): void {
     this.#currentPlayer === this.#playerOne ?
       this.#currentPlayer = this.#playerTwo :
-      this.#currentPlayer = this.playerOne
+      this.#currentPlayer = this.#playerOne
   }
 
   #generateGameBoard(boardAnchor: HTMLElement): void {
@@ -112,7 +112,6 @@ export default class Game {
             this.#switchCurrentPlayer()
             this.#displayGame()
           }
-
         })
         
         boardAnchor.append(newCell)
