@@ -1,4 +1,4 @@
-import Player from "./classes/Player"
+import Player from "./classes/Player.js"
 
 export type BoardArray = [
     [Player | null, Player | null, Player | null],

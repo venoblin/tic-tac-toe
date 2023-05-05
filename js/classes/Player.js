@@ -11,7 +11,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _Player_name, _Player_initialName, _Player_isComputer, _Player_wins, _Player_icons, _Player_selectedIcon;
 export default class Player {
-    constructor(options) {
+    constructor(name, icon, isComputer) {
         _Player_name.set(this, void 0);
         _Player_initialName.set(this, void 0); // used to remember name given when first instantiated 
         _Player_isComputer.set(this, void 0);
@@ -21,10 +21,10 @@ export default class Player {
             o: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M224 96C135.6 96 64 167.6 64 256s71.6 160 160 160s160-71.6 160-160s-71.6-160-160-160zM0 256C0 132.3 100.3 32 224 32s224 100.3 224 224s-100.3 224-224 224S0 379.7 0 256z"/></svg>'
         });
         _Player_selectedIcon.set(this, void 0);
-        __classPrivateFieldSet(this, _Player_name, options.name, "f");
-        __classPrivateFieldSet(this, _Player_initialName, options.name, "f");
-        __classPrivateFieldSet(this, _Player_selectedIcon, options.icon, "f");
-        __classPrivateFieldSet(this, _Player_isComputer, options.isComputer || false, "f");
+        __classPrivateFieldSet(this, _Player_name, name, "f");
+        __classPrivateFieldSet(this, _Player_initialName, name, "f");
+        __classPrivateFieldSet(this, _Player_selectedIcon, icon, "f");
+        __classPrivateFieldSet(this, _Player_isComputer, isComputer || false, "f");
     }
     get name() {
         return __classPrivateFieldGet(this, _Player_name, "f");
