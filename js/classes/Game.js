@@ -9,7 +9,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_currentPlayer, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_switchCurrentPlayer, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart;
+var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_currentPlayer, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_checkWinner, _Game_switchCurrentPlayer, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart;
 export default class Game {
     constructor(anchorId, playerOne, playerTwo) {
         _Game_instances.add(this);
@@ -87,6 +87,63 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         if (playerTwoName.toLowerCase() === 'computer')
             __classPrivateFieldGet(this, _Game_playerTwo, "f").isComputer = true;
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
+    }
+}, _Game_checkWinner = function _Game_checkWinner() {
+    if (__classPrivateFieldGet(this, _Game_board, "f")[0][0] === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
+        __classPrivateFieldGet(this, _Game_board, "f")[0][1] === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
+        __classPrivateFieldGet(this, _Game_board, "f")[0][2] === __classPrivateFieldGet(this, _Game_currentPlayer, "f")) {
+        cells[0].classList.add('winning-cell');
+        cells[1].classList.add('winning-cell');
+        cells[2].classList.add('winning-cell');
+    }
+    else if (__classPrivateFieldGet(this, _Game_board, "f")[1][0] === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
+        __classPrivateFieldGet(this, _Game_board, "f")[1][1] === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
+        __classPrivateFieldGet(this, _Game_board, "f")[1][2] === __classPrivateFieldGet(this, _Game_currentPlayer, "f")) {
+        cells[3].classList.add('winning-cell');
+        cells[4].classList.add('winning-cell');
+        cells[5].classList.add('winning-cell');
+    }
+    else if (__classPrivateFieldGet(this, _Game_board, "f")[2][0] === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
+        __classPrivateFieldGet(this, _Game_board, "f")[2][1] === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
+        __classPrivateFieldGet(this, _Game_board, "f")[2][2] === __classPrivateFieldGet(this, _Game_currentPlayer, "f")) {
+        cells[6].classList.add('winning-cell');
+        cells[7].classList.add('winning-cell');
+        cells[8].classList.add('winning-cell');
+    }
+    else if (__classPrivateFieldGet(this, _Game_board, "f")[0][0] === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
+        __classPrivateFieldGet(this, _Game_board, "f")[1][0] === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
+        __classPrivateFieldGet(this, _Game_board, "f")[2][0] === __classPrivateFieldGet(this, _Game_currentPlayer, "f")) {
+        cells[0].classList.add('winning-cell');
+        cells[3].classList.add('winning-cell');
+        cells[6].classList.add('winning-cell');
+    }
+    else if (__classPrivateFieldGet(this, _Game_board, "f")[0][1] === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
+        __classPrivateFieldGet(this, _Game_board, "f")[1][1] === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
+        __classPrivateFieldGet(this, _Game_board, "f")[2][1] === __classPrivateFieldGet(this, _Game_currentPlayer, "f")) {
+        cells[1].classList.add('winning-cell');
+        cells[4].classList.add('winning-cell');
+        cells[7].classList.add('winning-cell');
+    }
+    else if (__classPrivateFieldGet(this, _Game_board, "f")[0][2] === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
+        __classPrivateFieldGet(this, _Game_board, "f")[1][2] === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
+        __classPrivateFieldGet(this, _Game_board, "f")[2][2] === __classPrivateFieldGet(this, _Game_currentPlayer, "f")) {
+        cells[2].classList.add('winning-cell');
+        cells[5].classList.add('winning-cell');
+        cells[8].classList.add('winning-cell');
+    }
+    else if (__classPrivateFieldGet(this, _Game_board, "f")[0][0] === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
+        __classPrivateFieldGet(this, _Game_board, "f")[1][1] === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
+        __classPrivateFieldGet(this, _Game_board, "f")[2][2] === __classPrivateFieldGet(this, _Game_currentPlayer, "f")) {
+        cells[0].classList.add('winning-cell');
+        cells[4].classList.add('winning-cell');
+        cells[8].classList.add('winning-cell');
+    }
+    else if (__classPrivateFieldGet(this, _Game_board, "f")[0][2] === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
+        __classPrivateFieldGet(this, _Game_board, "f")[1][1] === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
+        __classPrivateFieldGet(this, _Game_board, "f")[2][0] === __classPrivateFieldGet(this, _Game_currentPlayer, "f")) {
+        cells[2].classList.add('winning-cell');
+        cells[4].classList.add('winning-cell');
+        cells[6].classList.add('winning-cell');
     }
 }, _Game_switchCurrentPlayer = function _Game_switchCurrentPlayer() {
     __classPrivateFieldGet(this, _Game_currentPlayer, "f") === __classPrivateFieldGet(this, _Game_playerOne, "f") ?

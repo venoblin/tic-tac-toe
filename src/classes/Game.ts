@@ -1,12 +1,12 @@
 import Player from "./Player.js"
-import { BoardArray } from "../types"
+import { Array2D } from "../types"
 
 export default class Game {
   #layout: HTMLElement
   #playerOne: Player
   #playerTwo: Player
   #currentPlayer: Player
-  #board: BoardArray
+  #board: Array2D
 
   constructor(anchorId: string, playerOne: Player, playerTwo: Player) {
     this.#playerOne = playerOne
@@ -88,6 +88,74 @@ export default class Game {
       if(playerTwoName.toLowerCase() === 'computer') this.#playerTwo.isComputer = true
       this.#displayGame()
     }
+  }
+
+  #checkWinner(): void {
+    if (
+      this.#board[0][0] === this.#currentPlayer &&
+      this.#board[0][1] === this.#currentPlayer &&
+      this.#board[0][2] === this.#currentPlayer
+    ) {
+      cells[0].classList.add('winning-cell')
+      cells[1].classList.add('winning-cell')
+      cells[2].classList.add('winning-cell')
+    } else if (
+      this.#board[1][0] === this.#currentPlayer &&
+      this.#board[1][1] === this.#currentPlayer &&
+      this.#board[1][2] === this.#currentPlayer
+    ) {
+      cells[3].classList.add('winning-cell')
+      cells[4].classList.add('winning-cell')
+      cells[5].classList.add('winning-cell')
+    } else if (
+      this.#board[2][0] === this.#currentPlayer &&
+      this.#board[2][1] === this.#currentPlayer &&
+      this.#board[2][2] === this.#currentPlayer
+    ) {
+      cells[6].classList.add('winning-cell')
+      cells[7].classList.add('winning-cell')
+      cells[8].classList.add('winning-cell')
+    } else if (
+      this.#board[0][0] === this.#currentPlayer &&
+      this.#board[1][0] === this.#currentPlayer &&
+      this.#board[2][0] === this.#currentPlayer
+    ) {
+      cells[0].classList.add('winning-cell')
+      cells[3].classList.add('winning-cell')
+      cells[6].classList.add('winning-cell')
+    } else if (
+      this.#board[0][1] === this.#currentPlayer &&
+      this.#board[1][1] === this.#currentPlayer &&
+      this.#board[2][1] === this.#currentPlayer
+    ) {
+      cells[1].classList.add('winning-cell')
+      cells[4].classList.add('winning-cell')
+      cells[7].classList.add('winning-cell')
+    } else if (
+      this.#board[0][2] === this.#currentPlayer &&
+      this.#board[1][2] === this.#currentPlayer &&
+      this.#board[2][2] === this.#currentPlayer
+    ) {
+      cells[2].classList.add('winning-cell')
+      cells[5].classList.add('winning-cell')
+      cells[8].classList.add('winning-cell')
+    } else if (
+      this.#board[0][0] === this.#currentPlayer &&
+      this.#board[1][1] === this.#currentPlayer &&
+      this.#board[2][2] === this.#currentPlayer
+    ) {
+      cells[0].classList.add('winning-cell')
+      cells[4].classList.add('winning-cell')
+      cells[8].classList.add('winning-cell')
+    } else if (
+      this.#board[0][2] === this.#currentPlayer &&
+      this.#board[1][1] === this.#currentPlayer &&
+      this.#board[2][0] === this.#currentPlayer
+    ) {
+      cells[2].classList.add('winning-cell')
+      cells[4].classList.add('winning-cell')
+      cells[6].classList.add('winning-cell')
+    } 
   }
 
   #switchCurrentPlayer(): void {
