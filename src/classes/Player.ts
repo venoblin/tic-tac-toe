@@ -11,11 +11,11 @@ export default class Player {
   }
   #selectedIcon: Icon
 
-  constructor(obj: {name: string, icon: Icon, isComputer?: boolean}) {
-    this.#name = obj.name
-    this.#initialName = obj.name
-    this.#selectedIcon = obj.icon
-    this.#isComputer = obj.isComputer || false
+  constructor(options: {name: string, icon: Icon, isComputer?: boolean}) {
+    this.#name = options.name
+    this.#initialName = options.name
+    this.#selectedIcon = options.icon
+    this.#isComputer = options.isComputer || false
   }
 
   get name(): string {

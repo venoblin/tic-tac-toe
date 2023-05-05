@@ -10,17 +10,16 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_currentPlayer, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_switchCurrentPlayer, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart;
-import Player from "./Player.js";
 export default class Game {
-    constructor(options) {
+    constructor(anchorId, playerOne, playerTwo) {
         _Game_instances.add(this);
         _Game_layout.set(this, void 0);
         _Game_playerOne.set(this, void 0);
         _Game_playerTwo.set(this, void 0);
         _Game_currentPlayer.set(this, void 0);
         _Game_board.set(this, void 0);
-        __classPrivateFieldSet(this, _Game_playerOne, new Player({ name: 'Player 1', icon: 'x' }), "f");
-        __classPrivateFieldSet(this, _Game_playerTwo, new Player({ name: 'Player 2', icon: 'o' }), "f");
+        __classPrivateFieldSet(this, _Game_playerOne, playerOne, "f");
+        __classPrivateFieldSet(this, _Game_playerTwo, playerTwo, "f");
         __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f"), "f");
         __classPrivateFieldSet(this, _Game_board, [
             [null, null, null],
@@ -28,7 +27,7 @@ export default class Game {
             [null, null, null]
         ], "f");
         // creating and anchoring layout element to anchor element  
-        const anchorElem = document.getElementById(options.anchorId);
+        const anchorElem = document.getElementById(anchorId);
         if (anchorElem === null)
             console.error('Anchor element not found!');
         __classPrivateFieldSet(this, _Game_layout, document.createElement('div'), "f");
@@ -77,7 +76,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_showAlert).call(this, 'Both names are required.');
     }
     else if (playerOneName.toLowerCase() === playerTwoName.toLowerCase()) {
-        playerTwoName === 'Computer' ?
+        playerTwoName.toLowerCase() === 'computer' ?
             __classPrivateFieldGet(this, _Game_instances, "m", _Game_showAlert).call(this, `You can't share names with the Computer.`) :
             __classPrivateFieldGet(this, _Game_instances, "m", _Game_showAlert).call(this, `Names can't be the same.`);
     }

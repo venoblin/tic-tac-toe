@@ -8,9 +8,9 @@ export default class Game {
   #currentPlayer: Player
   #board: BoardArray
 
-  constructor(options: {anchorId: string}) {
-    this.#playerOne = new Player({name: 'Player 1', icon: 'x'})
-    this.#playerTwo = new Player({name: 'Player 2', icon: 'o'})
+  constructor(anchorId: string, playerOne: Player, playerTwo: Player) {
+    this.#playerOne = playerOne
+    this.#playerTwo = playerTwo
     this.#currentPlayer = this.#playerOne
     this.#board = [
       [null, null, null],
@@ -19,7 +19,7 @@ export default class Game {
     ]
 
     // creating and anchoring layout element to anchor element  
-    const anchorElem = document.getElementById(options.anchorId)
+    const anchorElem = document.getElementById(anchorId)
     if (anchorElem === null) console.error('Anchor element not found!')
 
     this.#layout = document.createElement('div')
@@ -77,7 +77,7 @@ export default class Game {
     if (playerOneName === '' || playerTwoName === '') {
       this.#showAlert('Both names are required.')
     } else if (playerOneName.toLowerCase() === playerTwoName.toLowerCase()) {
-      playerTwoName === 'Computer' ?
+      playerTwoName.toLowerCase() === 'computer' ?
         this.#showAlert(`You can't share names with the Computer.`) :
         this.#showAlert(`Names can't be the same.`)
     } else {
