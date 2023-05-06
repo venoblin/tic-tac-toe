@@ -1,6 +1,5 @@
 export default class Array2D<T> {
-  #arr: Array<T>[] = []
-  #initialArr: Array<T>[] = []
+  #arr: T[][] = []
 
   constructor(el: T,rows: number, cols: number) {
     for (let i = 0; i < rows; i++) {
@@ -13,11 +12,7 @@ export default class Array2D<T> {
     }
   }
 
-  get arr(): Array<T>[] {
+  get arr(): T[][] {
     return this.#arr
-  }
-  
-  get initialArr(): Array<T>[] {
-    return this.initialArr
   }
 }
