@@ -7,12 +7,14 @@ export default class Game {
   #playerTwo: Player
   #currentPlayer: Player
   #board: Array2D<null | Player>
+  #cells: Array2D<null | HTMLElement>
 
   constructor(anchorId: string, playerOne: Player, playerTwo: Player) {
     this.#playerOne = playerOne
     this.#playerTwo = playerTwo
     this.#currentPlayer = this.#playerOne
     this.#board = new Array2D<null | Player>(null, 3, 3)
+    this.#cells = new Array2D<null | HTMLElement>(null, 3, 3)
 
     // creating and anchoring layout element to anchor element  
     const anchorElem = document.getElementById(anchorId)
@@ -161,6 +163,7 @@ export default class Game {
       row.forEach((player: null | Player, y: number) => {
         const newCell = document.createElement('div')
         newCell.classList.add('cell')
+        this.#cells.arr[x][y] = newCell
 
         if (player) {
           newCell.innerHTML = player.icon
