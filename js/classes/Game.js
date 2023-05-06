@@ -87,7 +87,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f"), "f");
 }, _Game_generateGameBoard = function _Game_generateGameBoard(boardAnchor) {
     __classPrivateFieldGet(this, _Game_board, "f").arr.forEach((row, x) => {
-        row === null || row === void 0 ? void 0 : row.forEach((player, y) => {
+        row.forEach((player, y) => {
             const newCell = document.createElement('div');
             newCell.classList.add('cell');
             if (player) {

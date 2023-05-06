@@ -157,8 +157,8 @@ export default class Game {
   }
 
   #generateGameBoard(boardAnchor: HTMLElement): void {
-    this.#board.arr.forEach((row, x: number) => {
-      row?.forEach((player, y: number) => {
+    this.#board.arr.forEach((row: (null | Player)[], x: number) => {
+      row.forEach((player: null | Player, y: number) => {
         const newCell = document.createElement('div')
         newCell.classList.add('cell')
 
