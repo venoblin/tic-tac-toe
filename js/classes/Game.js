@@ -159,7 +159,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
                 counter++;
         });
     });
-    return false;
+    return counter >= __classPrivateFieldGet(this, _Game_board, "f").rows * __classPrivateFieldGet(this, _Game_board, "f").cols ? true : false;
 }, _Game_switchCurrentPlayer = function _Game_switchCurrentPlayer() {
     __classPrivateFieldGet(this, _Game_currentPlayer, "f") === __classPrivateFieldGet(this, _Game_playerOne, "f") ?
         __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerTwo, "f"), "f") :
@@ -178,6 +178,9 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
                     __classPrivateFieldGet(this, _Game_board, "f").arr[x][y] = __classPrivateFieldGet(this, _Game_currentPlayer, "f");
                     if (__classPrivateFieldGet(this, _Game_instances, "m", _Game_isWinner).call(this)) {
                         console.log(__classPrivateFieldGet(this, _Game_currentPlayer, "f").name + ' is the winner');
+                    }
+                    else if (__classPrivateFieldGet(this, _Game_instances, "m", _Game_isBoardFilled).call(this)) {
+                        console.log('Its a tie');
                     }
                     __classPrivateFieldGet(this, _Game_instances, "m", _Game_switchCurrentPlayer).call(this);
                     __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);

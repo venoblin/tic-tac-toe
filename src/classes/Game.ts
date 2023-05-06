@@ -172,7 +172,7 @@ export default class Game {
       })
     })
 
-    return false
+    return counter >= this.#board.rows * this.#board.cols ? true : false
   }
 
   #switchCurrentPlayer(): void {
@@ -197,6 +197,8 @@ export default class Game {
             this.#board.arr[x][y] = this.#currentPlayer
             if (this.#isWinner()) {
               console.log(this.#currentPlayer.name + ' is the winner')
+            } else if (this.#isBoardFilled()) {
+              console.log('Its a tie')
             }
             this.#switchCurrentPlayer()
             this.#displayGame()
