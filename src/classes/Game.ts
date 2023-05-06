@@ -61,7 +61,7 @@ export default class Game {
     this.#playerOne.wins = 0
     this.#playerTwo.wins = 0
     this.#currentPlayer = this.#playerOne
-    console.log(this.#board)
+    this.#board = new Array2D<null | Player>(null, 3, 3)
   }
 
   #startHandler(playerOneName: string, playerTwoName: string): void {
@@ -163,11 +163,11 @@ export default class Game {
         newCell.classList.add('cell')
 
         if (player) {
-          newCell.innerHTML = player.getIcon()
+          newCell.innerHTML = player.icon
         }
 
         newCell.addEventListener('click', () => {
-          if(this.#board.arr[x][y] === null) {
+          if(!this.#board.arr[x][y]) {
             this.#board.arr[x][y] = this.#currentPlayer
             this.#switchCurrentPlayer()
             this.#displayGame()
@@ -178,8 +178,7 @@ export default class Game {
       })
     })
   }
-  
-    
+      
   #displayGame(): void {
     this.#resetLayout()
       

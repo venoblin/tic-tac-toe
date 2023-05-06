@@ -38,6 +38,9 @@ export default class Player {
     get wins() {
         return __classPrivateFieldGet(this, _Player_wins, "f");
     }
+    get icon() {
+        return __classPrivateFieldGet(this, _Player_icons, "f")[__classPrivateFieldGet(this, _Player_selectedIcon, "f")];
+    }
     set name(name) {
         __classPrivateFieldSet(this, _Player_name, name, "f");
     }
@@ -46,9 +49,6 @@ export default class Player {
     }
     set wins(amount) {
         __classPrivateFieldSet(this, _Player_wins, amount, "f");
-    }
-    getIcon() {
-        return __classPrivateFieldGet(this, _Player_icons, "f")[__classPrivateFieldGet(this, _Player_selectedIcon, "f")];
     }
     resetName() {
         __classPrivateFieldSet(this, _Player_name, __classPrivateFieldGet(this, _Player_initialName, "f"), "f");

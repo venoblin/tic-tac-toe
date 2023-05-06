@@ -34,6 +34,10 @@ export default class Player {
     return this.#wins
   }
 
+  get icon(): string {
+    return this.#icons[this.#selectedIcon]
+  }
+
   set name(name: string) {
     this.#name = name
   }
@@ -44,10 +48,6 @@ export default class Player {
 
   set wins(amount: number) {
     this.#wins = amount
-  }
-
-  getIcon(): string {
-    return this.#icons[this.#selectedIcon]
   }
 
   resetName(): void {

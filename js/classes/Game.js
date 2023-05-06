@@ -62,7 +62,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     __classPrivateFieldGet(this, _Game_playerOne, "f").wins = 0;
     __classPrivateFieldGet(this, _Game_playerTwo, "f").wins = 0;
     __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f"), "f");
-    console.log(__classPrivateFieldGet(this, _Game_board, "f"));
+    __classPrivateFieldSet(this, _Game_board, new Array2D(null, 3, 3), "f");
 }, _Game_startHandler = function _Game_startHandler(playerOneName, playerTwoName) {
     // makes sure names are unique
     if (playerOneName === '' || playerTwoName === '') {
@@ -91,10 +91,10 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
             const newCell = document.createElement('div');
             newCell.classList.add('cell');
             if (player) {
-                newCell.innerHTML = player.getIcon();
+                newCell.innerHTML = player.icon;
             }
             newCell.addEventListener('click', () => {
-                if (__classPrivateFieldGet(this, _Game_board, "f").arr[x][y] === null) {
+                if (!__classPrivateFieldGet(this, _Game_board, "f").arr[x][y]) {
                     __classPrivateFieldGet(this, _Game_board, "f").arr[x][y] = __classPrivateFieldGet(this, _Game_currentPlayer, "f");
                     __classPrivateFieldGet(this, _Game_instances, "m", _Game_switchCurrentPlayer).call(this);
                     __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
