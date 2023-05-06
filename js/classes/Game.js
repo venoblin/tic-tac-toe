@@ -62,11 +62,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     __classPrivateFieldGet(this, _Game_playerOne, "f").wins = 0;
     __classPrivateFieldGet(this, _Game_playerTwo, "f").wins = 0;
     __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f"), "f");
-    __classPrivateFieldSet(this, _Game_board, [
-        [null, null, null],
-        [null, null, null],
-        [null, null, null]
-    ], "f");
+    console.log(__classPrivateFieldGet(this, _Game_board, "f"));
 }, _Game_startHandler = function _Game_startHandler(playerOneName, playerTwoName) {
     // makes sure names are unique
     if (playerOneName === '' || playerTwoName === '') {
@@ -90,16 +86,16 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerTwo, "f"), "f") :
         __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f"), "f");
 }, _Game_generateGameBoard = function _Game_generateGameBoard(boardAnchor) {
-    __classPrivateFieldGet(this, _Game_board, "f").forEach((row, x) => {
-        row.forEach((player, y) => {
+    __classPrivateFieldGet(this, _Game_board, "f").arr.forEach((row, x) => {
+        row === null || row === void 0 ? void 0 : row.forEach((player, y) => {
             const newCell = document.createElement('div');
             newCell.classList.add('cell');
             if (player) {
                 newCell.innerHTML = player.getIcon();
             }
             newCell.addEventListener('click', () => {
-                if (__classPrivateFieldGet(this, _Game_board, "f")[x][y] === null) {
-                    __classPrivateFieldGet(this, _Game_board, "f")[x][y] = __classPrivateFieldGet(this, _Game_currentPlayer, "f");
+                if (__classPrivateFieldGet(this, _Game_board, "f").arr[x][y] === null) {
+                    __classPrivateFieldGet(this, _Game_board, "f").arr[x][y] = __classPrivateFieldGet(this, _Game_currentPlayer, "f");
                     __classPrivateFieldGet(this, _Game_instances, "m", _Game_switchCurrentPlayer).call(this);
                     __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
                 }

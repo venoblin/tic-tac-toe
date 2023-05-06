@@ -6,13 +6,13 @@ export default class Game {
   #playerOne: Player
   #playerTwo: Player
   #currentPlayer: Player
-  #board: Array2D
+  #board: Array2D<null | Player>
 
   constructor(anchorId: string, playerOne: Player, playerTwo: Player) {
     this.#playerOne = playerOne
     this.#playerTwo = playerTwo
     this.#currentPlayer = this.#playerOne
-    this.#board = new Array2D(null, 3, 3)
+    this.#board = new Array2D<null | Player>(null, 3, 3)
 
     // creating and anchoring layout element to anchor element  
     const anchorElem = document.getElementById(anchorId)
@@ -61,11 +61,7 @@ export default class Game {
     this.#playerOne.wins = 0
     this.#playerTwo.wins = 0
     this.#currentPlayer = this.#playerOne
-    this.#board = [
-      [null, null, null],
-      [null, null, null],
-      [null, null, null]
-    ]
+    console.log(this.#board)
   }
 
   #startHandler(playerOneName: string, playerTwoName: string): void {
@@ -161,8 +157,8 @@ export default class Game {
   }
 
   #generateGameBoard(boardAnchor: HTMLElement): void {
-    this.#board.forEach((row: Array<Player | null>, x: number) => {
-      row.forEach((player: Player | null, y: number) => {
+    this.#board.arr.forEach((row, x: number) => {
+      row?.forEach((player, y: number) => {
         const newCell = document.createElement('div')
         newCell.classList.add('cell')
 
@@ -171,8 +167,8 @@ export default class Game {
         }
 
         newCell.addEventListener('click', () => {
-          if(this.#board[x][y] === null) {
-            this.#board[x][y] = this.#currentPlayer
+          if(this.#board.arr[x][y] === null) {
+            this.#board.arr[x][y] = this.#currentPlayer
             this.#switchCurrentPlayer()
             this.#displayGame()
           }
