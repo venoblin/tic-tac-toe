@@ -84,73 +84,96 @@ export default class Game {
     }
   }
 
-  // #checkWinner(): void {
-  //   if (
-  //     this.#board[0][0] === this.#currentPlayer &&
-  //     this.#board[0][1] === this.#currentPlayer &&
-  //     this.#board[0][2] === this.#currentPlayer
-  //   ) {
-  //     cells[0].classList.add('winning-cell')
-  //     cells[1].classList.add('winning-cell')
-  //     cells[2].classList.add('winning-cell')
-  //   } else if (
-  //     this.#board[1][0] === this.#currentPlayer &&
-  //     this.#board[1][1] === this.#currentPlayer &&
-  //     this.#board[1][2] === this.#currentPlayer
-  //   ) {
-  //     cells[3].classList.add('winning-cell')
-  //     cells[4].classList.add('winning-cell')
-  //     cells[5].classList.add('winning-cell')
-  //   } else if (
-  //     this.#board[2][0] === this.#currentPlayer &&
-  //     this.#board[2][1] === this.#currentPlayer &&
-  //     this.#board[2][2] === this.#currentPlayer
-  //   ) {
-  //     cells[6].classList.add('winning-cell')
-  //     cells[7].classList.add('winning-cell')
-  //     cells[8].classList.add('winning-cell')
-  //   } else if (
-  //     this.#board[0][0] === this.#currentPlayer &&
-  //     this.#board[1][0] === this.#currentPlayer &&
-  //     this.#board[2][0] === this.#currentPlayer
-  //   ) {
-  //     cells[0].classList.add('winning-cell')
-  //     cells[3].classList.add('winning-cell')
-  //     cells[6].classList.add('winning-cell')
-  //   } else if (
-  //     this.#board[0][1] === this.#currentPlayer &&
-  //     this.#board[1][1] === this.#currentPlayer &&
-  //     this.#board[2][1] === this.#currentPlayer
-  //   ) {
-  //     cells[1].classList.add('winning-cell')
-  //     cells[4].classList.add('winning-cell')
-  //     cells[7].classList.add('winning-cell')
-  //   } else if (
-  //     this.#board[0][2] === this.#currentPlayer &&
-  //     this.#board[1][2] === this.#currentPlayer &&
-  //     this.#board[2][2] === this.#currentPlayer
-  //   ) {
-  //     cells[2].classList.add('winning-cell')
-  //     cells[5].classList.add('winning-cell')
-  //     cells[8].classList.add('winning-cell')
-  //   } else if (
-  //     this.#board[0][0] === this.#currentPlayer &&
-  //     this.#board[1][1] === this.#currentPlayer &&
-  //     this.#board[2][2] === this.#currentPlayer
-  //   ) {
-  //     cells[0].classList.add('winning-cell')
-  //     cells[4].classList.add('winning-cell')
-  //     cells[8].classList.add('winning-cell')
-  //   } else if (
-  //     this.#board[0][2] === this.#currentPlayer &&
-  //     this.#board[1][1] === this.#currentPlayer &&
-  //     this.#board[2][0] === this.#currentPlayer
-  //   ) {
-  //     cells[2].classList.add('winning-cell')
-  //     cells[4].classList.add('winning-cell')
-  //     cells[6].classList.add('winning-cell')
-  //   } 
-  // }
+  #isWinner(): boolean {
+    if (
+      this.#board.arr[0][0] === this.#currentPlayer &&
+      this.#board.arr[0][1] === this.#currentPlayer &&
+      this.#board.arr[0][2] === this.#currentPlayer
+    ) {
+      this.#cells.arr[0][0]?.classList.add('winning-cell')
+      this.#cells.arr[0][1]?.classList.add('winning-cell')
+      this.#cells.arr[0][2]?.classList.add('winning-cell')
+      return true 
+    } else if (
+      this.#board.arr[1][0] === this.#currentPlayer &&
+      this.#board.arr[1][1] === this.#currentPlayer &&
+      this.#board.arr[1][2] === this.#currentPlayer
+    ) {
+      this.#cells.arr[1][0]?.classList.add('winning-cell')
+      this.#cells.arr[1][1]?.classList.add('winning-cell')
+      this.#cells.arr[1][2]?.classList.add('winning-cell')
+      return true 
+    } else if (
+      this.#board.arr[2][0] === this.#currentPlayer &&
+      this.#board.arr[2][1] === this.#currentPlayer &&
+      this.#board.arr[2][2] === this.#currentPlayer
+    ) {
+      this.#cells.arr[2][0]?.classList.add('winning-cell')
+      this.#cells.arr[2][1]?.classList.add('winning-cell')
+      this.#cells.arr[2][2]?.classList.add('winning-cell')
+      return true 
+    } else if (
+      this.#board.arr[0][0] === this.#currentPlayer &&
+      this.#board.arr[1][0] === this.#currentPlayer &&
+      this.#board.arr[2][0] === this.#currentPlayer
+    ) {
+      this.#cells.arr[0][0]?.classList.add('winning-cell')
+      this.#cells.arr[1][0]?.classList.add('winning-cell')
+      this.#cells.arr[2][0]?.classList.add('winning-cell')
+      return true 
+    } else if (
+      this.#board.arr[0][1] === this.#currentPlayer &&
+      this.#board.arr[1][1] === this.#currentPlayer &&
+      this.#board.arr[2][1] === this.#currentPlayer
+    ) {
+      this.#cells.arr[0][1]?.classList.add('winning-cell')
+      this.#cells.arr[1][1]?.classList.add('winning-cell')
+      this.#cells.arr[2][2]?.classList.add('winning-cell')
+      return true 
+    } else if (
+      this.#board.arr[0][2] === this.#currentPlayer &&
+      this.#board.arr[1][2] === this.#currentPlayer &&
+      this.#board.arr[2][2] === this.#currentPlayer
+    ) {
+      this.#cells.arr[0][2]?.classList.add('winning-cell')
+      this.#cells.arr[1][2]?.classList.add('winning-cell')
+      this.#cells.arr[2][2]?.classList.add('winning-cell')
+      return true 
+    } else if (
+      this.#board.arr[0][0] === this.#currentPlayer &&
+      this.#board.arr[1][1] === this.#currentPlayer &&
+      this.#board.arr[2][2] === this.#currentPlayer
+    ) {
+      this.#cells.arr[0][0]?.classList.add('winning-cell')
+      this.#cells.arr[1][1]?.classList.add('winning-cell')
+      this.#cells.arr[2][2]?.classList.add('winning-cell')
+      return true 
+    } else if (
+      this.#board.arr[0][2] === this.#currentPlayer &&
+      this.#board.arr[1][1] === this.#currentPlayer &&
+      this.#board.arr[2][0] === this.#currentPlayer
+    ) {
+      this.#cells.arr[0][2]?.classList.add('winning-cell')
+      this.#cells.arr[1][1]?.classList.add('winning-cell')
+      this.#cells.arr[2][0]?.classList.add('winning-cell')
+      return true 
+    } 
+      
+    return false
+  }
+
+  #isBoardFilled(): boolean {
+    // used for counting the cells that are filled
+    let counter = 0
+
+    this.#board.arr.forEach((row: (null | Player)[], x: number) => {
+      row.forEach((player: null | Player, y: number) => {
+        if(player) counter++
+      })
+    })
+
+    return false
+  }
 
   #switchCurrentPlayer(): void {
     this.#currentPlayer === this.#playerOne ?
@@ -172,6 +195,9 @@ export default class Game {
         newCell.addEventListener('click', () => {
           if(!this.#board.arr[x][y]) {
             this.#board.arr[x][y] = this.#currentPlayer
+            if (this.#isWinner()) {
+              console.log(this.#currentPlayer.name + ' is the winner')
+            }
             this.#switchCurrentPlayer()
             this.#displayGame()
           }
