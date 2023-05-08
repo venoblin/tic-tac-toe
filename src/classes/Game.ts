@@ -7,17 +7,15 @@ export default class Game {
   #playerOne: Player
   #playerTwo: Player
   #currentPlayer: Player
-  #board: Array2D<null | Player>
-  #cells: Array2D<null | HTMLDivElement>
-  #board2: Array2D<BoardInfo>
+  #currentPlayerHeader: HTMLHeadingElement
+  #board: Array2D<BoardInfo>
 
   constructor(anchorId: string, playerOne: Player, playerTwo: Player) {
     this.#playerOne = playerOne
     this.#playerTwo = playerTwo
     this.#currentPlayer = this.#playerOne
-    this.#board = new Array2D<null | Player>(null, 3, 3)
-    this.#cells = new Array2D<null | HTMLDivElement>(null, 3, 3)
-    this.#board2 = new Array2D<BoardInfo>({cell: null, player: null}, 3, 3)
+    this.#board = new Array2D<BoardInfo>({cell: null, player: null}, 3, 3)
+    console.log(this.#board)
 
     // creating and anchoring layout element to anchor element  
     const anchorElem = document.getElementById(anchorId)
@@ -66,7 +64,6 @@ export default class Game {
     this.#playerOne.wins = 0
     this.#playerTwo.wins = 0
     this.#currentPlayer = this.#playerOne
-    this.#board = new Array2D<null | Player>(null, 3, 3)
   }
 
   #startHandler(playerOneName: string, playerTwoName: string): void {
@@ -87,92 +84,78 @@ export default class Game {
     }
   }
 
-  // to populate cells array after they have been appended to the dom
-  // #populateCellsArr(arr2D: Array2D<null | HTMLDivElement>, cells: NodeListOf<HTMLDivElement>) {
-  //   let cellsIdx = 0
-
-  //   arr2D.arr.forEach((row, x) => {
-  //     row.forEach((col, y) => {
-  //       arr2D.arr[x][y] = cells[cellsIdx]
-  //       cellsIdx++
-  //     })
-  //   })
-
-  //   console.log(arr2D)
-  // }
-
   #isWinner(): boolean {
     if (
-      this.#board.arr[0][0] === this.#currentPlayer &&
-      this.#board.arr[0][1] === this.#currentPlayer &&
-      this.#board.arr[0][2] === this.#currentPlayer
+      this.#board.arr[0][0].player === this.#currentPlayer &&
+      this.#board.arr[0][1].player === this.#currentPlayer &&
+      this.#board.arr[0][2].player === this.#currentPlayer
     ) {
-      this.#cells.arr[0][0]?.classList.add('winning-cell')
-      this.#cells.arr[0][1]?.classList.add('winning-cell')
-      this.#cells.arr[0][2]?.classList.add('winning-cell')
+      this.#board.arr[0][0].cell?.classList.add('winning-cell')
+      this.#board.arr[0][1].cell?.classList.add('winning-cell')
+      this.#board.arr[0][2].cell?.classList.add('winning-cell')
       return true 
     } else if (
-      this.#board.arr[1][0] === this.#currentPlayer &&
-      this.#board.arr[1][1] === this.#currentPlayer &&
-      this.#board.arr[1][2] === this.#currentPlayer
+      this.#board.arr[1][0].player === this.#currentPlayer &&
+      this.#board.arr[1][1].player === this.#currentPlayer &&
+      this.#board.arr[1][2].player === this.#currentPlayer
     ) {
-      this.#cells.arr[1][0]?.classList.add('winning-cell')
-      this.#cells.arr[1][1]?.classList.add('winning-cell')
-      this.#cells.arr[1][2]?.classList.add('winning-cell')
+      this.#board.arr[1][0].cell?.classList.add('winning-cell')
+      this.#board.arr[1][1].cell?.classList.add('winning-cell')
+      this.#board.arr[1][2].cell?.classList.add('winning-cell')
       return true 
     } else if (
-      this.#board.arr[2][0] === this.#currentPlayer &&
-      this.#board.arr[2][1] === this.#currentPlayer &&
-      this.#board.arr[2][2] === this.#currentPlayer
+      this.#board.arr[2][0].player === this.#currentPlayer &&
+      this.#board.arr[2][1].player === this.#currentPlayer &&
+      this.#board.arr[2][2].player === this.#currentPlayer
     ) {
-      this.#cells.arr[2][0]?.classList.add('winning-cell')
-      this.#cells.arr[2][1]?.classList.add('winning-cell')
-      this.#cells.arr[2][2]?.classList.add('winning-cell')
+      this.#board.arr[2][0].cell?.classList.add('winning-cell')
+      this.#board.arr[2][1].cell?.classList.add('winning-cell')
+      this.#board.arr[2][2].cell?.classList.add('winning-cell')
       return true 
     } else if (
-      this.#board.arr[0][0] === this.#currentPlayer &&
-      this.#board.arr[1][0] === this.#currentPlayer &&
-      this.#board.arr[2][0] === this.#currentPlayer
+      this.#board.arr[0][0].player === this.#currentPlayer &&
+      this.#board.arr[1][0].player === this.#currentPlayer &&
+      this.#board.arr[2][0].player === this.#currentPlayer
     ) {   
-      this.#cells.arr[0][0]?.classList.add('winning-cell')
-      this.#cells.arr[1][0]?.classList.add('winning-cell')
-      this.#cells.arr[2][0]?.classList.add('winning-cell')
+      this.#board.arr[0][0].cell?.classList.add('winning-cell')
+      this.#board.arr[1][0].cell?.classList.add('winning-cell')
+      this.#board.arr[2][0].cell?.classList.add('winning-cell')
       return true 
     } else if (
-      this.#board.arr[0][1] === this.#currentPlayer &&
-      this.#board.arr[1][1] === this.#currentPlayer &&
-      this.#board.arr[2][1] === this.#currentPlayer
+      this.#board.arr[0][1].player === this.#currentPlayer &&
+      this.#board.arr[1][1].player === this.#currentPlayer &&
+      this.#board.arr[2][1].player === this.#currentPlayer
     ) {
-      this.#cells.arr[0][1]?.classList.add('winning-cell')
-      this.#cells.arr[1][1]?.classList.add('winning-cell')
-      this.#cells.arr[2][2]?.classList.add('winning-cell')
+      this.#board.arr[0][1].cell?.classList.add('winning-cell')
+      this.#board.arr[1][1].cell?.classList.add('winning-cell')
+      this.#board.arr[2][2].cell?.classList.add('winning-cell')
       return true 
     } else if (
-      this.#board.arr[0][2] === this.#currentPlayer &&
-      this.#board.arr[1][2] === this.#currentPlayer &&
-      this.#board.arr[2][2] === this.#currentPlayer
+      this.#board.arr[0][2].player === this.#currentPlayer &&
+      this.#board.arr[1][2].player === this.#currentPlayer &&
+      this.#board.arr[2][2].player === this.#currentPlayer
     ) {
-      this.#cells.arr[0][2]?.classList.add('winning-cell')
-      this.#cells.arr[1][2]?.classList.add('winning-cell')
-      this.#cells.arr[2][2]?.classList.add('winning-cell')
+      this.#board.arr[0][2].cell?.classList.add('winning-cell')
+      this.#board.arr[1][2].cell?.classList.add('winning-cell')
+      this.#board.arr[2][2].cell?.classList.add('winning-cell')
       return true 
     } else if (
-      this.#board.arr[0][0] === this.#currentPlayer &&
-      this.#board.arr[1][1] === this.#currentPlayer &&
-      this.#board.arr[2][2] === this.#currentPlayer
+      this.#board.arr[0][0].player === this.#currentPlayer &&
+      this.#board.arr[1][1].player === this.#currentPlayer &&
+      this.#board.arr[2][2].player === this.#currentPlayer
     ) {
-      this.#cells.arr[0][0]?.classList.add('winning-cell')
-      this.#cells.arr[1][1]?.classList.add('winning-cell')
-      this.#cells.arr[2][2]?.classList.add('winning-cell')
+      this.#board.arr[0][0].cell?.classList.add('winning-cell')
+      this.#board.arr[1][1].cell?.classList.add('winning-cell')
+      this.#board.arr[2][2].cell?.classList.add('winning-cell')
       return true 
     } else if (
-      this.#board.arr[0][2] === this.#currentPlayer &&
-      this.#board.arr[1][1] === this.#currentPlayer &&
-      this.#board.arr[2][0] === this.#currentPlayer
+      this.#board.arr[0][2].player === this.#currentPlayer &&
+      this.#board.arr[1][1].player === this.#currentPlayer &&
+      this.#board.arr[2][0].player === this.#currentPlayer
     ) {
-      this.#cells.arr[0][2]?.classList.add('winning-cell')
-      this.#cells.arr[1][1]?.classList.add('winning-cell')
-      this.#cells.arr[2][0]?.classList.add('winning-cell')
+      this.#board.arr[0][2].cell?.classList.add('winning-cell')
+      this.#board.arr[1][1].cell?.classList.add('winning-cell')
+      this.#board.arr[2][0].cell?.classList.add('winning-cell')
       return true 
     } 
       
@@ -183,9 +166,9 @@ export default class Game {
     // used for counting the cells that are filled
     let counter = 0
 
-    this.#board.arr.forEach((row: (null | Player)[], x: number) => {
-      row.forEach((player: null | Player, y: number) => {
-        if(player) counter++
+    this.#board.arr.forEach((row: BoardInfo[], x: number) => {
+      row.forEach((info: BoardInfo, y: number) => {
+        if(info.player) counter++
       })
     })
 
@@ -196,26 +179,27 @@ export default class Game {
     this.#currentPlayer === this.#playerOne ?
       this.#currentPlayer = this.#playerTwo :
       this.#currentPlayer = this.#playerOne
+
+    this.#currentPlayerHeader.innerText = `${this.#currentPlayer.name}'s Turn`
   }
 
   #generateGameBoard(boardAnchor: HTMLElement): void {
-    this.#board.arr.forEach((row: (null | Player)[], x: number) => {
-      row.forEach((player: null | Player, y: number) => {
+    this.#board.arr.forEach((row: BoardInfo[], x: number) => {
+      row.forEach((info: BoardInfo, y: number) => {
         const newCell = document.createElement('div')
         newCell.classList.add('cell')
-        this.#cells.arr[x][y] = newCell
+        this.#board.arr[x][y].cell = newCell
 
         newCell.addEventListener('click', () => {
-          if(!this.#board.arr[x][y]) {
-            this.#board.arr[x][y] = this.#currentPlayer
-            this.#cells.arr[x][y].innerHTML = this.#currentPlayer.icon
-
+          if(!this.#board.arr[x][y].player) {
             console.clear()
+            console.log(this.#board.arr)
             if (this.#isWinner()) {
               console.log(this.#currentPlayer.name + ' is the winner')
             } else if (this.#isBoardFilled()) {
               console.log('Its a tie')
             }
+            console.log(this.#board.arr[x][y].cell)
             this.#switchCurrentPlayer()
           }
         })
@@ -253,6 +237,7 @@ export default class Game {
     // displays who's currently playing
     const playingHeader = document.createElement('h2')
     playingHeader.classList.add('currently-playing')
+    this.#currentPlayerHeader = playingHeader
     playingHeader.innerText = `${this.#currentPlayer.name}'s Turn`
     gameBoard.append(playingHeader)
 
