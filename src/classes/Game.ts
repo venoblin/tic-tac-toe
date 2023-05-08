@@ -1,5 +1,6 @@
 import Player from "./Player.js"
 import Array2D from "./Array2D.js"
+import { BoardInfo } from "../types"
 
 export default class Game {
   #layout: HTMLElement
@@ -7,14 +8,16 @@ export default class Game {
   #playerTwo: Player
   #currentPlayer: Player
   #board: Array2D<null | Player>
-  #cells: Array2D<null | HTMLElement>
+  #cells: Array2D<null | HTMLDivElement>
+  #board2: Array2D<BoardInfo>
 
   constructor(anchorId: string, playerOne: Player, playerTwo: Player) {
     this.#playerOne = playerOne
     this.#playerTwo = playerTwo
     this.#currentPlayer = this.#playerOne
     this.#board = new Array2D<null | Player>(null, 3, 3)
-    this.#cells = new Array2D<null | HTMLElement>(null, 3, 3)
+    this.#cells = new Array2D<null | HTMLDivElement>(null, 3, 3)
+    this.#board2 = new Array2D<BoardInfo>({cell: null, player: null}, 3, 3)
 
     // creating and anchoring layout element to anchor element  
     const anchorElem = document.getElementById(anchorId)
@@ -84,6 +87,20 @@ export default class Game {
     }
   }
 
+  // to populate cells array after they have been appended to the dom
+  // #populateCellsArr(arr2D: Array2D<null | HTMLDivElement>, cells: NodeListOf<HTMLDivElement>) {
+  //   let cellsIdx = 0
+
+  //   arr2D.arr.forEach((row, x) => {
+  //     row.forEach((col, y) => {
+  //       arr2D.arr[x][y] = cells[cellsIdx]
+  //       cellsIdx++
+  //     })
+  //   })
+
+  //   console.log(arr2D)
+  // }
+
   #isWinner(): boolean {
     if (
       this.#board.arr[0][0] === this.#currentPlayer &&
@@ -116,7 +133,7 @@ export default class Game {
       this.#board.arr[0][0] === this.#currentPlayer &&
       this.#board.arr[1][0] === this.#currentPlayer &&
       this.#board.arr[2][0] === this.#currentPlayer
-    ) {
+    ) {   
       this.#cells.arr[0][0]?.classList.add('winning-cell')
       this.#cells.arr[1][0]?.classList.add('winning-cell')
       this.#cells.arr[2][0]?.classList.add('winning-cell')
@@ -188,20 +205,18 @@ export default class Game {
         newCell.classList.add('cell')
         this.#cells.arr[x][y] = newCell
 
-        if (player) {
-          newCell.innerHTML = player.icon
-        }
-
         newCell.addEventListener('click', () => {
           if(!this.#board.arr[x][y]) {
             this.#board.arr[x][y] = this.#currentPlayer
+            this.#cells.arr[x][y].innerHTML = this.#currentPlayer.icon
+
+            console.clear()
             if (this.#isWinner()) {
               console.log(this.#currentPlayer.name + ' is the winner')
             } else if (this.#isBoardFilled()) {
               console.log('Its a tie')
             }
             this.#switchCurrentPlayer()
-            this.#displayGame()
           }
         })
         
@@ -212,7 +227,7 @@ export default class Game {
       
   #displayGame(): void {
     this.#resetLayout()
-      
+
     // entire game board
     const gameBoard = document.createElement('div')
     gameBoard.classList.add('game-board')

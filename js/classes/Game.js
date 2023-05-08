@@ -9,7 +9,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_currentPlayer, _Game_board, _Game_cells, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_isWinner, _Game_isBoardFilled, _Game_switchCurrentPlayer, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart;
+var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_currentPlayer, _Game_board, _Game_cells, _Game_board2, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_isWinner, _Game_isBoardFilled, _Game_switchCurrentPlayer, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart;
 import Array2D from "./Array2D.js";
 export default class Game {
     constructor(anchorId, playerOne, playerTwo) {
@@ -20,11 +20,13 @@ export default class Game {
         _Game_currentPlayer.set(this, void 0);
         _Game_board.set(this, void 0);
         _Game_cells.set(this, void 0);
+        _Game_board2.set(this, void 0);
         __classPrivateFieldSet(this, _Game_playerOne, playerOne, "f");
         __classPrivateFieldSet(this, _Game_playerTwo, playerTwo, "f");
         __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f"), "f");
         __classPrivateFieldSet(this, _Game_board, new Array2D(null, 3, 3), "f");
         __classPrivateFieldSet(this, _Game_cells, new Array2D(null, 3, 3), "f");
+        __classPrivateFieldSet(this, _Game_board2, new Array2D({ cell: null, player: null }, 3, 3), "f");
         // creating and anchoring layout element to anchor element  
         const anchorElem = document.getElementById(anchorId);
         if (anchorElem === null)
@@ -43,7 +45,7 @@ export default class Game {
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayStart).call(this);
     }
 }
-_Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo = new WeakMap(), _Game_currentPlayer = new WeakMap(), _Game_board = new WeakMap(), _Game_cells = new WeakMap(), _Game_instances = new WeakSet(), _Game_showAlert = function _Game_showAlert(msg) {
+_Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo = new WeakMap(), _Game_currentPlayer = new WeakMap(), _Game_board = new WeakMap(), _Game_cells = new WeakMap(), _Game_board2 = new WeakMap(), _Game_instances = new WeakSet(), _Game_showAlert = function _Game_showAlert(msg) {
     const alertContainer = document.createElement('div');
     alertContainer.classList.add('alert');
     const h2 = document.createElement('h2');
@@ -170,12 +172,11 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
             const newCell = document.createElement('div');
             newCell.classList.add('cell');
             __classPrivateFieldGet(this, _Game_cells, "f").arr[x][y] = newCell;
-            if (player) {
-                newCell.innerHTML = player.icon;
-            }
             newCell.addEventListener('click', () => {
                 if (!__classPrivateFieldGet(this, _Game_board, "f").arr[x][y]) {
                     __classPrivateFieldGet(this, _Game_board, "f").arr[x][y] = __classPrivateFieldGet(this, _Game_currentPlayer, "f");
+                    __classPrivateFieldGet(this, _Game_cells, "f").arr[x][y].innerHTML = __classPrivateFieldGet(this, _Game_currentPlayer, "f").icon;
+                    console.clear();
                     if (__classPrivateFieldGet(this, _Game_instances, "m", _Game_isWinner).call(this)) {
                         console.log(__classPrivateFieldGet(this, _Game_currentPlayer, "f").name + ' is the winner');
                     }
@@ -183,7 +184,6 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
                         console.log('Its a tie');
                     }
                     __classPrivateFieldGet(this, _Game_instances, "m", _Game_switchCurrentPlayer).call(this);
-                    __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
                 }
             });
             boardAnchor.append(newCell);
