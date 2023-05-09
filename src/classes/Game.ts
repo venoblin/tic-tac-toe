@@ -83,83 +83,83 @@ export default class Game {
     }
   }
 
-  // #isWinner(): boolean {
-  //   if (
-  //     this.#board.arr[0][0].player === this.#currentPlayer &&
-  //     this.#board.arr[0][1].player === this.#currentPlayer &&
-  //     this.#board.arr[0][2].player === this.#currentPlayer
-  //   ) {
-  //     this.#board.arr[0][0].cell?.classList.add('winning-cell')
-  //     this.#board.arr[0][1].cell?.classList.add('winning-cell')
-  //     this.#board.arr[0][2].cell?.classList.add('winning-cell')
-  //     return true 
-  //   } else if (
-  //     this.#board.arr[1][0].player === this.#currentPlayer &&
-  //     this.#board.arr[1][1].player === this.#currentPlayer &&
-  //     this.#board.arr[1][2].player === this.#currentPlayer
-  //   ) {
-  //     this.#board.arr[1][0].cell?.classList.add('winning-cell')
-  //     this.#board.arr[1][1].cell?.classList.add('winning-cell')
-  //     this.#board.arr[1][2].cell?.classList.add('winning-cell')
-  //     return true 
-  //   } else if (
-  //     this.#board.arr[2][0].player === this.#currentPlayer &&
-  //     this.#board.arr[2][1].player === this.#currentPlayer &&
-  //     this.#board.arr[2][2].player === this.#currentPlayer
-  //   ) {
-  //     this.#board.arr[2][0].cell?.classList.add('winning-cell')
-  //     this.#board.arr[2][1].cell?.classList.add('winning-cell')
-  //     this.#board.arr[2][2].cell?.classList.add('winning-cell')
-  //     return true 
-  //   } else if (
-  //     this.#board.arr[0][0].player === this.#currentPlayer &&
-  //     this.#board.arr[1][0].player === this.#currentPlayer &&
-  //     this.#board.arr[2][0].player === this.#currentPlayer
-  //   ) {   
-  //     this.#board.arr[0][0].cell?.classList.add('winning-cell')
-  //     this.#board.arr[1][0].cell?.classList.add('winning-cell')
-  //     this.#board.arr[2][0].cell?.classList.add('winning-cell')
-  //     return true 
-  //   } else if (
-  //     this.#board.arr[0][1].player === this.#currentPlayer &&
-  //     this.#board.arr[1][1].player === this.#currentPlayer &&
-  //     this.#board.arr[2][1].player === this.#currentPlayer
-  //   ) {
-  //     this.#board.arr[0][1].cell?.classList.add('winning-cell')
-  //     this.#board.arr[1][1].cell?.classList.add('winning-cell')
-  //     this.#board.arr[2][2].cell?.classList.add('winning-cell')
-  //     return true 
-  //   } else if (
-  //     this.#board.arr[0][2].player === this.#currentPlayer &&
-  //     this.#board.arr[1][2].player === this.#currentPlayer &&
-  //     this.#board.arr[2][2].player === this.#currentPlayer
-  //   ) {
-  //     this.#board.arr[0][2].cell?.classList.add('winning-cell')
-  //     this.#board.arr[1][2].cell?.classList.add('winning-cell')
-  //     this.#board.arr[2][2].cell?.classList.add('winning-cell')
-  //     return true 
-  //   } else if (
-  //     this.#board.arr[0][0].player === this.#currentPlayer &&
-  //     this.#board.arr[1][1].player === this.#currentPlayer &&
-  //     this.#board.arr[2][2].player === this.#currentPlayer
-  //   ) {
-  //     this.#board.arr[0][0].cell?.classList.add('winning-cell')
-  //     this.#board.arr[1][1].cell?.classList.add('winning-cell')
-  //     this.#board.arr[2][2].cell?.classList.add('winning-cell')
-  //     return true 
-  //   } else if (
-  //     this.#board.arr[0][2].player === this.#currentPlayer &&
-  //     this.#board.arr[1][1].player === this.#currentPlayer &&
-  //     this.#board.arr[2][0].player === this.#currentPlayer
-  //   ) {
-  //     this.#board.arr[0][2].cell?.classList.add('winning-cell')
-  //     this.#board.arr[1][1].cell?.classList.add('winning-cell')
-  //     this.#board.arr[2][0].cell?.classList.add('winning-cell')
-  //     return true 
-  //   } 
+  #isWinner(): boolean {
+    if (
+      this.#board.arr[0][0].player === this.#currentPlayer &&
+      this.#board.arr[0][1].player === this.#currentPlayer &&
+      this.#board.arr[0][2].player === this.#currentPlayer
+    ) {
+      this.#board.arr[0][0].cell?.classList.add('winning-cell')
+      this.#board.arr[0][1].cell?.classList.add('winning-cell')
+      this.#board.arr[0][2].cell?.classList.add('winning-cell')
+      return true 
+    } else if (
+      this.#board.arr[1][0].player === this.#currentPlayer &&
+      this.#board.arr[1][1].player === this.#currentPlayer &&
+      this.#board.arr[1][2].player === this.#currentPlayer
+    ) {
+      this.#board.arr[1][0].cell?.classList.add('winning-cell')
+      this.#board.arr[1][1].cell?.classList.add('winning-cell')
+      this.#board.arr[1][2].cell?.classList.add('winning-cell')
+      return true 
+    } else if (
+      this.#board.arr[2][0].player === this.#currentPlayer &&
+      this.#board.arr[2][1].player === this.#currentPlayer &&
+      this.#board.arr[2][2].player === this.#currentPlayer
+    ) {
+      this.#board.arr[2][0].cell?.classList.add('winning-cell')
+      this.#board.arr[2][1].cell?.classList.add('winning-cell')
+      this.#board.arr[2][2].cell?.classList.add('winning-cell')
+      return true 
+    } else if (
+      this.#board.arr[0][0].player === this.#currentPlayer &&
+      this.#board.arr[1][0].player === this.#currentPlayer &&
+      this.#board.arr[2][0].player === this.#currentPlayer
+    ) {   
+      this.#board.arr[0][0].cell?.classList.add('winning-cell')
+      this.#board.arr[1][0].cell?.classList.add('winning-cell')
+      this.#board.arr[2][0].cell?.classList.add('winning-cell')
+      return true 
+    } else if (
+      this.#board.arr[0][1].player === this.#currentPlayer &&
+      this.#board.arr[1][1].player === this.#currentPlayer &&
+      this.#board.arr[2][1].player === this.#currentPlayer
+    ) {
+      this.#board.arr[0][1].cell?.classList.add('winning-cell')
+      this.#board.arr[1][1].cell?.classList.add('winning-cell')
+      this.#board.arr[2][2].cell?.classList.add('winning-cell')
+      return true 
+    } else if (
+      this.#board.arr[0][2].player === this.#currentPlayer &&
+      this.#board.arr[1][2].player === this.#currentPlayer &&
+      this.#board.arr[2][2].player === this.#currentPlayer
+    ) {
+      this.#board.arr[0][2].cell?.classList.add('winning-cell')
+      this.#board.arr[1][2].cell?.classList.add('winning-cell')
+      this.#board.arr[2][2].cell?.classList.add('winning-cell')
+      return true 
+    } else if (
+      this.#board.arr[0][0].player === this.#currentPlayer &&
+      this.#board.arr[1][1].player === this.#currentPlayer &&
+      this.#board.arr[2][2].player === this.#currentPlayer
+    ) {
+      this.#board.arr[0][0].cell?.classList.add('winning-cell')
+      this.#board.arr[1][1].cell?.classList.add('winning-cell')
+      this.#board.arr[2][2].cell?.classList.add('winning-cell')
+      return true 
+    } else if (
+      this.#board.arr[0][2].player === this.#currentPlayer &&
+      this.#board.arr[1][1].player === this.#currentPlayer &&
+      this.#board.arr[2][0].player === this.#currentPlayer
+    ) {
+      this.#board.arr[0][2].cell?.classList.add('winning-cell')
+      this.#board.arr[1][1].cell?.classList.add('winning-cell')
+      this.#board.arr[2][0].cell?.classList.add('winning-cell')
+      return true 
+    } 
       
-  //   return false
-  // }
+    return false
+  }
 
   #isBoardFilled(): boolean {
     // used for counting the cells that are filled
@@ -189,17 +189,18 @@ export default class Game {
       row.forEach((info: BoardInfo, y: number) => {
         const newCell = document.createElement('div')
         newCell.classList.add('cell')
-        info.cell = (x + 1) * (y + 1)      
+        info.cell = newCell      
         
         newCell.addEventListener('click', () => {
           if(!info.player) {
-            console.log(this.#board)
+            info.player = this.#currentPlayer
+            if(info.cell) info.cell.innerHTML = this.#currentPlayer.icon
             
-            // if (this.#isWinner()) {
-            //   console.log(this.#currentPlayer.name + ' is the winner')
-            // } else if (this.#isBoardFilled()) {
-            //   console.log('Its a tie')
-            // }
+            if (this.#isWinner()) {
+              console.log(this.#currentPlayer.name + ' is the winner')
+            } else if (this.#isBoardFilled()) {
+              console.log('Its a tie')
+            }
 
             this.#switchCurrentPlayer()
           }
