@@ -20,7 +20,13 @@ export default class Array2D {
         for (let i = 0; i < rows; i++) {
             const rowArr = [];
             for (let j = 0; j < cols; j++) {
-                rowArr.push(el);
+                if (typeof el === 'object') {
+                    const newObj = Object.assign({}, el);
+                    rowArr.push(newObj);
+                }
+                else {
+                    rowArr.push(el);
+                }
             }
             __classPrivateFieldGet(this, _Array2D_arr, "f").push(rowArr);
         }

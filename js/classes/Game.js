@@ -9,7 +9,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_currentPlayer, _Game_currentPlayerHeader, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_isWinner, _Game_isBoardFilled, _Game_switchCurrentPlayer, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart;
+var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_currentPlayer, _Game_currentPlayerHeader, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_isBoardFilled, _Game_switchCurrentPlayer, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart;
 import Array2D from "./Array2D.js";
 export default class Game {
     constructor(anchorId, playerOne, playerTwo) {
@@ -24,7 +24,6 @@ export default class Game {
         __classPrivateFieldSet(this, _Game_playerTwo, playerTwo, "f");
         __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f"), "f");
         __classPrivateFieldSet(this, _Game_board, new Array2D({ cell: null, player: null }, 3, 3), "f");
-        console.log(__classPrivateFieldGet(this, _Game_board, "f"));
         // creating and anchoring layout element to anchor element  
         const anchorElem = document.getElementById(anchorId);
         if (anchorElem === null)
@@ -82,73 +81,6 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
             __classPrivateFieldGet(this, _Game_playerTwo, "f").isComputer = true;
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
     }
-}, _Game_isWinner = function _Game_isWinner() {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z;
-    if (__classPrivateFieldGet(this, _Game_board, "f").arr[0][0].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
-        __classPrivateFieldGet(this, _Game_board, "f").arr[0][1].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
-        __classPrivateFieldGet(this, _Game_board, "f").arr[0][2].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f")) {
-        (_a = __classPrivateFieldGet(this, _Game_board, "f").arr[0][0].cell) === null || _a === void 0 ? void 0 : _a.classList.add('winning-cell');
-        (_b = __classPrivateFieldGet(this, _Game_board, "f").arr[0][1].cell) === null || _b === void 0 ? void 0 : _b.classList.add('winning-cell');
-        (_c = __classPrivateFieldGet(this, _Game_board, "f").arr[0][2].cell) === null || _c === void 0 ? void 0 : _c.classList.add('winning-cell');
-        return true;
-    }
-    else if (__classPrivateFieldGet(this, _Game_board, "f").arr[1][0].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
-        __classPrivateFieldGet(this, _Game_board, "f").arr[1][1].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
-        __classPrivateFieldGet(this, _Game_board, "f").arr[1][2].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f")) {
-        (_d = __classPrivateFieldGet(this, _Game_board, "f").arr[1][0].cell) === null || _d === void 0 ? void 0 : _d.classList.add('winning-cell');
-        (_e = __classPrivateFieldGet(this, _Game_board, "f").arr[1][1].cell) === null || _e === void 0 ? void 0 : _e.classList.add('winning-cell');
-        (_f = __classPrivateFieldGet(this, _Game_board, "f").arr[1][2].cell) === null || _f === void 0 ? void 0 : _f.classList.add('winning-cell');
-        return true;
-    }
-    else if (__classPrivateFieldGet(this, _Game_board, "f").arr[2][0].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
-        __classPrivateFieldGet(this, _Game_board, "f").arr[2][1].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
-        __classPrivateFieldGet(this, _Game_board, "f").arr[2][2].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f")) {
-        (_g = __classPrivateFieldGet(this, _Game_board, "f").arr[2][0].cell) === null || _g === void 0 ? void 0 : _g.classList.add('winning-cell');
-        (_h = __classPrivateFieldGet(this, _Game_board, "f").arr[2][1].cell) === null || _h === void 0 ? void 0 : _h.classList.add('winning-cell');
-        (_j = __classPrivateFieldGet(this, _Game_board, "f").arr[2][2].cell) === null || _j === void 0 ? void 0 : _j.classList.add('winning-cell');
-        return true;
-    }
-    else if (__classPrivateFieldGet(this, _Game_board, "f").arr[0][0].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
-        __classPrivateFieldGet(this, _Game_board, "f").arr[1][0].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
-        __classPrivateFieldGet(this, _Game_board, "f").arr[2][0].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f")) {
-        (_k = __classPrivateFieldGet(this, _Game_board, "f").arr[0][0].cell) === null || _k === void 0 ? void 0 : _k.classList.add('winning-cell');
-        (_l = __classPrivateFieldGet(this, _Game_board, "f").arr[1][0].cell) === null || _l === void 0 ? void 0 : _l.classList.add('winning-cell');
-        (_m = __classPrivateFieldGet(this, _Game_board, "f").arr[2][0].cell) === null || _m === void 0 ? void 0 : _m.classList.add('winning-cell');
-        return true;
-    }
-    else if (__classPrivateFieldGet(this, _Game_board, "f").arr[0][1].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
-        __classPrivateFieldGet(this, _Game_board, "f").arr[1][1].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
-        __classPrivateFieldGet(this, _Game_board, "f").arr[2][1].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f")) {
-        (_o = __classPrivateFieldGet(this, _Game_board, "f").arr[0][1].cell) === null || _o === void 0 ? void 0 : _o.classList.add('winning-cell');
-        (_p = __classPrivateFieldGet(this, _Game_board, "f").arr[1][1].cell) === null || _p === void 0 ? void 0 : _p.classList.add('winning-cell');
-        (_q = __classPrivateFieldGet(this, _Game_board, "f").arr[2][2].cell) === null || _q === void 0 ? void 0 : _q.classList.add('winning-cell');
-        return true;
-    }
-    else if (__classPrivateFieldGet(this, _Game_board, "f").arr[0][2].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
-        __classPrivateFieldGet(this, _Game_board, "f").arr[1][2].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
-        __classPrivateFieldGet(this, _Game_board, "f").arr[2][2].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f")) {
-        (_r = __classPrivateFieldGet(this, _Game_board, "f").arr[0][2].cell) === null || _r === void 0 ? void 0 : _r.classList.add('winning-cell');
-        (_s = __classPrivateFieldGet(this, _Game_board, "f").arr[1][2].cell) === null || _s === void 0 ? void 0 : _s.classList.add('winning-cell');
-        (_t = __classPrivateFieldGet(this, _Game_board, "f").arr[2][2].cell) === null || _t === void 0 ? void 0 : _t.classList.add('winning-cell');
-        return true;
-    }
-    else if (__classPrivateFieldGet(this, _Game_board, "f").arr[0][0].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
-        __classPrivateFieldGet(this, _Game_board, "f").arr[1][1].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
-        __classPrivateFieldGet(this, _Game_board, "f").arr[2][2].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f")) {
-        (_u = __classPrivateFieldGet(this, _Game_board, "f").arr[0][0].cell) === null || _u === void 0 ? void 0 : _u.classList.add('winning-cell');
-        (_v = __classPrivateFieldGet(this, _Game_board, "f").arr[1][1].cell) === null || _v === void 0 ? void 0 : _v.classList.add('winning-cell');
-        (_w = __classPrivateFieldGet(this, _Game_board, "f").arr[2][2].cell) === null || _w === void 0 ? void 0 : _w.classList.add('winning-cell');
-        return true;
-    }
-    else if (__classPrivateFieldGet(this, _Game_board, "f").arr[0][2].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
-        __classPrivateFieldGet(this, _Game_board, "f").arr[1][1].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
-        __classPrivateFieldGet(this, _Game_board, "f").arr[2][0].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f")) {
-        (_x = __classPrivateFieldGet(this, _Game_board, "f").arr[0][2].cell) === null || _x === void 0 ? void 0 : _x.classList.add('winning-cell');
-        (_y = __classPrivateFieldGet(this, _Game_board, "f").arr[1][1].cell) === null || _y === void 0 ? void 0 : _y.classList.add('winning-cell');
-        (_z = __classPrivateFieldGet(this, _Game_board, "f").arr[2][0].cell) === null || _z === void 0 ? void 0 : _z.classList.add('winning-cell');
-        return true;
-    }
-    return false;
 }, _Game_isBoardFilled = function _Game_isBoardFilled() {
     // used for counting the cells that are filled
     let counter = 0;
@@ -163,24 +95,23 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     __classPrivateFieldGet(this, _Game_currentPlayer, "f") === __classPrivateFieldGet(this, _Game_playerOne, "f") ?
         __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerTwo, "f"), "f") :
         __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f"), "f");
-    __classPrivateFieldGet(this, _Game_currentPlayerHeader, "f").innerText = `${__classPrivateFieldGet(this, _Game_currentPlayer, "f").name}'s Turn`;
+    if (__classPrivateFieldGet(this, _Game_currentPlayerHeader, "f")) {
+        __classPrivateFieldGet(this, _Game_currentPlayerHeader, "f").innerText = `${__classPrivateFieldGet(this, _Game_currentPlayer, "f").name}'s Turn`;
+    }
 }, _Game_generateGameBoard = function _Game_generateGameBoard(boardAnchor) {
     __classPrivateFieldGet(this, _Game_board, "f").arr.forEach((row, x) => {
         row.forEach((info, y) => {
             const newCell = document.createElement('div');
             newCell.classList.add('cell');
-            __classPrivateFieldGet(this, _Game_board, "f").arr[x][y].cell = newCell;
+            info.cell = (x + 1) * (y + 1);
             newCell.addEventListener('click', () => {
-                if (!__classPrivateFieldGet(this, _Game_board, "f").arr[x][y].player) {
-                    console.clear();
-                    console.log(__classPrivateFieldGet(this, _Game_board, "f").arr);
-                    if (__classPrivateFieldGet(this, _Game_instances, "m", _Game_isWinner).call(this)) {
-                        console.log(__classPrivateFieldGet(this, _Game_currentPlayer, "f").name + ' is the winner');
-                    }
-                    else if (__classPrivateFieldGet(this, _Game_instances, "m", _Game_isBoardFilled).call(this)) {
-                        console.log('Its a tie');
-                    }
-                    console.log(__classPrivateFieldGet(this, _Game_board, "f").arr[x][y].cell);
+                if (!info.player) {
+                    console.log(__classPrivateFieldGet(this, _Game_board, "f"));
+                    // if (this.#isWinner()) {
+                    //   console.log(this.#currentPlayer.name + ' is the winner')
+                    // } else if (this.#isBoardFilled()) {
+                    //   console.log('Its a tie')
+                    // }
                     __classPrivateFieldGet(this, _Game_instances, "m", _Game_switchCurrentPlayer).call(this);
                 }
             });

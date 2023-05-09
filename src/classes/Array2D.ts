@@ -10,7 +10,12 @@ export default class Array2D<T> {
     for (let i = 0; i < rows; i++) {
       const rowArr: T[] = []
       for (let j = 0; j < cols; j++) {
-        rowArr.push(el)
+        if(typeof el === 'object') {
+          const newObj = {...el}
+          rowArr.push(newObj)
+        } else {
+          rowArr.push(el)
+        }
       }
 
       this.#arr.push(rowArr) 
