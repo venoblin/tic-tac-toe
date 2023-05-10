@@ -15,7 +15,7 @@ export default class Game {
     this.#playerTwo = playerTwo
     this.#currentPlayer = this.#playerOne
     this.#board = new Array2D<BoardInfo>({cell: null, player: null}, 3, 3)
-   
+
     // creating and anchoring layout element to anchor element  
     const anchorElem = document.getElementById(anchorId)
     if (anchorElem === null) console.error('Anchor element not found!')
@@ -165,10 +165,8 @@ export default class Game {
     // used for counting the cells that are filled
     let counter = 0
 
-    this.#board.arr.forEach((row: BoardInfo[], x: number) => {
-      row.forEach((info: BoardInfo, y: number) => {
-        if(info.player) counter++
-      })
+    this.#board.iterate((item: BoardInfo) => {
+      if(item.player) counter++
     })
 
     return counter >= this.#board.rows * this.#board.cols ? true : false
@@ -185,29 +183,27 @@ export default class Game {
   }
 
   #generateGameBoard(boardAnchor: HTMLElement): void {
-    this.#board.arr.forEach((row: BoardInfo[], x: number) => {
-      row.forEach((info: BoardInfo, y: number) => {
-        const newCell = document.createElement('div')
-        newCell.classList.add('cell')
-        info.cell = newCell      
+    this.#board.iterate((item: BoardInfo) => {
+      const newCell = document.createElement('div')
+      newCell.classList.add('cell')
+      item.cell = newCell      
         
-        newCell.addEventListener('click', () => {
-          if(!info.player) {
-            info.player = this.#currentPlayer
-            if(info.cell) info.cell.innerHTML = this.#currentPlayer.icon
+      newCell.addEventListener('click', () => {
+        if(!item.player) {
+          item.player = this.#currentPlayer
+          if(item.cell) item.cell.innerHTML = this.#currentPlayer.icon
             
-            if (this.#isWinner()) {
-              console.log(this.#currentPlayer.name + ' is the winner')
-            } else if (this.#isBoardFilled()) {
-              console.log('Its a tie')
-            }
-
-            this.#switchCurrentPlayer()
+          if (this.#isWinner()) {
+            console.log(this.#currentPlayer.name + ' is the winner')
+          } else if (this.#isBoardFilled()) {
+            console.log('Its a tie')
           }
-        })
-        
-        boardAnchor.append(newCell)
+
+          this.#switchCurrentPlayer()
+        }
       })
+        
+      boardAnchor.append(newCell)
     })
   }
       

@@ -151,11 +151,9 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
 }, _Game_isBoardFilled = function _Game_isBoardFilled() {
     // used for counting the cells that are filled
     let counter = 0;
-    __classPrivateFieldGet(this, _Game_board, "f").arr.forEach((row, x) => {
-        row.forEach((info, y) => {
-            if (info.player)
-                counter++;
-        });
+    __classPrivateFieldGet(this, _Game_board, "f").iterate((item) => {
+        if (item.player)
+            counter++;
     });
     return counter >= __classPrivateFieldGet(this, _Game_board, "f").rows * __classPrivateFieldGet(this, _Game_board, "f").cols ? true : false;
 }, _Game_switchCurrentPlayer = function _Game_switchCurrentPlayer() {
@@ -166,27 +164,25 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         __classPrivateFieldGet(this, _Game_currentPlayerHeader, "f").innerText = `${__classPrivateFieldGet(this, _Game_currentPlayer, "f").name}'s Turn`;
     }
 }, _Game_generateGameBoard = function _Game_generateGameBoard(boardAnchor) {
-    __classPrivateFieldGet(this, _Game_board, "f").arr.forEach((row, x) => {
-        row.forEach((info, y) => {
-            const newCell = document.createElement('div');
-            newCell.classList.add('cell');
-            info.cell = newCell;
-            newCell.addEventListener('click', () => {
-                if (!info.player) {
-                    info.player = __classPrivateFieldGet(this, _Game_currentPlayer, "f");
-                    if (info.cell)
-                        info.cell.innerHTML = __classPrivateFieldGet(this, _Game_currentPlayer, "f").icon;
-                    if (__classPrivateFieldGet(this, _Game_instances, "m", _Game_isWinner).call(this)) {
-                        console.log(__classPrivateFieldGet(this, _Game_currentPlayer, "f").name + ' is the winner');
-                    }
-                    else if (__classPrivateFieldGet(this, _Game_instances, "m", _Game_isBoardFilled).call(this)) {
-                        console.log('Its a tie');
-                    }
-                    __classPrivateFieldGet(this, _Game_instances, "m", _Game_switchCurrentPlayer).call(this);
+    __classPrivateFieldGet(this, _Game_board, "f").iterate((item) => {
+        const newCell = document.createElement('div');
+        newCell.classList.add('cell');
+        item.cell = newCell;
+        newCell.addEventListener('click', () => {
+            if (!item.player) {
+                item.player = __classPrivateFieldGet(this, _Game_currentPlayer, "f");
+                if (item.cell)
+                    item.cell.innerHTML = __classPrivateFieldGet(this, _Game_currentPlayer, "f").icon;
+                if (__classPrivateFieldGet(this, _Game_instances, "m", _Game_isWinner).call(this)) {
+                    console.log(__classPrivateFieldGet(this, _Game_currentPlayer, "f").name + ' is the winner');
                 }
-            });
-            boardAnchor.append(newCell);
+                else if (__classPrivateFieldGet(this, _Game_instances, "m", _Game_isBoardFilled).call(this)) {
+                    console.log('Its a tie');
+                }
+                __classPrivateFieldGet(this, _Game_instances, "m", _Game_switchCurrentPlayer).call(this);
+            }
         });
+        boardAnchor.append(newCell);
     });
 }, _Game_displayGame = function _Game_displayGame() {
     __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);
