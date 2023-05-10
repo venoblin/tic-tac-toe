@@ -63,6 +63,9 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     __classPrivateFieldGet(this, _Game_playerOne, "f").wins = 0;
     __classPrivateFieldGet(this, _Game_playerTwo, "f").wins = 0;
     __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f"), "f");
+    __classPrivateFieldGet(this, _Game_board, "f").iterate((item) => {
+        item.player = null;
+    });
 }, _Game_startHandler = function _Game_startHandler(playerOneName, playerTwoName) {
     // makes sure names are unique
     if (playerOneName === '' || playerTwoName === '') {

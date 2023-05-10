@@ -63,6 +63,10 @@ export default class Game {
     this.#playerOne.wins = 0
     this.#playerTwo.wins = 0
     this.#currentPlayer = this.#playerOne
+
+    this.#board.iterate((item: BoardInfo) => {
+      item.player = null
+    })
   }
 
   #startHandler(playerOneName: string, playerTwoName: string): void {
