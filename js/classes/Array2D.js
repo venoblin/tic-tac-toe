@@ -39,5 +39,13 @@ export default class Array2D {
     get cols() {
         return __classPrivateFieldGet(this, _Array2D_cols, "f");
     }
+    // iterates through the array and executes callback with passed in parameters
+    iterate(func) {
+        __classPrivateFieldGet(this, _Array2D_arr, "f").forEach((row, x) => {
+            row.forEach((item, y) => {
+                func(item, x, y);
+            });
+        });
+    }
 }
 _Array2D_arr = new WeakMap(), _Array2D_rows = new WeakMap(), _Array2D_cols = new WeakMap();

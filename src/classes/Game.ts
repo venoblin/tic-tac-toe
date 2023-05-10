@@ -15,7 +15,7 @@ export default class Game {
     this.#playerTwo = playerTwo
     this.#currentPlayer = this.#playerOne
     this.#board = new Array2D<BoardInfo>({cell: null, player: null}, 3, 3)
-
+   
     // creating and anchoring layout element to anchor element  
     const anchorElem = document.getElementById(anchorId)
     if (anchorElem === null) console.error('Anchor element not found!')

@@ -32,4 +32,13 @@ export default class Array2D<T> {
   get cols(): number {
     return this.#cols
   }
+
+  // iterates through the array and executes callback with passed in parameters
+  iterate(func: Function) {
+    this.#arr.forEach((row: T[], x: number) => {
+      row.forEach((item: T, y: number) => {
+        func(item, x, y)
+      })
+    })
+  } 
 }
