@@ -21,8 +21,7 @@ export default class Array2D {
             const rowArr = [];
             for (let j = 0; j < cols; j++) {
                 if (typeof el === 'object') {
-                    const newObj = Object.assign({}, el);
-                    rowArr.push(newObj);
+                    rowArr.push(Object.assign({}, el));
                 }
                 else {
                     rowArr.push(el);

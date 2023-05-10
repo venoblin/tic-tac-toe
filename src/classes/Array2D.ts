@@ -11,8 +11,7 @@ export default class Array2D<T> {
       const rowArr: T[] = []
       for (let j = 0; j < cols; j++) {
         if(typeof el === 'object') {
-          const newObj = {...el}
-          rowArr.push(newObj)
+          rowArr.push({...el})
         } else {
           rowArr.push(el)
         }
