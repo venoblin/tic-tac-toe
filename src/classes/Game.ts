@@ -350,7 +350,7 @@ export default class Game {
     h2.innerText = msg
   
     const dismissBtn = document.createElement('button')
-    dismissBtn.innerText = 'Ok'
+    dismissBtn.innerText = 'Continue'
     dismissBtn.classList.add('btn')
     dismissBtn.addEventListener('click', () => {
       this.#displayGame()

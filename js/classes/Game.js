@@ -307,7 +307,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     const h2 = document.createElement('h2');
     h2.innerText = msg;
     const dismissBtn = document.createElement('button');
-    dismissBtn.innerText = 'Ok';
+    dismissBtn.innerText = 'Continue';
     dismissBtn.classList.add('btn');
     dismissBtn.addEventListener('click', () => {
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
