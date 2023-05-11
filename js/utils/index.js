@@ -1,7 +1,9 @@
 export const removeAllChildren = (parentElem, exeptionsArr = []) => {
-    // Exeptions array should be an array of classes from the elements
-    // you wish not to remove, just add the string don't put a '.',
-    // leave empty if you wish to remove everything
+    /*
+    Exeptions array should be a string array of classes from the elements
+    you wish not to remove, just add the string don't put a '.',
+    leave empty if you wish to remove everything
+    */
     const elemsToRemove = [];
     for (let child of parentElem.children) {
         if (exeptionsArr.length) {
