@@ -7,8 +7,8 @@ export const removeAllChildren = (parentElem, exeptionsArr = []) => {
     const elemsToRemove = [];
     for (let child of parentElem.children) {
         if (exeptionsArr.length) {
-            for (let exeption of exeptionsArr) {
-                if (!child.classList.contains(exeption))
+            for (let className of exeptionsArr) {
+                if (!child.classList.contains(className))
                     elemsToRemove.push(child);
             }
         }
