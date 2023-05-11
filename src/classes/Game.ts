@@ -1,6 +1,7 @@
 import Player from "./Player.js"
 import Array2D from "./Array2D.js"
 import { BoardInfo } from "../types"
+import { removeAllChildren } from "../utils/index.js"
 
 export default class Game {
   #layout: HTMLElement
@@ -340,7 +341,7 @@ export default class Game {
 
   #displayGameOver(msg: string): void {
     const gameBoard = document.querySelector('.game-board')
-    // removeAllChildren(gameBoard, ['board'])
+    if(gameBoard) removeAllChildren(gameBoard, ['board'])
   
     const gameOverContainer = document.createElement('div')
     gameOverContainer.classList.add('alert')

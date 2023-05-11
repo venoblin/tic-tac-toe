@@ -1,4 +1,4 @@
-export const removeAllChildren = (parentElem: HTMLElement, exeptionsArr: [] = []) => {
+export const removeAllChildren = (parentElem: Element, exeptionsArr: string[] = []) => {
   // Exeptions array should be an array of classes from the elements
   // you wish not to remove, just add the string don't put a '.',
   // leave empty if you wish to remove everything

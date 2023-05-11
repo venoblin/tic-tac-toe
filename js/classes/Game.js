@@ -11,6 +11,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_currentPlayer, _Game_currentPlayerHeader, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_isWinner, _Game_isBoardFilled, _Game_switchCurrentPlayer, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart, _Game_displayGameOver;
 import Array2D from "./Array2D.js";
+import { removeAllChildren } from "../utils/index.js";
 export default class Game {
     constructor(anchorId, playerOne, playerTwo) {
         _Game_instances.add(this);
@@ -299,7 +300,8 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     __classPrivateFieldGet(this, _Game_layout, "f").append(startMenu);
 }, _Game_displayGameOver = function _Game_displayGameOver(msg) {
     const gameBoard = document.querySelector('.game-board');
-    // removeAllChildren(gameBoard, ['board'])
+    if (gameBoard)
+        removeAllChildren(gameBoard, ['board']);
     const gameOverContainer = document.createElement('div');
     gameOverContainer.classList.add('alert');
     const h2 = document.createElement('h2');
