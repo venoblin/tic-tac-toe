@@ -337,6 +337,38 @@ export default class Game {
     this.#layout.append(startMenu)
   }
 
+  #displayGameOver(msg: string): void {
+    const gameBoard = document.querySelector('.game-board')
+    // removeAllChildren(gameBoard, ['board'])
+  
+    const gameOverContainer = document.createElement('div')
+    gameOverContainer.classList.add('alert')
+  
+    const h2 = document.createElement('h2')
+    h2.innerText = msg
+  
+    const dismissBtn = document.createElement('button')
+    dismissBtn.innerText = 'Ok'
+    dismissBtn.classList.add('btn')
+    dismissBtn.addEventListener('click', () => {
+      this.#displayGame()
+    })
+  
+    const mainMenuBtn = document.createElement('button')
+    mainMenuBtn.innerText = 'Main Menu'
+    mainMenuBtn.classList.add('btn')
+    mainMenuBtn.addEventListener('click', () => {
+      this.#displayStart()
+    })
+  
+    gameOverContainer.append(h2)
+    gameOverContainer.append(dismissBtn)
+    gameOverContainer.append(mainMenuBtn)
+  
+    this.#layout.append(gameOverContainer)
+  }
+  
+
   run(): void {
     this.#displayStart()
   }

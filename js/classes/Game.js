@@ -9,7 +9,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_currentPlayer, _Game_currentPlayerHeader, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_isWinner, _Game_isBoardFilled, _Game_switchCurrentPlayer, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart;
+var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_currentPlayer, _Game_currentPlayerHeader, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_isWinner, _Game_isBoardFilled, _Game_switchCurrentPlayer, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart, _Game_displayGameOver;
 import Array2D from "./Array2D.js";
 export default class Game {
     constructor(anchorId, playerOne, playerTwo) {
@@ -296,4 +296,27 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     startMenu.append(inputContainer);
     startMenu.append(startBtn);
     __classPrivateFieldGet(this, _Game_layout, "f").append(startMenu);
+}, _Game_displayGameOver = function _Game_displayGameOver(msg) {
+    const gameBoard = document.querySelector('.game-board');
+    // removeAllChildren(gameBoard, ['board'])
+    const gameOverContainer = document.createElement('div');
+    gameOverContainer.classList.add('alert');
+    const h2 = document.createElement('h2');
+    h2.innerText = msg;
+    const dismissBtn = document.createElement('button');
+    dismissBtn.innerText = 'Ok';
+    dismissBtn.classList.add('btn');
+    dismissBtn.addEventListener('click', () => {
+        __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
+    });
+    const mainMenuBtn = document.createElement('button');
+    mainMenuBtn.innerText = 'Main Menu';
+    mainMenuBtn.classList.add('btn');
+    mainMenuBtn.addEventListener('click', () => {
+        __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayStart).call(this);
+    });
+    gameOverContainer.append(h2);
+    gameOverContainer.append(dismissBtn);
+    gameOverContainer.append(mainMenuBtn);
+    __classPrivateFieldGet(this, _Game_layout, "f").append(gameOverContainer);
 };
