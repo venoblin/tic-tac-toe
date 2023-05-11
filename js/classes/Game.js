@@ -177,10 +177,10 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
                 if (item.cell)
                     item.cell.innerHTML = __classPrivateFieldGet(this, _Game_currentPlayer, "f").icon;
                 if (__classPrivateFieldGet(this, _Game_instances, "m", _Game_isWinner).call(this)) {
-                    console.log(__classPrivateFieldGet(this, _Game_currentPlayer, "f").name + ' is the winner');
+                    __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGameOver).call(this, `${__classPrivateFieldGet(this, _Game_currentPlayer, "f").name} is the winner!`);
                 }
                 else if (__classPrivateFieldGet(this, _Game_instances, "m", _Game_isBoardFilled).call(this)) {
-                    console.log('Its a tie');
+                    __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGameOver).call(this, `It's a tie!`);
                 }
                 __classPrivateFieldGet(this, _Game_instances, "m", _Game_switchCurrentPlayer).call(this);
             }
@@ -189,6 +189,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     });
 }, _Game_displayGame = function _Game_displayGame() {
     __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);
+    __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetBoard).call(this);
     // entire game board
     const gameBoard = document.createElement('div');
     gameBoard.classList.add('game-board');

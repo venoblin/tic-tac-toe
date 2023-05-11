@@ -198,9 +198,9 @@ export default class Game {
           if(item.cell) item.cell.innerHTML = this.#currentPlayer.icon
             
           if (this.#isWinner()) {
-            console.log(this.#currentPlayer.name + ' is the winner')
+            this.#displayGameOver(`${this.#currentPlayer.name} is the winner!`)
           } else if (this.#isBoardFilled()) {
-            console.log('Its a tie')
+            this.#displayGameOver(`It's a tie!`)
           }
 
           this.#switchCurrentPlayer()
@@ -213,6 +213,7 @@ export default class Game {
       
   #displayGame(): void {
     this.#resetLayout()
+    this.#resetBoard()
 
     // entire game board
     const gameBoard = document.createElement('div')
