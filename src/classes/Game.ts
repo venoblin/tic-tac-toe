@@ -215,6 +215,20 @@ export default class Game {
       boardAnchor.append(newCell)
     })
   }
+
+  #mainMenuButton(): HTMLButtonElement {
+    const mainMenuBtn = document.createElement('button')
+    mainMenuBtn.innerText = 'Main Menu'
+    mainMenuBtn.classList.add('btn')
+    mainMenuBtn.addEventListener('click', () => {
+      if (this.#playerTwo.name.toLowerCase() === 'computer') this.#playerTwo.resetName()
+      this.#resetWins()
+      this.#resetBoard()
+      this.#displayStart()
+    })
+
+    return mainMenuBtn
+  }
       
   #displayGame(): void {
     this.#resetLayout()
@@ -262,19 +276,13 @@ export default class Game {
     resetBtn.innerText = 'Reset'
     resetBtn.classList.add('btn')
     resetBtn.addEventListener('click', () => {
+      this.#resetWins()
       this.#resetBoard()
       this.#displayGame()
     })
     btnsContainer.append(resetBtn)
 
-    const mainMenuBtn = document.createElement('button')
-    mainMenuBtn.innerText = 'Main Menu'
-    mainMenuBtn.classList.add('btn')
-    mainMenuBtn.addEventListener('click', () => {
-      if (this.#playerTwo.name.toLowerCase() === 'computer') this.#playerTwo.resetName()
-      this.#resetBoard()
-      this.#displayStart()
-    })
+    const mainMenuBtn = this.#mainMenuButton()
     btnsContainer.append(mainMenuBtn)
 
     this.#layout.append(gameBoard)
@@ -362,12 +370,7 @@ export default class Game {
       this.#displayGame()
     })
   
-    const mainMenuBtn = document.createElement('button')
-    mainMenuBtn.innerText = 'Main Menu'
-    mainMenuBtn.classList.add('btn')
-    mainMenuBtn.addEventListener('click', () => {
-      this.#displayStart()
-    })
+    const mainMenuBtn = this.#mainMenuButton()
   
     gameOverContainer.append(h2)
     gameOverContainer.append(dismissBtn)

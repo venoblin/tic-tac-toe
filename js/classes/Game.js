@@ -9,7 +9,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_currentPlayer, _Game_currentPlayerHeader, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetWins, _Game_resetBoard, _Game_startHandler, _Game_isWinner, _Game_isBoardFilled, _Game_switchCurrentPlayer, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart, _Game_displayGameOver;
+var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_currentPlayer, _Game_currentPlayerHeader, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetWins, _Game_resetBoard, _Game_startHandler, _Game_isWinner, _Game_isBoardFilled, _Game_switchCurrentPlayer, _Game_generateGameBoard, _Game_mainMenuButton, _Game_displayGame, _Game_displayStart, _Game_displayGameOver;
 import Array2D from "./Array2D.js";
 import { removeAllChildren } from "../utils/index.js";
 export default class Game {
@@ -190,6 +190,18 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         });
         boardAnchor.append(newCell);
     });
+}, _Game_mainMenuButton = function _Game_mainMenuButton() {
+    const mainMenuBtn = document.createElement('button');
+    mainMenuBtn.innerText = 'Main Menu';
+    mainMenuBtn.classList.add('btn');
+    mainMenuBtn.addEventListener('click', () => {
+        if (__classPrivateFieldGet(this, _Game_playerTwo, "f").name.toLowerCase() === 'computer')
+            __classPrivateFieldGet(this, _Game_playerTwo, "f").resetName();
+        __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetWins).call(this);
+        __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetBoard).call(this);
+        __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayStart).call(this);
+    });
+    return mainMenuBtn;
 }, _Game_displayGame = function _Game_displayGame() {
     __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);
     // entire game board
@@ -228,19 +240,12 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     resetBtn.innerText = 'Reset';
     resetBtn.classList.add('btn');
     resetBtn.addEventListener('click', () => {
+        __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetWins).call(this);
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetBoard).call(this);
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
     });
     btnsContainer.append(resetBtn);
-    const mainMenuBtn = document.createElement('button');
-    mainMenuBtn.innerText = 'Main Menu';
-    mainMenuBtn.classList.add('btn');
-    mainMenuBtn.addEventListener('click', () => {
-        if (__classPrivateFieldGet(this, _Game_playerTwo, "f").name.toLowerCase() === 'computer')
-            __classPrivateFieldGet(this, _Game_playerTwo, "f").resetName();
-        __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetBoard).call(this);
-        __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayStart).call(this);
-    });
+    const mainMenuBtn = __classPrivateFieldGet(this, _Game_instances, "m", _Game_mainMenuButton).call(this);
     btnsContainer.append(mainMenuBtn);
     __classPrivateFieldGet(this, _Game_layout, "f").append(gameBoard);
 }, _Game_displayStart = function _Game_displayStart() {
@@ -316,12 +321,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         });
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
     });
-    const mainMenuBtn = document.createElement('button');
-    mainMenuBtn.innerText = 'Main Menu';
-    mainMenuBtn.classList.add('btn');
-    mainMenuBtn.addEventListener('click', () => {
-        __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayStart).call(this);
-    });
+    const mainMenuBtn = __classPrivateFieldGet(this, _Game_instances, "m", _Game_mainMenuButton).call(this);
     gameOverContainer.append(h2);
     gameOverContainer.append(dismissBtn);
     gameOverContainer.append(mainMenuBtn);
