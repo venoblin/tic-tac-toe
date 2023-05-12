@@ -60,9 +60,12 @@ export default class Game {
     this.#layout.innerHTML = ''
   }
 
-  #resetBoard(): void {
+  #resetWins() {
     this.#playerOne.wins = 0
     this.#playerTwo.wins = 0
+  }
+
+  #resetBoard(): void {
     this.#currentPlayer = this.#playerOne
 
     this.#board.iterate((item: BoardInfo) => {
@@ -200,6 +203,7 @@ export default class Game {
             
           if (this.#isWinner()) {
             this.#displayGameOver(`${this.#currentPlayer.name} is the winner!`)
+            this.#currentPlayer.wins = this.#currentPlayer.wins + 1
           } else if (this.#isBoardFilled()) {
             this.#displayGameOver(`It's a tie!`)
           }
@@ -214,7 +218,6 @@ export default class Game {
       
   #displayGame(): void {
     this.#resetLayout()
-    this.#resetBoard()
 
     // entire game board
     const gameBoard = document.createElement('div')
@@ -353,6 +356,9 @@ export default class Game {
     dismissBtn.innerText = 'Continue'
     dismissBtn.classList.add('btn')
     dismissBtn.addEventListener('click', () => {
+      this.#board.iterate((item: BoardInfo) => {
+        item.player = null
+      })
       this.#displayGame()
     })
   

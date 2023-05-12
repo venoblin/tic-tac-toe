@@ -9,7 +9,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_currentPlayer, _Game_currentPlayerHeader, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetBoard, _Game_startHandler, _Game_isWinner, _Game_isBoardFilled, _Game_switchCurrentPlayer, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart, _Game_displayGameOver;
+var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_currentPlayer, _Game_currentPlayerHeader, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetWins, _Game_resetBoard, _Game_startHandler, _Game_isWinner, _Game_isBoardFilled, _Game_switchCurrentPlayer, _Game_generateGameBoard, _Game_displayGame, _Game_displayStart, _Game_displayGameOver;
 import Array2D from "./Array2D.js";
 import { removeAllChildren } from "../utils/index.js";
 export default class Game {
@@ -60,9 +60,10 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
 }, _Game_resetLayout = function _Game_resetLayout() {
     // clears entire layout so new displays can be shown
     __classPrivateFieldGet(this, _Game_layout, "f").innerHTML = '';
-}, _Game_resetBoard = function _Game_resetBoard() {
+}, _Game_resetWins = function _Game_resetWins() {
     __classPrivateFieldGet(this, _Game_playerOne, "f").wins = 0;
     __classPrivateFieldGet(this, _Game_playerTwo, "f").wins = 0;
+}, _Game_resetBoard = function _Game_resetBoard() {
     __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f"), "f");
     __classPrivateFieldGet(this, _Game_board, "f").iterate((item) => {
         item.player = null;
@@ -179,6 +180,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
                     item.cell.innerHTML = __classPrivateFieldGet(this, _Game_currentPlayer, "f").icon;
                 if (__classPrivateFieldGet(this, _Game_instances, "m", _Game_isWinner).call(this)) {
                     __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGameOver).call(this, `${__classPrivateFieldGet(this, _Game_currentPlayer, "f").name} is the winner!`);
+                    __classPrivateFieldGet(this, _Game_currentPlayer, "f").wins = __classPrivateFieldGet(this, _Game_currentPlayer, "f").wins + 1;
                 }
                 else if (__classPrivateFieldGet(this, _Game_instances, "m", _Game_isBoardFilled).call(this)) {
                     __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGameOver).call(this, `It's a tie!`);
@@ -190,7 +192,6 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     });
 }, _Game_displayGame = function _Game_displayGame() {
     __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);
-    __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetBoard).call(this);
     // entire game board
     const gameBoard = document.createElement('div');
     gameBoard.classList.add('game-board');
@@ -310,6 +311,9 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     dismissBtn.innerText = 'Continue';
     dismissBtn.classList.add('btn');
     dismissBtn.addEventListener('click', () => {
+        __classPrivateFieldGet(this, _Game_board, "f").iterate((item) => {
+            item.player = null;
+        });
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
     });
     const mainMenuBtn = document.createElement('button');
