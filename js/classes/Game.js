@@ -172,7 +172,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     }
 }, _Game_generateGameBoard = function _Game_generateGameBoard(boardAnchor) {
     __classPrivateFieldGet(this, _Game_board, "f").iterate((item) => {
-        const newCell = new DOMElement('div', ['cell']).create();
+        const newCell = DOMElement.create('div', ['cell']);
         item.cell = newCell;
         newCell.addEventListener('click', () => {
             if (!item.player) {
@@ -192,7 +192,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         boardAnchor.append(newCell);
     });
 }, _Game_mainMenuButton = function _Game_mainMenuButton() {
-    const mainMenuBtn = new DOMElement('button', ['btn']).create();
+    const mainMenuBtn = DOMElement.create('button', ['btn']);
     mainMenuBtn.innerText = 'Main Menu';
     mainMenuBtn.addEventListener('click', () => {
         if (__classPrivateFieldGet(this, _Game_playerTwo, "f").name.toLowerCase() === 'computer')
@@ -205,31 +205,31 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
 }, _Game_displayGame = function _Game_displayGame() {
     __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);
     // entire game board
-    const gameBoard = new DOMElement('div', ['game-board']).create();
-    const winsContainer = new DOMElement('div', ['wins-container']).create();
+    const gameBoard = DOMElement.create('div', ['game-board']);
+    const winsContainer = DOMElement.create('div', ['wins-container']);
     gameBoard.append(winsContainer);
     // displays first player wins
-    const firstPlayerWins = new DOMElement('h3', ['first-wins']).create();
+    const firstPlayerWins = DOMElement.create('h3', ['first-wins']);
     firstPlayerWins.innerHTML =
         `${__classPrivateFieldGet(this, _Game_playerOne, "f").name} Wins: <span>${__classPrivateFieldGet(this, _Game_playerOne, "f").wins}</span>`;
     winsContainer.append(firstPlayerWins);
     // displays second player wins
-    const secondPlayerWins = new DOMElement('h3', ['second-wins']).create();
+    const secondPlayerWins = DOMElement.create('h3', ['second-wins']);
     secondPlayerWins.innerHTML =
         `${__classPrivateFieldGet(this, _Game_playerTwo, "f").name} Wins: <span>${__classPrivateFieldGet(this, _Game_playerTwo, "f").wins}</span>`;
     winsContainer.append(secondPlayerWins);
     // displays who's currently playing
-    const playingHeader = new DOMElement('h2', ['currently-playing']).create();
+    const playingHeader = DOMElement.create('h2', ['currently-playing']);
     __classPrivateFieldSet(this, _Game_currentPlayerHeader, playingHeader, "f");
     playingHeader.innerText = `${__classPrivateFieldGet(this, _Game_currentPlayer, "f").name}'s Turn`;
     gameBoard.append(playingHeader);
-    const boardContainer = new DOMElement('div', ['board']).create();
+    const boardContainer = DOMElement.create('div', ['board']);
     // generating board
     __classPrivateFieldGet(this, _Game_instances, "m", _Game_generateGameBoard).call(this, boardContainer);
     gameBoard.append(boardContainer);
-    const btnsContainer = new DOMElement('div', ['btns-container']).create();
+    const btnsContainer = DOMElement.create('div', ['btns-container']);
     gameBoard.append(btnsContainer);
-    const resetBtn = new DOMElement('button', ['btn']).create();
+    const resetBtn = DOMElement.create('button', ['btn']);
     resetBtn.innerText = 'Reset';
     resetBtn.addEventListener('click', () => {
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetWins).call(this);
@@ -243,10 +243,10 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
 }, _Game_displayStart = function _Game_displayStart() {
     __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);
     let isComputerPlaying = false;
-    const startMenu = new DOMElement('div', ['start-menu']).create();
+    const startMenu = DOMElement.create('div', ['start-menu']);
     // gamemode switcher
-    const gameModeContainer = new DOMElement('div', ['game-mode-container']).create();
-    const pvpModeBtn = new DOMElement('button', ['selected']).create();
+    const gameModeContainer = DOMElement.create('div', ['game-mode-container']);
+    const pvpModeBtn = DOMElement.create('button', ['selected']);
     pvpModeBtn.innerText = '🤨 vs. 🤨';
     pvpModeBtn.addEventListener('click', () => {
         isComputerPlaying = false;
@@ -254,7 +254,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         pvpModeBtn.classList.add('selected');
         pvcModeBtn.classList.remove('selected');
     });
-    const pvcModeBtn = new DOMElement('button').create();
+    const pvcModeBtn = DOMElement.create('button');
     pvcModeBtn.innerText = '🤨 vs. 🤖';
     pvcModeBtn.addEventListener('click', () => {
         isComputerPlaying = true;
@@ -265,7 +265,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     gameModeContainer.append(pvpModeBtn);
     gameModeContainer.append(pvcModeBtn);
     // player name inputs
-    const inputContainer = new DOMElement('div', ['input-container']).create();
+    const inputContainer = DOMElement.create('div', ['input-container']);
     const firstPlayerInput = document.createElement('input');
     firstPlayerInput.setAttribute('id', 'firstPlayerInput');
     firstPlayerInput.setAttribute('placeholder', 'Player 1 Name');
@@ -277,7 +277,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     inputContainer.append(firstPlayerInput);
     inputContainer.append(secondPlayerInput);
     // start button
-    const startBtn = new DOMElement('button', ['btn']).create();
+    const startBtn = DOMElement.create('button', ['btn']);
     startBtn.innerText = 'Play';
     startBtn.addEventListener('click', () => {
         if (isComputerPlaying) {
@@ -295,10 +295,10 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     const gameBoard = document.querySelector('.game-board');
     if (gameBoard)
         removeAllChildren(gameBoard, ['board']);
-    const gameOverContainer = new DOMElement('div', ['alert']).create();
-    const h2 = new DOMElement('h2').create();
+    const gameOverContainer = DOMElement.create('div', ['alert']);
+    const h2 = DOMElement.create('h2');
     h2.innerText = msg;
-    const dismissBtn = new DOMElement('button', ['btn']).create();
+    const dismissBtn = DOMElement.create('button', ['btn']);
     dismissBtn.innerText = 'Continue';
     dismissBtn.addEventListener('click', () => {
         __classPrivateFieldGet(this, _Game_board, "f").iterate((item) => {

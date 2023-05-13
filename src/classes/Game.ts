@@ -195,7 +195,7 @@ export default class Game {
 
   #generateGameBoard(boardAnchor: HTMLElement): void {
     this.#board.iterate((item: BoardInfo) => {
-      const newCell = new DOMElement('div', ['cell']).create()
+      const newCell = DOMElement.create('div', ['cell'])
       item.cell = newCell      
       
       newCell.addEventListener('click', () => {
@@ -219,7 +219,7 @@ export default class Game {
   }
 
   #mainMenuButton(): HTMLElement {
-    const mainMenuBtn = new DOMElement('button', ['btn']).create()
+    const mainMenuBtn = DOMElement.create('button', ['btn'])
     mainMenuBtn.innerText = 'Main Menu'
     mainMenuBtn.addEventListener('click', () => {
       if (this.#playerTwo.name.toLowerCase() === 'computer') this.#playerTwo.resetName()
@@ -235,38 +235,38 @@ export default class Game {
     this.#resetLayout()
 
     // entire game board
-    const gameBoard = new DOMElement('div', ['game-board']).create()
+    const gameBoard = DOMElement.create('div', ['game-board'])
 
-    const winsContainer = new DOMElement('div', ['wins-container']).create()
+    const winsContainer = DOMElement.create('div', ['wins-container'])
     gameBoard.append(winsContainer)
     
     // displays first player wins
-    const firstPlayerWins = new DOMElement('h3', ['first-wins']).create()
+    const firstPlayerWins = DOMElement.create('h3', ['first-wins'])
     firstPlayerWins.innerHTML = 
     `${this.#playerOne.name} Wins: <span>${this.#playerOne.wins}</span>`
     winsContainer.append(firstPlayerWins)
     
     // displays second player wins
-    const secondPlayerWins = new DOMElement('h3', ['second-wins']).create()
+    const secondPlayerWins = DOMElement.create('h3', ['second-wins'])
     secondPlayerWins.innerHTML = 
     `${this.#playerTwo.name} Wins: <span>${this.#playerTwo.wins}</span>`
     winsContainer.append(secondPlayerWins)
     
     // displays who's currently playing
-    const playingHeader = new DOMElement('h2', ['currently-playing']).create()
+    const playingHeader = DOMElement.create('h2', ['currently-playing'])
     this.#currentPlayerHeader = playingHeader
     playingHeader.innerText = `${this.#currentPlayer.name}'s Turn`
     gameBoard.append(playingHeader)
 
-    const boardContainer = new DOMElement('div', ['board']).create()
+    const boardContainer = DOMElement.create('div', ['board'])
     // generating board
     this.#generateGameBoard(boardContainer)
     gameBoard.append(boardContainer)
 
-    const btnsContainer = new DOMElement('div', ['btns-container']).create()
+    const btnsContainer = DOMElement.create('div', ['btns-container'])
     gameBoard.append(btnsContainer)
 
-    const resetBtn = new DOMElement('button', ['btn']).create()
+    const resetBtn = DOMElement.create('button', ['btn'])
     resetBtn.innerText = 'Reset'
     resetBtn.addEventListener('click', () => {
       this.#resetWins()
@@ -285,11 +285,11 @@ export default class Game {
     this.#resetLayout()
     let isComputerPlaying: boolean = false
 
-    const startMenu = new DOMElement('div', ['start-menu']).create()
+    const startMenu = DOMElement.create('div', ['start-menu'])
   
     // gamemode switcher
-    const gameModeContainer = new DOMElement('div', ['game-mode-container']).create()
-    const pvpModeBtn = new DOMElement('button', ['selected']).create()
+    const gameModeContainer = DOMElement.create('div', ['game-mode-container'])
+    const pvpModeBtn = DOMElement.create('button', ['selected'])
     pvpModeBtn.innerText = '🤨 vs. 🤨'
     pvpModeBtn.addEventListener('click', () => {
       isComputerPlaying = false
@@ -297,7 +297,7 @@ export default class Game {
       pvpModeBtn.classList.add('selected')
       pvcModeBtn.classList.remove('selected')
     })
-    const pvcModeBtn = new DOMElement('button').create()
+    const pvcModeBtn = DOMElement.create('button')
     pvcModeBtn.innerText = '🤨 vs. 🤖'
     pvcModeBtn.addEventListener('click', () => {
       isComputerPlaying = true  
@@ -309,7 +309,7 @@ export default class Game {
     gameModeContainer.append(pvcModeBtn)
 
     // player name inputs
-    const inputContainer = new DOMElement('div', ['input-container']).create()
+    const inputContainer = DOMElement.create('div', ['input-container'])
     const firstPlayerInput = document.createElement('input')
     firstPlayerInput.setAttribute('id', 'firstPlayerInput')
     firstPlayerInput.setAttribute('placeholder', 'Player 1 Name')
@@ -322,7 +322,7 @@ export default class Game {
     inputContainer.append(secondPlayerInput)
 
     // start button
-    const startBtn = new DOMElement('button', ['btn']).create()
+    const startBtn = DOMElement.create('button', ['btn'])
     startBtn.innerText = 'Play'
     startBtn.addEventListener('click', () => {
       if (isComputerPlaying) {
@@ -342,12 +342,12 @@ export default class Game {
     const gameBoard = document.querySelector('.game-board')
     if(gameBoard) removeAllChildren(gameBoard, ['board'])
   
-    const gameOverContainer = new DOMElement('div', ['alert']).create()
+    const gameOverContainer = DOMElement.create('div', ['alert'])
 
-    const h2 = new DOMElement('h2').create()
+    const h2 = DOMElement.create('h2')
     h2.innerText = msg
   
-    const dismissBtn = new DOMElement('button', ['btn']).create()
+    const dismissBtn = DOMElement.create('button', ['btn'])
     dismissBtn.innerText = 'Continue'
     dismissBtn.addEventListener('click', () => {
       this.#board.iterate((item: BoardInfo) => {
