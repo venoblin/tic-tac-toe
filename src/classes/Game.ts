@@ -85,8 +85,7 @@ export default class Game {
       // updates player names if both names are unique
       this.#playerOne.name = playerOneName
       this.#playerTwo.name = playerTwoName
-        
-      if(playerTwoName.toLowerCase() === 'computer') this.#playerTwo.isComputer = true
+      
       this.#displayGame()
     }
   }

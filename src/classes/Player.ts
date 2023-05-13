@@ -24,10 +24,6 @@ export default class Player {
     return this.#initialName
   }
 
-  get isComputer(): boolean {
-    return this.#isComputer
-  }
-
   get wins(): number {
     return this.#wins
   }
