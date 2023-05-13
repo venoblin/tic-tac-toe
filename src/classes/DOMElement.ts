@@ -1,9 +1,9 @@
 export default class DOMElement {
   #elem: Element
 
-  constructor(tag: string, classNames: string[]){
+  constructor(tag: string, classNames?: string[]){
     this.#elem = document.createElement(tag)
-    if(classNames.length) {
+    if(classNames) {
       classNames.forEach((cl) => {
         this.#elem.classList.add(cl)
       })

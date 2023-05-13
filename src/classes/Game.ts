@@ -1,5 +1,6 @@
 import Player from "./Player.js"
 import Computer from "./Computer.js"
+import DOMElement from "./DOMElement.js"
 import Array2D from "./Array2D.js"
 import { BoardInfo } from "../types"
 import { removeAllChildren } from "../utils/index.js"

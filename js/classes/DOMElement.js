@@ -14,7 +14,7 @@ export default class DOMElement {
     constructor(tag, classNames) {
         _DOMElement_elem.set(this, void 0);
         __classPrivateFieldSet(this, _DOMElement_elem, document.createElement(tag), "f");
-        if (classNames.length) {
+        if (classNames) {
             classNames.forEach((cl) => {
                 __classPrivateFieldGet(this, _DOMElement_elem, "f").classList.add(cl);
             });
