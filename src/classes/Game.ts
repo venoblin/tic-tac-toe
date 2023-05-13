@@ -135,7 +135,7 @@ export default class Game {
     ) {
       this.#board.arr[0][1].cell?.classList.add('winning-cell')
       this.#board.arr[1][1].cell?.classList.add('winning-cell')
-      this.#board.arr[2][2].cell?.classList.add('winning-cell')
+      this.#board.arr[2][1].cell?.classList.add('winning-cell')
       return true 
     } else if (
       this.#board.arr[0][2].player === this.#currentPlayer &&

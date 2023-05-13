@@ -125,7 +125,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         __classPrivateFieldGet(this, _Game_board, "f").arr[2][1].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f")) {
         (_o = __classPrivateFieldGet(this, _Game_board, "f").arr[0][1].cell) === null || _o === void 0 ? void 0 : _o.classList.add('winning-cell');
         (_p = __classPrivateFieldGet(this, _Game_board, "f").arr[1][1].cell) === null || _p === void 0 ? void 0 : _p.classList.add('winning-cell');
-        (_q = __classPrivateFieldGet(this, _Game_board, "f").arr[2][2].cell) === null || _q === void 0 ? void 0 : _q.classList.add('winning-cell');
+        (_q = __classPrivateFieldGet(this, _Game_board, "f").arr[2][1].cell) === null || _q === void 0 ? void 0 : _q.classList.add('winning-cell');
         return true;
     }
     else if (__classPrivateFieldGet(this, _Game_board, "f").arr[0][2].player === __classPrivateFieldGet(this, _Game_currentPlayer, "f") &&
