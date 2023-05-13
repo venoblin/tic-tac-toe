@@ -1,4 +1,4 @@
-export default class DOMElement {
+export default class DOMElement<T> {
   #elem: HTMLElement
 
   constructor(tag: string, classNames?: string[]){

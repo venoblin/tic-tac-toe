@@ -243,13 +243,10 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
 }, _Game_displayStart = function _Game_displayStart() {
     __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);
     let isComputerPlaying = false;
-    const startMenu = document.createElement('div');
-    startMenu.classList.add('start-menu');
+    const startMenu = new DOMElement('div', ['start-menu']).create();
     // gamemode switcher
-    const gameModeContainer = document.createElement('div');
-    gameModeContainer.classList.add('game-mode-container');
-    const pvpModeBtn = document.createElement('button');
-    pvpModeBtn.classList.add('selected');
+    const gameModeContainer = new DOMElement('div', ['game-mode-container']).create();
+    const pvpModeBtn = new DOMElement('button', ['selected']).create();
     pvpModeBtn.innerText = '🤨 vs. 🤨';
     pvpModeBtn.addEventListener('click', () => {
         isComputerPlaying = false;
@@ -257,7 +254,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         pvpModeBtn.classList.add('selected');
         pvcModeBtn.classList.remove('selected');
     });
-    const pvcModeBtn = document.createElement('button');
+    const pvcModeBtn = new DOMElement('button').create();
     pvcModeBtn.innerText = '🤨 vs. 🤖';
     pvcModeBtn.addEventListener('click', () => {
         isComputerPlaying = true;
@@ -268,8 +265,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     gameModeContainer.append(pvpModeBtn);
     gameModeContainer.append(pvcModeBtn);
     // player name inputs
-    const inputContainer = document.createElement('div');
-    inputContainer.classList.add('input-container');
+    const inputContainer = new DOMElement('div', ['input-container']).create();
     const firstPlayerInput = document.createElement('input');
     firstPlayerInput.setAttribute('id', 'firstPlayerInput');
     firstPlayerInput.setAttribute('placeholder', 'Player 1 Name');
@@ -281,8 +277,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     inputContainer.append(firstPlayerInput);
     inputContainer.append(secondPlayerInput);
     // start button
-    const startBtn = document.createElement('button');
-    startBtn.classList.add('btn');
+    const startBtn = new DOMElement('button', ['btn']).create();
     startBtn.innerText = 'Play';
     startBtn.addEventListener('click', () => {
         if (isComputerPlaying) {
@@ -300,13 +295,11 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     const gameBoard = document.querySelector('.game-board');
     if (gameBoard)
         removeAllChildren(gameBoard, ['board']);
-    const gameOverContainer = document.createElement('div');
-    gameOverContainer.classList.add('alert');
-    const h2 = document.createElement('h2');
+    const gameOverContainer = new DOMElement('div', ['alert']).create();
+    const h2 = new DOMElement('h2').create();
     h2.innerText = msg;
-    const dismissBtn = document.createElement('button');
+    const dismissBtn = new DOMElement('button', ['btn']).create();
     dismissBtn.innerText = 'Continue';
-    dismissBtn.classList.add('btn');
     dismissBtn.addEventListener('click', () => {
         __classPrivateFieldGet(this, _Game_board, "f").iterate((item) => {
             item.player = null;
