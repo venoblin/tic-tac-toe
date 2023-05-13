@@ -11,6 +11,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_computer, _Game_currentPlayer, _Game_currentPlayerHeader, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetWins, _Game_resetBoard, _Game_startHandler, _Game_isWinner, _Game_isBoardFilled, _Game_switchCurrentPlayer, _Game_generateGameBoard, _Game_mainMenuButton, _Game_displayGame, _Game_displayStart, _Game_displayGameOver;
 import Computer from "./Computer.js";
+import DOMElement from "./DOMElement.js";
 import Array2D from "./Array2D.js";
 import { removeAllChildren } from "../utils/index.js";
 export default class Game {
@@ -192,9 +193,8 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         boardAnchor.append(newCell);
     });
 }, _Game_mainMenuButton = function _Game_mainMenuButton() {
-    const mainMenuBtn = document.createElement('button');
+    const mainMenuBtn = new DOMElement('button', ['btn']).create();
     mainMenuBtn.innerText = 'Main Menu';
-    mainMenuBtn.classList.add('btn');
     mainMenuBtn.addEventListener('click', () => {
         if (__classPrivateFieldGet(this, _Game_playerTwo, "f").name.toLowerCase() === 'computer')
             __classPrivateFieldGet(this, _Game_playerTwo, "f").resetName();

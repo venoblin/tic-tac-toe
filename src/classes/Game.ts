@@ -219,10 +219,9 @@ export default class Game {
     })
   }
 
-  #mainMenuButton(): HTMLButtonElement {
-    const mainMenuBtn = document.createElement('button')
+  #mainMenuButton(): HTMLElement {
+    const mainMenuBtn = new DOMElement('button', ['btn']).create()
     mainMenuBtn.innerText = 'Main Menu'
-    mainMenuBtn.classList.add('btn')
     mainMenuBtn.addEventListener('click', () => {
       if (this.#playerTwo.name.toLowerCase() === 'computer') this.#playerTwo.resetName()
       this.#resetWins()

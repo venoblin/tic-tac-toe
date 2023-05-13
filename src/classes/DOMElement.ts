@@ -1,5 +1,5 @@
 export default class DOMElement {
-  #elem: Element
+  #elem: HTMLElement
 
   constructor(tag: string, classNames?: string[]){
     this.#elem = document.createElement(tag)
@@ -10,7 +10,7 @@ export default class DOMElement {
     }
   }
 
-  create(): Element {
+  create(): HTMLElement {
     return this.#elem
   }
 }
