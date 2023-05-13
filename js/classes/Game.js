@@ -172,8 +172,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     }
 }, _Game_generateGameBoard = function _Game_generateGameBoard(boardAnchor) {
     __classPrivateFieldGet(this, _Game_board, "f").iterate((item) => {
-        const newCell = document.createElement('div');
-        newCell.classList.add('cell');
+        const newCell = new DOMElement('div', ['cell']).create();
         item.cell = newCell;
         newCell.addEventListener('click', () => {
             if (!item.player) {
@@ -206,40 +205,32 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
 }, _Game_displayGame = function _Game_displayGame() {
     __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);
     // entire game board
-    const gameBoard = document.createElement('div');
-    gameBoard.classList.add('game-board');
-    const winsContainer = document.createElement('div');
-    winsContainer.classList.add('wins-container');
+    const gameBoard = new DOMElement('div', ['game-board']).create();
+    const winsContainer = new DOMElement('div', ['wins-container']).create();
     gameBoard.append(winsContainer);
     // displays first player wins
-    const firstPlayerWins = document.createElement('h3');
-    firstPlayerWins.classList.add('first-wins');
+    const firstPlayerWins = new DOMElement('h3', ['first-wins']).create();
     firstPlayerWins.innerHTML =
         `${__classPrivateFieldGet(this, _Game_playerOne, "f").name} Wins: <span>${__classPrivateFieldGet(this, _Game_playerOne, "f").wins}</span>`;
     winsContainer.append(firstPlayerWins);
     // displays second player wins
-    const secondPlayerWins = document.createElement('h3');
-    secondPlayerWins.classList.add('second-wins');
+    const secondPlayerWins = new DOMElement('h3', ['second-wins']).create();
     secondPlayerWins.innerHTML =
         `${__classPrivateFieldGet(this, _Game_playerTwo, "f").name} Wins: <span>${__classPrivateFieldGet(this, _Game_playerTwo, "f").wins}</span>`;
     winsContainer.append(secondPlayerWins);
     // displays who's currently playing
-    const playingHeader = document.createElement('h2');
-    playingHeader.classList.add('currently-playing');
+    const playingHeader = new DOMElement('h2', ['currently-playing']).create();
     __classPrivateFieldSet(this, _Game_currentPlayerHeader, playingHeader, "f");
     playingHeader.innerText = `${__classPrivateFieldGet(this, _Game_currentPlayer, "f").name}'s Turn`;
     gameBoard.append(playingHeader);
-    const boardContainer = document.createElement('div');
-    boardContainer.classList.add('board');
+    const boardContainer = new DOMElement('div', ['board']).create();
     // generating board
     __classPrivateFieldGet(this, _Game_instances, "m", _Game_generateGameBoard).call(this, boardContainer);
     gameBoard.append(boardContainer);
-    const btnsContainer = document.createElement('div');
-    btnsContainer.classList.add('btns-container');
+    const btnsContainer = new DOMElement('div', ['btns-container']).create();
     gameBoard.append(btnsContainer);
-    const resetBtn = document.createElement('button');
+    const resetBtn = new DOMElement('button', ['btn']).create();
     resetBtn.innerText = 'Reset';
-    resetBtn.classList.add('btn');
     resetBtn.addEventListener('click', () => {
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetWins).call(this);
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetBoard).call(this);

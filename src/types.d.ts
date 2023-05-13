@@ -5,6 +5,6 @@ import Player from "./classes/Player.js"
   export type IconObject = {x: string, o: string}
 
   export type BoardInfo = {
-    cell: null | HTMLDivElement,
+    cell: null | HTMLElement,
     player: null | Player 
   }

@@ -11,7 +11,7 @@ export default class Game {
   #playerTwo: Player
   #computer: Computer
   #currentPlayer: Player | Computer
-  #currentPlayerHeader?: HTMLHeadingElement
+  #currentPlayerHeader?: HTMLElement
   #board: Array2D<BoardInfo>
 
   constructor(anchorId: string, playerOne: Player, playerTwo: Player) {
@@ -195,10 +195,9 @@ export default class Game {
 
   #generateGameBoard(boardAnchor: HTMLElement): void {
     this.#board.iterate((item: BoardInfo) => {
-      const newCell = document.createElement('div')
-      newCell.classList.add('cell')
+      const newCell = new DOMElement('div', ['cell']).create()
       item.cell = newCell      
-        
+      
       newCell.addEventListener('click', () => {
         if(!item.player) {
           item.player = this.#currentPlayer
@@ -236,47 +235,39 @@ export default class Game {
     this.#resetLayout()
 
     // entire game board
-    const gameBoard = document.createElement('div')
-    gameBoard.classList.add('game-board')
-    
-    const winsContainer = document.createElement('div')
-    winsContainer.classList.add('wins-container')
+    const gameBoard = new DOMElement('div', ['game-board']).create()
+
+    const winsContainer = new DOMElement('div', ['wins-container']).create()
     gameBoard.append(winsContainer)
     
     // displays first player wins
-    const firstPlayerWins = document.createElement('h3')
-    firstPlayerWins.classList.add('first-wins')
+    const firstPlayerWins = new DOMElement('h3', ['first-wins']).create()
     firstPlayerWins.innerHTML = 
     `${this.#playerOne.name} Wins: <span>${this.#playerOne.wins}</span>`
     winsContainer.append(firstPlayerWins)
     
     // displays second player wins
-    const secondPlayerWins = document.createElement('h3')
-    secondPlayerWins.classList.add('second-wins')
+    const secondPlayerWins = new DOMElement('h3', ['second-wins']).create()
     secondPlayerWins.innerHTML = 
     `${this.#playerTwo.name} Wins: <span>${this.#playerTwo.wins}</span>`
     winsContainer.append(secondPlayerWins)
     
     // displays who's currently playing
-    const playingHeader = document.createElement('h2')
-    playingHeader.classList.add('currently-playing')
+    const playingHeader = new DOMElement('h2', ['currently-playing']).create()
     this.#currentPlayerHeader = playingHeader
     playingHeader.innerText = `${this.#currentPlayer.name}'s Turn`
     gameBoard.append(playingHeader)
 
-    const boardContainer = document.createElement('div')
-    boardContainer.classList.add('board')
+    const boardContainer = new DOMElement('div', ['board']).create()
     // generating board
     this.#generateGameBoard(boardContainer)
     gameBoard.append(boardContainer)
 
-    const btnsContainer = document.createElement('div')
-    btnsContainer.classList.add('btns-container')
+    const btnsContainer = new DOMElement('div', ['btns-container']).create()
     gameBoard.append(btnsContainer)
 
-    const resetBtn = document.createElement('button')
+    const resetBtn = new DOMElement('button', ['btn']).create()
     resetBtn.innerText = 'Reset'
-    resetBtn.classList.add('btn')
     resetBtn.addEventListener('click', () => {
       this.#resetWins()
       this.#resetBoard()
