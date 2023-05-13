@@ -3,7 +3,6 @@ import Computer from "./Computer.js"
 import DOMElement from "./DOMElement.js"
 import Array2D from "./Array2D.js"
 import { BoardInfo } from "../types"
-import { removeAllChildren } from "../utils/index.js"
 
 export default class Game {
   #layout: HTMLElement
@@ -340,7 +339,7 @@ export default class Game {
 
   #displayGameOver(msg: string): void {
     const gameBoard = document.querySelector('.game-board')
-    if(gameBoard) removeAllChildren(gameBoard, ['board'])
+    if(gameBoard) DOMElement.removeAllChildren(gameBoard, ['board'])
   
     const gameOverContainer = DOMElement.create('div', ['alert'])
 

@@ -13,7 +13,6 @@ var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_compu
 import Computer from "./Computer.js";
 import DOMElement from "./DOMElement.js";
 import Array2D from "./Array2D.js";
-import { removeAllChildren } from "../utils/index.js";
 export default class Game {
     constructor(anchorId, playerOne, playerTwo) {
         _Game_instances.add(this);
@@ -294,7 +293,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
 }, _Game_displayGameOver = function _Game_displayGameOver(msg) {
     const gameBoard = document.querySelector('.game-board');
     if (gameBoard)
-        removeAllChildren(gameBoard, ['board']);
+        DOMElement.removeAllChildren(gameBoard, ['board']);
     const gameOverContainer = DOMElement.create('div', ['alert']);
     const h2 = DOMElement.create('h2');
     h2.innerText = msg;
