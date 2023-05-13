@@ -9,12 +9,11 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Player_name, _Player_initialName, _Player_isComputer, _Player_wins, _Player_icons, _Player_selectedIcon;
+var _Player_name, _Player_initialName, _Player_wins, _Player_icons, _Player_selectedIcon;
 export default class Player {
-    constructor(name, icon, isComputer) {
+    constructor(name, icon) {
         _Player_name.set(this, void 0);
         _Player_initialName.set(this, void 0); // used to remember name given when first instantiated 
-        _Player_isComputer.set(this, void 0);
         _Player_wins.set(this, 0);
         _Player_icons.set(this, {
             x: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/></svg>',
@@ -24,7 +23,6 @@ export default class Player {
         __classPrivateFieldSet(this, _Player_name, name, "f");
         __classPrivateFieldSet(this, _Player_initialName, name, "f");
         __classPrivateFieldSet(this, _Player_selectedIcon, icon, "f");
-        __classPrivateFieldSet(this, _Player_isComputer, isComputer || false, "f");
     }
     get name() {
         return __classPrivateFieldGet(this, _Player_name, "f");
@@ -32,20 +30,17 @@ export default class Player {
     get initialName() {
         return __classPrivateFieldGet(this, _Player_initialName, "f");
     }
-    get isComputer() {
-        return __classPrivateFieldGet(this, _Player_isComputer, "f");
-    }
     get wins() {
         return __classPrivateFieldGet(this, _Player_wins, "f");
     }
     get icon() {
+        return __classPrivateFieldGet(this, _Player_selectedIcon, "f");
+    }
+    get iconSVG() {
         return __classPrivateFieldGet(this, _Player_icons, "f")[__classPrivateFieldGet(this, _Player_selectedIcon, "f")];
     }
     set name(name) {
         __classPrivateFieldSet(this, _Player_name, name, "f");
-    }
-    set isComputer(b) {
-        __classPrivateFieldSet(this, _Player_isComputer, b, "f");
     }
     set wins(amount) {
         __classPrivateFieldSet(this, _Player_wins, amount, "f");
@@ -54,4 +49,4 @@ export default class Player {
         __classPrivateFieldSet(this, _Player_name, __classPrivateFieldGet(this, _Player_initialName, "f"), "f");
     }
 }
-_Player_name = new WeakMap(), _Player_initialName = new WeakMap(), _Player_isComputer = new WeakMap(), _Player_wins = new WeakMap(), _Player_icons = new WeakMap(), _Player_selectedIcon = new WeakMap();
+_Player_name = new WeakMap(), _Player_initialName = new WeakMap(), _Player_wins = new WeakMap(), _Player_icons = new WeakMap(), _Player_selectedIcon = new WeakMap();

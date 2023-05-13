@@ -9,7 +9,8 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_currentPlayer, _Game_currentPlayerHeader, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetWins, _Game_resetBoard, _Game_startHandler, _Game_isWinner, _Game_isBoardFilled, _Game_switchCurrentPlayer, _Game_generateGameBoard, _Game_mainMenuButton, _Game_displayGame, _Game_displayStart, _Game_displayGameOver;
+var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_computer, _Game_currentPlayer, _Game_currentPlayerHeader, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetWins, _Game_resetBoard, _Game_startHandler, _Game_isWinner, _Game_isBoardFilled, _Game_switchCurrentPlayer, _Game_generateGameBoard, _Game_mainMenuButton, _Game_displayGame, _Game_displayStart, _Game_displayGameOver;
+import Computer from "./Computer.js";
 import Array2D from "./Array2D.js";
 import { removeAllChildren } from "../utils/index.js";
 export default class Game {
@@ -18,11 +19,13 @@ export default class Game {
         _Game_layout.set(this, void 0);
         _Game_playerOne.set(this, void 0);
         _Game_playerTwo.set(this, void 0);
+        _Game_computer.set(this, void 0);
         _Game_currentPlayer.set(this, void 0);
         _Game_currentPlayerHeader.set(this, void 0);
         _Game_board.set(this, void 0);
         __classPrivateFieldSet(this, _Game_playerOne, playerOne, "f");
         __classPrivateFieldSet(this, _Game_playerTwo, playerTwo, "f");
+        __classPrivateFieldSet(this, _Game_computer, new Computer(__classPrivateFieldGet(this, _Game_playerTwo, "f").icon), "f");
         __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f"), "f");
         __classPrivateFieldSet(this, _Game_board, new Array2D({ cell: null, player: null }, 3, 3), "f");
         // creating and anchoring layout element to anchor element  
@@ -43,7 +46,7 @@ export default class Game {
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayStart).call(this);
     }
 }
-_Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo = new WeakMap(), _Game_currentPlayer = new WeakMap(), _Game_currentPlayerHeader = new WeakMap(), _Game_board = new WeakMap(), _Game_instances = new WeakSet(), _Game_showAlert = function _Game_showAlert(msg) {
+_Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo = new WeakMap(), _Game_computer = new WeakMap(), _Game_currentPlayer = new WeakMap(), _Game_currentPlayerHeader = new WeakMap(), _Game_board = new WeakMap(), _Game_instances = new WeakSet(), _Game_showAlert = function _Game_showAlert(msg) {
     const alertContainer = document.createElement('div');
     alertContainer.classList.add('alert');
     const h2 = document.createElement('h2');
@@ -82,8 +85,6 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         // updates player names if both names are unique
         __classPrivateFieldGet(this, _Game_playerOne, "f").name = playerOneName;
         __classPrivateFieldGet(this, _Game_playerTwo, "f").name = playerTwoName;
-        if (playerTwoName.toLowerCase() === 'computer')
-            __classPrivateFieldGet(this, _Game_playerTwo, "f").isComputer = true;
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGame).call(this);
     }
 }, _Game_isWinner = function _Game_isWinner() {
@@ -177,7 +178,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
             if (!item.player) {
                 item.player = __classPrivateFieldGet(this, _Game_currentPlayer, "f");
                 if (item.cell)
-                    item.cell.innerHTML = __classPrivateFieldGet(this, _Game_currentPlayer, "f").icon;
+                    item.cell.innerHTML = __classPrivateFieldGet(this, _Game_currentPlayer, "f").iconSVG;
                 if (__classPrivateFieldGet(this, _Game_instances, "m", _Game_isWinner).call(this)) {
                     __classPrivateFieldGet(this, _Game_instances, "m", _Game_displayGameOver).call(this, `${__classPrivateFieldGet(this, _Game_currentPlayer, "f").name} is the winner!`);
                     __classPrivateFieldGet(this, _Game_currentPlayer, "f").wins = __classPrivateFieldGet(this, _Game_currentPlayer, "f").wins + 1;

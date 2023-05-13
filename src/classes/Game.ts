@@ -1,4 +1,5 @@
 import Player from "./Player.js"
+import Computer from "./Computer.js"
 import Array2D from "./Array2D.js"
 import { BoardInfo } from "../types"
 import { removeAllChildren } from "../utils/index.js"
@@ -7,13 +8,15 @@ export default class Game {
   #layout: HTMLElement
   #playerOne: Player
   #playerTwo: Player
-  #currentPlayer: Player
+  #computer: Computer
+  #currentPlayer: Player | Computer
   #currentPlayerHeader?: HTMLHeadingElement
   #board: Array2D<BoardInfo>
 
   constructor(anchorId: string, playerOne: Player, playerTwo: Player) {
     this.#playerOne = playerOne
     this.#playerTwo = playerTwo
+    this.#computer = new Computer(this.#playerTwo.icon)
     this.#currentPlayer = this.#playerOne
     this.#board = new Array2D<BoardInfo>({cell: null, player: null}, 3, 3)
 
@@ -198,7 +201,7 @@ export default class Game {
       newCell.addEventListener('click', () => {
         if(!item.player) {
           item.player = this.#currentPlayer
-          if(item.cell) item.cell.innerHTML = this.#currentPlayer.icon
+          if(item.cell) item.cell.innerHTML = this.#currentPlayer.iconSVG
             
           if (this.#isWinner()) {
             this.#displayGameOver(`${this.#currentPlayer.name} is the winner!`)

@@ -28,7 +28,11 @@ export default class Player {
     return this.#wins
   }
 
-  get icon(): string {
+  get icon(): Icon {
+    return this.#selectedIcon
+  }
+
+  get iconSVG(): string {
     return this.#icons[this.#selectedIcon]
   }
 
