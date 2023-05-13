@@ -231,14 +231,14 @@ export default class Game {
 
     return mainMenuBtn
   }
-      
+  
   #displayGame(): void {
     this.#resetLayout()
 
     // entire game board
     const gameBoard = document.createElement('div')
     gameBoard.classList.add('game-board')
-      
+    
     const winsContainer = document.createElement('div')
     winsContainer.classList.add('wins-container')
     gameBoard.append(winsContainer)
@@ -380,7 +380,6 @@ export default class Game {
   
     this.#layout.append(gameOverContainer)
   }
-  
 
   run(): void {
     this.#displayStart()
