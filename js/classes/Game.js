@@ -241,14 +241,12 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     __classPrivateFieldGet(this, _Game_layout, "f").append(gameBoard);
 }, _Game_displayStart = function _Game_displayStart() {
     __classPrivateFieldGet(this, _Game_instances, "m", _Game_resetLayout).call(this);
-    let isComputerPlaying = false;
     const startMenu = DOMElement.create('div', ['start-menu']);
     // gamemode switcher
     const gameModeContainer = DOMElement.create('div', ['game-mode-container']);
     const pvpModeBtn = DOMElement.create('button', ['selected']);
     pvpModeBtn.innerText = '🤨 vs. 🤨';
     pvpModeBtn.addEventListener('click', () => {
-        isComputerPlaying = false;
         secondPlayerInput.style.display = 'initial';
         pvpModeBtn.classList.add('selected');
         pvcModeBtn.classList.remove('selected');
@@ -256,7 +254,6 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     const pvcModeBtn = DOMElement.create('button');
     pvcModeBtn.innerText = '🤨 vs. 🤖';
     pvcModeBtn.addEventListener('click', () => {
-        isComputerPlaying = true;
         secondPlayerInput.style.display = 'none';
         pvcModeBtn.classList.add('selected');
         pvpModeBtn.classList.remove('selected');
@@ -279,12 +276,11 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     const startBtn = DOMElement.create('button', ['btn']);
     startBtn.innerText = 'Play';
     startBtn.addEventListener('click', () => {
-        if (isComputerPlaying) {
-            __classPrivateFieldGet(this, _Game_instances, "m", _Game_startHandler).call(this, firstPlayerInput.value, 'Computer');
-        }
-        else {
-            __classPrivateFieldGet(this, _Game_instances, "m", _Game_startHandler).call(this, firstPlayerInput.value, secondPlayerInput.value);
-        }
+        // if (isComputerPlaying) {
+        //   this.#startHandler(firstPlayerInput.value, 'Computer')
+        // } else {
+        //   this.#startHandler(firstPlayerInput.value, secondPlayerInput.value)
+        // }
     });
     startMenu.append(gameModeContainer);
     startMenu.append(inputContainer);

@@ -282,7 +282,6 @@ export default class Game {
 
   #displayStart(): void {
     this.#resetLayout()
-    let isComputerPlaying: boolean = false
 
     const startMenu = DOMElement.create('div', ['start-menu'])
   
@@ -291,7 +290,6 @@ export default class Game {
     const pvpModeBtn = DOMElement.create('button', ['selected'])
     pvpModeBtn.innerText = '🤨 vs. 🤨'
     pvpModeBtn.addEventListener('click', () => {
-      isComputerPlaying = false
       secondPlayerInput.style.display = 'initial'
       pvpModeBtn.classList.add('selected')
       pvcModeBtn.classList.remove('selected')
@@ -299,7 +297,6 @@ export default class Game {
     const pvcModeBtn = DOMElement.create('button')
     pvcModeBtn.innerText = '🤨 vs. 🤖'
     pvcModeBtn.addEventListener('click', () => {
-      isComputerPlaying = true  
       secondPlayerInput.style.display = 'none'
       pvcModeBtn.classList.add('selected')
       pvpModeBtn.classList.remove('selected')
@@ -324,11 +321,11 @@ export default class Game {
     const startBtn = DOMElement.create('button', ['btn'])
     startBtn.innerText = 'Play'
     startBtn.addEventListener('click', () => {
-      if (isComputerPlaying) {
-        this.#startHandler(firstPlayerInput.value, 'Computer')
-      } else {
-        this.#startHandler(firstPlayerInput.value, secondPlayerInput.value)
-      }
+      // if (isComputerPlaying) {
+      //   this.#startHandler(firstPlayerInput.value, 'Computer')
+      // } else {
+      //   this.#startHandler(firstPlayerInput.value, secondPlayerInput.value)
+      // }
     })
 
     startMenu.append(gameModeContainer)

@@ -1,4 +1,4 @@
-export default class DOMElement<T> {
+export default class DOMElement {
 
   static create(tag: string, classNames?: string[]): HTMLElement {
     const elem = document.createElement(tag)
