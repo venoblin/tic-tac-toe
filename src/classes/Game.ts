@@ -184,6 +184,8 @@ export default class Game {
 
   #switchCurrentPlayer(): void {
     if(this.#computer.isPlaying) {
+      this.#computer.makeChoice(this.#board)
+
       this.#currentPlayer === this.#playerOne ?
       this.#currentPlayer = this.#computer :
       this.#currentPlayer = this.#playerOne

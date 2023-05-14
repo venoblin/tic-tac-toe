@@ -1,3 +1,4 @@
+// creates multi-dimensional arrays of a specific type element
 export default class DimensionalArray<T> {
   #arr: T[][] = []
   #rows: number

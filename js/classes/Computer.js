@@ -23,5 +23,24 @@ export default class Computer extends Player {
     set isPlaying(b) {
         __classPrivateFieldSet(this, _Computer_isPlaying, b, "f");
     }
+    makeChoice(board) {
+        const choices = {
+            x: null,
+            y: null
+        };
+        board.iterate((item, x, y) => {
+            if (!item.player) {
+                choices.x = x;
+                choices.y = y;
+            }
+        });
+        if (choices.x !== null && choices.y !== null) {
+            const item = board.arr[choices.x][choices.y];
+            item.player = this;
+            if (item.cell)
+                item.cell.innerHTML = this.iconSVG;
+        }
+        console.log(board.arr);
+    }
 }
 _Computer_isPlaying = new WeakMap();

@@ -164,6 +164,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     return counter >= __classPrivateFieldGet(this, _Game_board, "f").rows * __classPrivateFieldGet(this, _Game_board, "f").cols ? true : false;
 }, _Game_switchCurrentPlayer = function _Game_switchCurrentPlayer() {
     if (__classPrivateFieldGet(this, _Game_computer, "f").isPlaying) {
+        __classPrivateFieldGet(this, _Game_computer, "f").makeChoice(__classPrivateFieldGet(this, _Game_board, "f"));
         __classPrivateFieldGet(this, _Game_currentPlayer, "f") === __classPrivateFieldGet(this, _Game_playerOne, "f") ?
             __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_computer, "f"), "f") :
             __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f"), "f");

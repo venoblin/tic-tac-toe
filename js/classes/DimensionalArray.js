@@ -10,6 +10,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _DimensionalArray_arr, _DimensionalArray_rows, _DimensionalArray_cols;
+// creates multi-dimensional arrays of a specific type element
 export default class DimensionalArray {
     constructor(el, rows, cols) {
         _DimensionalArray_arr.set(this, []);
