@@ -183,9 +183,16 @@ export default class Game {
   }
 
   #switchCurrentPlayer(): void {
-    this.#currentPlayer === this.#playerOne ?
+    if(this.#computer.isPlaying) {
+      this.#currentPlayer === this.#playerOne ?
+      this.#currentPlayer = this.#computer :
+      this.#currentPlayer = this.#playerOne
+    } else {
+      this.#currentPlayer === this.#playerOne ?
       this.#currentPlayer = this.#playerTwo :
       this.#currentPlayer = this.#playerOne
+    }
+    
 
     if(this.#currentPlayerHeader) {
       this.#currentPlayerHeader.innerText = `${this.#currentPlayer.name}'s Turn`
@@ -198,7 +205,7 @@ export default class Game {
       item.cell = newCell      
       
       newCell.addEventListener('click', () => {
-        if(!item.player) {
+        if(!item.player && this.#currentPlayer !== this.#computer) {
           item.player = this.#currentPlayer
           if(item.cell) item.cell.innerHTML = this.#currentPlayer.iconSVG
             

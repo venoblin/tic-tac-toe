@@ -163,9 +163,16 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     });
     return counter >= __classPrivateFieldGet(this, _Game_board, "f").rows * __classPrivateFieldGet(this, _Game_board, "f").cols ? true : false;
 }, _Game_switchCurrentPlayer = function _Game_switchCurrentPlayer() {
-    __classPrivateFieldGet(this, _Game_currentPlayer, "f") === __classPrivateFieldGet(this, _Game_playerOne, "f") ?
-        __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerTwo, "f"), "f") :
-        __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f"), "f");
+    if (__classPrivateFieldGet(this, _Game_computer, "f").isPlaying) {
+        __classPrivateFieldGet(this, _Game_currentPlayer, "f") === __classPrivateFieldGet(this, _Game_playerOne, "f") ?
+            __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_computer, "f"), "f") :
+            __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f"), "f");
+    }
+    else {
+        __classPrivateFieldGet(this, _Game_currentPlayer, "f") === __classPrivateFieldGet(this, _Game_playerOne, "f") ?
+            __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerTwo, "f"), "f") :
+            __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f"), "f");
+    }
     if (__classPrivateFieldGet(this, _Game_currentPlayerHeader, "f")) {
         __classPrivateFieldGet(this, _Game_currentPlayerHeader, "f").innerText = `${__classPrivateFieldGet(this, _Game_currentPlayer, "f").name}'s Turn`;
     }
@@ -174,7 +181,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
         const newCell = DOMElement.create('div', ['cell']);
         item.cell = newCell;
         newCell.addEventListener('click', () => {
-            if (!item.player) {
+            if (!item.player && __classPrivateFieldGet(this, _Game_currentPlayer, "f") !== __classPrivateFieldGet(this, _Game_computer, "f")) {
                 item.player = __classPrivateFieldGet(this, _Game_currentPlayer, "f");
                 if (item.cell)
                     item.cell.innerHTML = __classPrivateFieldGet(this, _Game_currentPlayer, "f").iconSVG;
