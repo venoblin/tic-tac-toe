@@ -290,6 +290,7 @@ export default class Game {
     const pvpModeBtn = DOMElement.create('button', ['selected'])
     pvpModeBtn.innerText = '🤨 vs. 🤨'
     pvpModeBtn.addEventListener('click', () => {
+      this.#computer.isPlaying = false
       secondPlayerInput.style.display = 'initial'
       pvpModeBtn.classList.add('selected')
       pvcModeBtn.classList.remove('selected')
@@ -297,6 +298,7 @@ export default class Game {
     const pvcModeBtn = DOMElement.create('button')
     pvcModeBtn.innerText = '🤨 vs. 🤖'
     pvcModeBtn.addEventListener('click', () => {
+      this.#computer.isPlaying = true
       secondPlayerInput.style.display = 'none'
       pvcModeBtn.classList.add('selected')
       pvpModeBtn.classList.remove('selected')
@@ -321,11 +323,11 @@ export default class Game {
     const startBtn = DOMElement.create('button', ['btn'])
     startBtn.innerText = 'Play'
     startBtn.addEventListener('click', () => {
-      // if (isComputerPlaying) {
-      //   this.#startHandler(firstPlayerInput.value, 'Computer')
-      // } else {
-      //   this.#startHandler(firstPlayerInput.value, secondPlayerInput.value)
-      // }
+      if (this.#computer.isPlaying) {
+        this.#startHandler(firstPlayerInput.value, this.#computer.name)
+      } else {
+        this.#startHandler(firstPlayerInput.value, secondPlayerInput.value)
+      }
     })
 
     startMenu.append(gameModeContainer)

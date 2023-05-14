@@ -247,6 +247,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     const pvpModeBtn = DOMElement.create('button', ['selected']);
     pvpModeBtn.innerText = '🤨 vs. 🤨';
     pvpModeBtn.addEventListener('click', () => {
+        __classPrivateFieldGet(this, _Game_computer, "f").isPlaying = false;
         secondPlayerInput.style.display = 'initial';
         pvpModeBtn.classList.add('selected');
         pvcModeBtn.classList.remove('selected');
@@ -254,6 +255,7 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     const pvcModeBtn = DOMElement.create('button');
     pvcModeBtn.innerText = '🤨 vs. 🤖';
     pvcModeBtn.addEventListener('click', () => {
+        __classPrivateFieldGet(this, _Game_computer, "f").isPlaying = true;
         secondPlayerInput.style.display = 'none';
         pvcModeBtn.classList.add('selected');
         pvpModeBtn.classList.remove('selected');
@@ -276,11 +278,12 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     const startBtn = DOMElement.create('button', ['btn']);
     startBtn.innerText = 'Play';
     startBtn.addEventListener('click', () => {
-        // if (isComputerPlaying) {
-        //   this.#startHandler(firstPlayerInput.value, 'Computer')
-        // } else {
-        //   this.#startHandler(firstPlayerInput.value, secondPlayerInput.value)
-        // }
+        if (__classPrivateFieldGet(this, _Game_computer, "f").isPlaying) {
+            __classPrivateFieldGet(this, _Game_instances, "m", _Game_startHandler).call(this, firstPlayerInput.value, __classPrivateFieldGet(this, _Game_computer, "f").name);
+        }
+        else {
+            __classPrivateFieldGet(this, _Game_instances, "m", _Game_startHandler).call(this, firstPlayerInput.value, secondPlayerInput.value);
+        }
     });
     startMenu.append(gameModeContainer);
     startMenu.append(inputContainer);
