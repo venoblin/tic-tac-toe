@@ -1,4 +1,4 @@
-export default class Array2D<T> {
+export default class DimensionalArray<T> {
   #arr: T[][] = []
   #rows: number
   #cols: number

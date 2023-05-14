@@ -9,14 +9,14 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Array2D_arr, _Array2D_rows, _Array2D_cols;
-export default class Array2D {
+var _DimensionalArray_arr, _DimensionalArray_rows, _DimensionalArray_cols;
+export default class DimensionalArray {
     constructor(el, rows, cols) {
-        _Array2D_arr.set(this, []);
-        _Array2D_rows.set(this, void 0);
-        _Array2D_cols.set(this, void 0);
-        __classPrivateFieldSet(this, _Array2D_rows, rows, "f");
-        __classPrivateFieldSet(this, _Array2D_cols, cols, "f");
+        _DimensionalArray_arr.set(this, []);
+        _DimensionalArray_rows.set(this, void 0);
+        _DimensionalArray_cols.set(this, void 0);
+        __classPrivateFieldSet(this, _DimensionalArray_rows, rows, "f");
+        __classPrivateFieldSet(this, _DimensionalArray_cols, cols, "f");
         for (let i = 0; i < rows; i++) {
             const rowArr = [];
             for (let j = 0; j < cols; j++) {
@@ -27,25 +27,25 @@ export default class Array2D {
                     rowArr.push(el);
                 }
             }
-            __classPrivateFieldGet(this, _Array2D_arr, "f").push(rowArr);
+            __classPrivateFieldGet(this, _DimensionalArray_arr, "f").push(rowArr);
         }
     }
     get arr() {
-        return __classPrivateFieldGet(this, _Array2D_arr, "f");
+        return __classPrivateFieldGet(this, _DimensionalArray_arr, "f");
     }
     get rows() {
-        return __classPrivateFieldGet(this, _Array2D_rows, "f");
+        return __classPrivateFieldGet(this, _DimensionalArray_rows, "f");
     }
     get cols() {
-        return __classPrivateFieldGet(this, _Array2D_cols, "f");
+        return __classPrivateFieldGet(this, _DimensionalArray_cols, "f");
     }
     // iterates through the array and executes callback with passed in parameters
     iterate(func) {
-        __classPrivateFieldGet(this, _Array2D_arr, "f").forEach((row, x) => {
+        __classPrivateFieldGet(this, _DimensionalArray_arr, "f").forEach((row, x) => {
             row.forEach((item, y) => {
                 func(item, x, y);
             });
         });
     }
 }
-_Array2D_arr = new WeakMap(), _Array2D_rows = new WeakMap(), _Array2D_cols = new WeakMap();
+_DimensionalArray_arr = new WeakMap(), _DimensionalArray_rows = new WeakMap(), _DimensionalArray_cols = new WeakMap();

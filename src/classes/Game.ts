@@ -1,7 +1,7 @@
 import Player from "./Player.js"
 import Computer from "./Computer.js"
 import DOMElement from "./DOMElement.js"
-import Array2D from "./Array2D.js"
+import DimensionalArray from "./DimensionalArray.js"
 import { BoardInfo } from "../types"
 
 export default class Game {
@@ -11,14 +11,14 @@ export default class Game {
   #computer: Computer
   #currentPlayer: Player | Computer
   #currentPlayerHeader?: HTMLElement
-  #board: Array2D<BoardInfo>
+  #board: DimensionalArray<BoardInfo>
 
   constructor(anchorId: string, playerOne: Player, playerTwo: Player) {
     this.#playerOne = playerOne
     this.#playerTwo = playerTwo
     this.#computer = new Computer(this.#playerTwo.icon)
     this.#currentPlayer = this.#playerOne
-    this.#board = new Array2D<BoardInfo>({cell: null, player: null}, 3, 3)
+    this.#board = new DimensionalArray<BoardInfo>({cell: null, player: null}, 3, 3)
 
     // creating and anchoring layout element to anchor element  
     const anchorElem = document.getElementById(anchorId)
