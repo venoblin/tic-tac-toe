@@ -12,7 +12,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_computer, _Game_currentPlayer, _Game_currentPlayerHeader, _Game_board, _Game_showAlert, _Game_resetLayout, _Game_resetWins, _Game_resetBoard, _Game_startHandler, _Game_isWinner, _Game_isBoardFilled, _Game_switchCurrentPlayer, _Game_generateGameBoard, _Game_mainMenuButton, _Game_displayGame, _Game_displayStart, _Game_displayGameOver;
 import Computer from "./Computer.js";
 import DOMElement from "./DOMElement.js";
-import DimensionalArray from "./DimensionalArray.js";
+import Board from "./Board.js";
 export default class Game {
     constructor(anchorId, playerOne, playerTwo) {
         _Game_instances.add(this);
@@ -27,7 +27,7 @@ export default class Game {
         __classPrivateFieldSet(this, _Game_playerTwo, playerTwo, "f");
         __classPrivateFieldSet(this, _Game_computer, new Computer(__classPrivateFieldGet(this, _Game_playerTwo, "f").icon), "f");
         __classPrivateFieldSet(this, _Game_currentPlayer, __classPrivateFieldGet(this, _Game_playerOne, "f"), "f");
-        __classPrivateFieldSet(this, _Game_board, new DimensionalArray({ cell: null, player: null }, 3, 3), "f");
+        __classPrivateFieldSet(this, _Game_board, new Board(3, 3), "f");
         // creating and anchoring layout element to anchor element  
         const anchorElem = document.getElementById(anchorId);
         if (anchorElem === null)

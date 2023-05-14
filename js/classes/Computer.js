@@ -24,18 +24,18 @@ export default class Computer extends Player {
         __classPrivateFieldSet(this, _Computer_isPlaying, b, "f");
     }
     makeChoice(board) {
-        const choices = {
+        const choice = {
             x: null,
             y: null
         };
         board.iterate((item, x, y) => {
             if (!item.player) {
-                choices.x = x;
-                choices.y = y;
+                choice.x = x;
+                choice.y = y;
             }
         });
-        if (choices.x !== null && choices.y !== null) {
-            const item = board.arr[choices.x][choices.y];
+        if (choice.x !== null && choice.y !== null) {
+            const item = board.arr[choice.x][choice.y];
             item.player = this;
             if (item.cell)
                 item.cell.innerHTML = this.iconSVG;

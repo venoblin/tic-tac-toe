@@ -4,7 +4,7 @@ export default class DimensionalArray<T> {
   #rows: number
   #cols: number
 
-  constructor(el: T,rows: number, cols: number) {
+  constructor(el: T, rows: number, cols: number) {
     this.#rows = rows
     this.#cols = cols
 

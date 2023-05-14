@@ -19,20 +19,20 @@ export default class Computer extends Player {
   }
 
   makeChoice(board: DimensionalArray<BoardInfo>): void {
-    const choices: {x: number |null, y: number |null} = {
+    const choice: {x: number |null, y: number |null} = {
       x: null,
       y: null
     }
 
     board.iterate((item: BoardInfo, x: number, y: number) => {
       if(!item.player) {
-        choices.x = x
-        choices.y = y
+        choice.x = x
+        choice.y = y
       }
     })
 
-    if(choices.x !== null && choices.y !== null) {
-      const item = board.arr[choices.x][choices.y]
+    if(choice.x !== null && choice.y !== null) {
+      const item = board.arr[choice.x][choice.y]
       item.player = this
       if(item.cell) item.cell.innerHTML = this.iconSVG
     }
