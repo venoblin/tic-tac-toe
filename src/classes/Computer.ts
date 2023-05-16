@@ -36,7 +36,5 @@ export default class Computer extends Player {
       item.player = this
       if(item.cell) item.cell.innerHTML = this.iconSVG
     }
-
-    console.log(board.arr)
   }
 }
