@@ -2,7 +2,6 @@ import Player from "./Player.js"
 import Computer from "./Computer.js"
 import DOMElement from "./DOMElement.js"
 import Board from "./Board.js"
-import DimensionalArray from "./DimensionalArray.js"
 import { BoardInfo } from "../types"
 
 export default class Game {
