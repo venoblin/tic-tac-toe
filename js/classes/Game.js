@@ -13,7 +13,7 @@ var _Game_instances, _Game_layout, _Game_playerOne, _Game_playerTwo, _Game_compu
 import Computer from "./Computer.js";
 import DOMElement from "./DOMElement.js";
 import Board from "./Board.js";
-export default class Game {
+class Game {
     constructor(anchorId, playerOne, playerTwo) {
         _Game_instances.add(this);
         _Game_layout.set(this, void 0);
@@ -318,3 +318,4 @@ _Game_layout = new WeakMap(), _Game_playerOne = new WeakMap(), _Game_playerTwo =
     gameOverContainer.append(mainMenuBtn);
     __classPrivateFieldGet(this, _Game_layout, "f").append(gameOverContainer);
 };
+export default Game;

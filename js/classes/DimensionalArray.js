@@ -11,7 +11,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _DimensionalArray_arr, _DimensionalArray_rows, _DimensionalArray_cols;
 // creates multi-dimensional arrays of a specific type element
-export default class DimensionalArray {
+class DimensionalArray {
     constructor(el, rows, cols) {
         _DimensionalArray_arr.set(this, []);
         _DimensionalArray_rows.set(this, void 0);
@@ -50,3 +50,4 @@ export default class DimensionalArray {
     }
 }
 _DimensionalArray_arr = new WeakMap(), _DimensionalArray_rows = new WeakMap(), _DimensionalArray_cols = new WeakMap();
+export default DimensionalArray;

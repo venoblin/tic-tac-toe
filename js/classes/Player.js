@@ -10,7 +10,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _Player_name, _Player_initialName, _Player_wins, _Player_icons, _Player_selectedIcon;
-export default class Player {
+class Player {
     constructor(name, icon) {
         _Player_name.set(this, void 0);
         _Player_initialName.set(this, void 0); // used to remember name given when first instantiated 
@@ -50,3 +50,4 @@ export default class Player {
     }
 }
 _Player_name = new WeakMap(), _Player_initialName = new WeakMap(), _Player_wins = new WeakMap(), _Player_icons = new WeakMap(), _Player_selectedIcon = new WeakMap();
+export default Player;

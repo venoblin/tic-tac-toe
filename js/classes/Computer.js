@@ -11,7 +11,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _Computer_isPlaying;
 import Player from "./Player.js";
-export default class Computer extends Player {
+class Computer extends Player {
     constructor(icon, isPlaying = false) {
         super('Computer', icon);
         _Computer_isPlaying.set(this, void 0);
@@ -40,7 +40,7 @@ export default class Computer extends Player {
             if (item.cell)
                 item.cell.innerHTML = this.iconSVG;
         }
-        console.log(board.arr);
     }
 }
 _Computer_isPlaying = new WeakMap();
+export default Computer;
